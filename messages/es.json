@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "title": "Tara Centros — Panel para centros educativos",
+    "description": "Progreso agregado y anónimo del alumnado que usa Tara."
+  },
+  "common": {
+    "skipToContent": "Ir al contenido principal",
+    "languageSelectorLabel": "Seleccionar idioma",
+    "signOut": "Cerrar sesión"
+  },
+  "footer": {
+    "accessibilityStatement": "Declaración de accesibilidad",
+    "privacyPolicy": "Política de privacidad"
+  },
+  "login": {
+    "subtitle": "Panel para centros educativos. Progreso agregado y anónimo del alumnado.",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Entrar",
+    "submitting": "Entrando…",
+    "error": "Correo electrónico o contraseña incorrectos.",
+    "helpText": "El acceso lo gestiona el centro educativo. Contacta con la administración si no tienes cuenta."
+  },
+  "consentBadge": {
+    "GRANTED": "Consentimiento concedido",
+    "PENDING": "Consentimiento pendiente",
+    "DENIED": "Consentimiento denegado"
+  },
+  "consentStatus": {
+    "GRANTED": "Concedido",
+    "PENDING": "Pendiente",
+    "DENIED": "Denegado"
+  },
+  "moodTrend": {
+    "mejora": "Mejora",
+    "estable": "Estable",
+    "empeora": "Empeora"
+  },
+  "severity": {
+    "LOW": "Prioridad baja",
+    "MEDIUM": "Prioridad media",
+    "HIGH": "Prioridad alta",
+    "CRITICAL": "Prioridad crítica"
+  },
+  "alertStatus": {
+    "OPEN": "Abierta",
+    "IN_REVIEW": "En revisión",
+    "RESOLVED": "Resuelta"
+  },
+  "auditActions": {
+    "VIEW_GROUP_SUMMARY": "Consultó el resumen de un grupo",
+    "VIEW_SAFETY_ALERT": "Consultó el detalle de una alerta",
+    "ACKNOWLEDGE_SAFETY_ALERT": "Se hizo cargo de una alerta",
+    "RESOLVE_SAFETY_ALERT": "Resolvió una alerta",
+    "ADD_SAFETY_ALERT_NOTE": "Añadió una nota a una alerta",
+    "REQUEST_ADDITIONAL_CONTEXT": "Solicitó contexto adicional",
+    "VIEW_SCHOOL_AGGREGATE": "Consultó agregados del centro",
+    "VIEW_GROUP_AGGREGATE": "Consultó agregados de un grupo",
+    "EXPORT_REPORT": "Exportó un informe",
+    "ASSIGN_TUTOR": "Asignó un tutor a un grupo",
+    "UNASSIGN_TUTOR": "Quitó un tutor de un grupo",
+    "UPDATE_CONSENT_STATUS": "Actualizó un consentimiento familiar"
+  },
+  "tutor": {
+    "panelLabel": "Panel de tutoría",
+    "heading": "Progreso de mis grupos",
+    "noGroups": "Todavía no tienes grupos asignados.",
+    "groupSelectionLabel": "Selección de grupo",
+    "studentsCount": "{count, plural, one {# alumno/a} other {# alumnos/as}}",
+    "tableStudent": "Alumno/a",
+    "tableConsent": "Consentimiento",
+    "tableSessions": "Sesiones",
+    "tableMinutes": "Minutos",
+    "tableMood": "Tendencia de ánimo",
+    "tableBridges": "Puentes humanos",
+    "noConsent": "Sin datos: falta consentimiento familiar",
+    "noData": "Todavía no hay datos de uso",
+    "bridgesActive": "{count, plural, one {# activo} other {# activos}}",
+    "footerNote": "Los datos mostrados son agregados y anónimos: nunca el contenido literal de las conversaciones del alumnado con Tara."
+  },
+  "referenteDashboard": {
+    "panelLabel": "Panel de referente de bienestar",
+    "heading": "Alertas de seguridad",
+    "statOpen": "Alertas abiertas",
+    "statInReview": "En revisión",
+    "statResolved": "Resueltas (30 días)",
+    "chartTitle": "Alertas de seguridad por semana",
+    "activeAlertsHeading": "Alertas activas",
+    "noActiveAlerts": "No hay alertas abiertas ni en revisión.",
+    "resolvedHeading": "Resueltas recientemente",
+    "auditHeading": "Registro de auditoría",
+    "auditNote": "Toda consulta de datos agregados o de alertas queda registrada aquí, para cumplir con RGPD/LOPD-GDD.",
+    "noAudit": "Todavía no hay actividad registrada.",
+    "bridgeGaugeLabel": "Puentes humanos atendidos",
+    "bridgeCaptionWithData": "{resolved} de {total} atendidos",
+    "bridgeCaptionNoData": "Todavía no hay puentes humanos registrados"
+  },
+  "alertDetail": {
+    "panelLabel": "Panel de referente de bienestar",
+    "heading": "Detalle de alerta",
+    "back": "Volver a alertas",
+    "createdLabel": "Creada",
+    "assignedLabel": "A cargo de",
+    "resolvedLabel": "Resuelta",
+    "acknowledgeButton": "Hacerme cargo",
+    "resolveButton": "Marcar como resuelta",
+    "contextHeading": "Solicitar contexto adicional",
+    "contextNote": "Esta acción no muestra ningún texto de conversación del alumno/a: solo deja constancia auditable de que se ha solicitado más contexto por el canal humano correspondiente (dirección, orientación, familia).",
+    "contextReasonLabel": "Motivo de la solicitud (opcional)",
+    "contextSubmit": "Registrar solicitud",
+    "notesHeading": "Notas de seguimiento",
+    "noteFieldLabel": "Añadir una nota",
+    "noteSubmit": "Guardar nota",
+    "noNotes": "Todavía no hay notas."
+  },
+  "adminLayout": {
+    "panelLabel": "Panel de administración",
+    "brand": "Tara Centros",
+    "navSummary": "Resumen",
+    "navGroups": "Grupos y tutores",
+    "navStudents": "Alumnado y consentimiento",
+    "exportButton": "Exportar informe (PDF)"
+  },
+  "adminDashboard": {
+    "statConsent": "Alumnado con consentimiento",
+    "statGroupsData": "Grupos con datos disponibles",
+    "statOpenAlerts": "Alertas de seguridad abiertas",
+    "chartTitle": "Sesiones con Tara por semana (todo el centro)",
+    "gaugeLabel": "Consentimiento familiar",
+    "gaugeCaptionWithData": "{granted} de {total} concedido",
+    "gaugeCaptionNoData": "Todavía no hay alumnado registrado",
+    "footnote": "Un grupo solo muestra datos agregados cuando tiene al menos 5 alumnos activos con consentimiento familiar concedido, para proteger su anonimato. Las alertas de seguridad solo muestran aquí un recuento: el detalle de cada caso es visible únicamente para la referente de bienestar."
+  },
+  "adminGroups": {
+    "heading": "Grupos y tutores",
+    "subheading": "Los datos agregados de un grupo solo están disponibles a partir de {min} alumnos activos con consentimiento concedido.",
+    "studentsCount": "{count, plural, one {# alumno/a} other {# alumnos/as}} · {active, plural, one {# con consentimiento} other {# con consentimiento}}",
+    "dataAvailable": "Datos disponibles",
+    "dataInsufficient": "Datos insuficientes",
+    "tutorsAssignedLabel": "Tutores asignados",
+    "noTutors": "Sin tutor asignado.",
+    "removeTutorAria": "Quitar a {name} de {group}",
+    "assignPlaceholder": "Asignar tutor…",
+    "assignButton": "Asignar"
+  },
+  "adminGroupDetail": {
+    "back": "Volver a grupos",
+    "studentsSummary": "{count, plural, one {# alumno/a} other {# alumnos/as}} · {active, plural, one {# con consentimiento concedido} other {# con consentimiento concedido}}",
+    "noDataHeading": "Datos agregados no disponibles",
+    "noDataBody": "Este grupo tiene {active} alumnos/as activos/as con consentimiento concedido. Se necesitan al menos {min} para mostrar cualquier dato agregado, de forma que no se pueda identificar a ningún alumno/a a partir de las cifras.",
+    "statSessions": "Sesiones con Tara (total)",
+    "statMinutes": "Minutos de uso (total)"
+  },
+  "adminStudents": {
+    "heading": "Alumnado y consentimiento familiar",
+    "subheading": "El estado de consentimiento determina si se recogen datos agregados de uso de ese alumno/a. Actualízalo cuando la familia entregue o revoque su autorización.",
+    "tableStudent": "Alumno/a",
+    "tableStatus": "Estado",
+    "tableChangeTo": "Cambiar a",
+    "changeAria": "Cambiar estado de consentimiento de {name}",
+    "saveButton": "Guardar"
+  },
+  "accessibilityPage": {
+    "title": "Declaración de accesibilidad",
+    "updated": "Última actualización: {date}",
+    "intro": "Este centro/entidad se compromete a hacer accesible su aplicación Tara Centros de conformidad con el Real Decreto 1112/2018, de 7 de septiembre, sobre accesibilidad de los sitios web y aplicaciones para dispositivos móviles del sector público.",
+    "conformanceTitle": "Estado de cumplimiento",
+    "conformanceBody": "Esta aplicación se ha diseñado siguiendo las pautas WCAG 2.1 nivel AA: estructura semántica y de encabezados, contraste de color suficiente, formularios con etiquetas asociadas, foco visible en todos los elementos interactivos, textos alternativos en iconos informativos y navegación completa por teclado.",
+    "limitationsTitle": "Contenido no accesible",
+    "limitationsBody": "Pese a los esfuerzos realizados, es posible que existan limitaciones puntuales. Si detectas algún problema de accesibilidad, contáctanos por el canal indicado más abajo y lo revisaremos.",
+    "preparationTitle": "Preparación de esta declaración",
+    "preparationBody": "Esta declaración se preparó a partir de una autoevaluación realizada por el equipo responsable de la aplicación.",
+    "contactTitle": "Información de contacto",
+    "contactBody": "Puedes comunicar cualquier incidencia de accesibilidad a la administración de tu centro educativo, que trasladará la incidencia al equipo técnico responsable de la aplicación.",
+    "feedbackTitle": "Procedimiento de aplicación",
+    "feedbackBody": "Si no quedas satisfecho/a con la respuesta recibida, puedes presentar una reclamación de accesibilidad ante el organismo competente de tu comunidad autónoma."
+  },
+  "privacyPage": {
+    "title": "Política de privacidad",
+    "updated": "Última actualización: {date}",
+    "intro": "Esta página explica cómo Tara Centros trata los datos del alumnado y del personal del centro educativo. Este texto es una plantilla orientativa: el centro debe revisarla y adaptarla junto con su delegado/a de protección de datos antes de su uso real.",
+    "principleTitle": "Principio central: nunca texto literal de conversaciones",
+    "principleBody": "Tara Centros no muestra ni almacena el contenido literal de las conversaciones de ningún alumno/a con Tara. El personal del centro solo accede a datos agregados y anonimizados (número de sesiones, minutos de uso, categorías temáticas, tendencia de ánimo). La única excepción es el flujo de alertas de seguridad, gestionado exclusivamente por la persona referente de bienestar, y que tampoco expone texto de conversación: solo un resumen profesional generado por el sistema.",
+    "dataCollectedTitle": "Qué datos se tratan",
+    "dataCollectedBody": "Datos de identificación básica del alumnado (alias pseudónimo y grupo), estado de consentimiento familiar, resúmenes agregados de uso, eventos de puente humano (categoría anonimizada) y alertas de seguridad. También se registran los datos de las cuentas del personal del centro (nombre, correo electrónico, rol) y un registro de auditoría de los accesos a datos agregados y de seguridad.",
+    "legalBasisTitle": "Base legal y responsable",
+    "legalBasisBody": "El tratamiento se basa en el interés legítimo del centro educativo en el acompañamiento del bienestar del alumnado y, cuando corresponde, en el consentimiento familiar. El centro educativo es responsable del tratamiento; Tara actúa como encargado del tratamiento para los datos agregados que procesa.",
+    "minorsTitle": "Consentimiento familiar y menores",
+    "minorsBody": "Los datos agregados de uso de un alumno/a solo se recogen cuando la familia ha concedido su consentimiento. El centro puede consultar y actualizar este estado en el panel de administración.",
+    "retentionTitle": "Conservación",
+    "retentionBody": "Los datos se conservan mientras el alumno/a esté matriculado/a en el centro y durante el plazo adicional que exija la normativa aplicable en materia de protección de datos.",
+    "rightsTitle": "Derechos de las personas interesadas",
+    "rightsBody": "Las familias y el personal del centro pueden ejercer sus derechos de acceso, rectificación, supresión, oposición y limitación dirigiéndose a la administración del centro educativo.",
+    "contactTitle": "Contacto",
+    "contactBody": "Para cualquier consulta sobre esta política, contacta con la administración de tu centro educativo o con su delegado/a de protección de datos."
+  }
+}

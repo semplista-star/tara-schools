@@ -31,8 +31,8 @@ export async function acknowledgeAlert(formData: FormData) {
     targetId: alert.id
   });
 
-  revalidatePath(`/referente/alertas/${alert.id}`);
-  revalidatePath("/referente");
+  revalidatePath("/[locale]/referente/alertas/[id]", "page");
+  revalidatePath("/[locale]/referente", "page");
 }
 
 export async function resolveAlert(formData: FormData) {
@@ -53,8 +53,8 @@ export async function resolveAlert(formData: FormData) {
     targetId: alert.id
   });
 
-  revalidatePath(`/referente/alertas/${alert.id}`);
-  revalidatePath("/referente");
+  revalidatePath("/[locale]/referente/alertas/[id]", "page");
+  revalidatePath("/[locale]/referente", "page");
 }
 
 export async function addAlertNote(formData: FormData) {
@@ -77,7 +77,7 @@ export async function addAlertNote(formData: FormData) {
     targetId: alert.id
   });
 
-  revalidatePath(`/referente/alertas/${alert.id}`);
+  revalidatePath("/[locale]/referente/alertas/[id]", "page");
 }
 
 // Solicitud puntual de contexto adicional para un caso. No expone ningún
@@ -100,5 +100,5 @@ export async function requestAdditionalContext(formData: FormData) {
     metadata: reason ? { reason } : undefined
   });
 
-  revalidatePath(`/referente/alertas/${alert.id}`);
+  revalidatePath("/[locale]/referente/alertas/[id]", "page");
 }

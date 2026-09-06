@@ -18,6 +18,7 @@
     "chart.js": "^4.4.4",
     "next": "15.5.9",
     "next-auth": "^4.24.8",
+    "next-intl": "^4.14.2",
     "react": "^19.0.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^19.0.0"

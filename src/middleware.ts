@@ -1,37 +1,49 @@
-import { withAuth } from "next-auth/middleware";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
+import createIntlMiddleware from "next-intl/middleware";
+import { routing } from "@/i18n/routing";
+
+const intlMiddleware = createIntlMiddleware(routing);
 
 const roleHome: Record<string, string> = {
-  ADMIN: "/admin",
-  TUTOR: "/tutor",
-  WELLBEING_REFERENT: "/referente"
+  ADMIN: "admin",
+  TUTOR: "tutor",
+  WELLBEING_REFERENT: "referente"
 };
 
 const pathRole: Record<string, string> = {
-  "/admin": "ADMIN",
-  "/tutor": "TUTOR",
-  "/referente": "WELLBEING_REFERENT"
+  admin: "ADMIN",
+  tutor: "TUTOR",
+  referente: "WELLBEING_REFERENT"
 };
 
-export default withAuth(
-  function middleware(req) {
-    const role = (req.nextauth.token as any)?.role as string | undefined;
-    const path = req.nextUrl.pathname;
-    const matchedPrefix = Object.keys(pathRole).find((prefix) => path.startsWith(prefix));
+// Middleware combinado: primero aplica el aislamiento por rol (igual que
+// antes de introducir next-intl), leyendo el token de NextAuth
+// directamente porque next-auth/middleware no se puede anidar dentro de
+// otro middleware. Después delega en next-intl para la gestión del
+// prefijo de idioma.
+export default async function middleware(req: NextRequest) {
+  const segments = req.nextUrl.pathname.split("/").filter(Boolean);
+  const hasLocalePrefix = routing.locales.includes(segments[0] as (typeof routing.locales)[number]);
+  const locale = hasLocalePrefix ? segments[0] : routing.defaultLocale;
+  const firstSegment = hasLocalePrefix ? segments[1] : segments[0];
 
-    // Aislamiento por rol: un tutor no puede entrar al panel de referente
-    // de bienestar (donde están las alertas de seguridad) ni al de admin,
-    // aunque conozca la URL.
-    if (matchedPrefix && role && pathRole[matchedPrefix] !== role) {
-      return NextResponse.redirect(new URL(roleHome[role] ?? "/login", req.url));
+  if (firstSegment && pathRole[firstSegment]) {
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+
+    if (!token) {
+      return NextResponse.redirect(new URL(`/${locale}/login`, req.url));
     }
-    return NextResponse.next();
-  },
-  {
-    pages: { signIn: "/login" }
+
+    const role = token.role as string | undefined;
+    if (role && pathRole[firstSegment] !== role) {
+      return NextResponse.redirect(new URL(`/${locale}/${roleHome[role] ?? "login"}`, req.url));
+    }
   }
-);
+
+  return intlMiddleware(req);
+}
 
 export const config = {
-  matcher: ["/admin/:path*", "/tutor/:path*", "/referente/:path*", "/dashboard/:path*"]
+  matcher: ["/((?!api|_next|.*\\..*).*)"]
 };

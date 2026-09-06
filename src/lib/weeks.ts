@@ -1,6 +1,6 @@
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
-export function weekBuckets(weeks: number) {
+export function weekBuckets(weeks: number, locale: string) {
   const now = new Date();
   const buckets: { start: Date; end: Date; label: string }[] = [];
   for (let i = weeks - 1; i >= 0; i--) {
@@ -9,7 +9,7 @@ export function weekBuckets(weeks: number) {
     buckets.push({
       start,
       end,
-      label: start.toLocaleDateString("es-ES", { day: "numeric", month: "short" })
+      label: start.toLocaleDateString(locale, { day: "numeric", month: "short" })
     });
   }
   return buckets;

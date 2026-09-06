@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { AlertSeverity, AlertStatus } from "@prisma/client";
+import { useFormatter } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import SeverityBadge from "@/components/SeverityBadge";
 import AlertStatusBadge from "@/components/AlertStatusBadge";
 
@@ -22,6 +23,8 @@ export default function AlertCard({
     student: { alias: string; group: { name: string } };
   };
 }) {
+  const format = useFormatter();
+
   return (
     <Link
       href={`/referente/alertas/${alert.id}`}
@@ -36,7 +39,7 @@ export default function AlertCard({
       </p>
       <p className="text-inksoft text-sm mt-1 line-clamp-2">{alert.summary}</p>
       <p className="text-muted text-xs mt-2">
-        {alert.createdAt.toLocaleDateString("es-ES", { day: "numeric", month: "short", year: "numeric" })}
+        {format.dateTime(alert.createdAt, { day: "numeric", month: "short", year: "numeric" })}
       </p>
     </Link>
   );

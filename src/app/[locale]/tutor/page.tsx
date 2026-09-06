@@ -1,17 +1,22 @@
-import Link from "next/link";
 import { IconArrowRight, IconUsersGroup } from "@tabler/icons-react";
+import { getTranslations } from "next-intl/server";
 import { requireStaff } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { logAudit } from "@/lib/audit";
+import { Link } from "@/i18n/navigation";
 import SignOutButton from "@/components/SignOutButton";
 import ConsentBadge from "@/components/ConsentBadge";
 import MoodTrendTag from "@/components/MoodTrendTag";
 
 export default async function TutorPage({
+  params,
   searchParams
 }: {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ grupo?: string }>;
 }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "tutor" });
   const user = await requireStaff(["TUTOR"]);
   const { grupo } = await searchParams;
 
@@ -58,22 +63,22 @@ export default async function TutorPage({
   }
 
   return (
-    <div className="min-h-screen bg-canvas">
+    <div className="min-h-screen bg-canvas flex flex-col">
       <header className="bg-panel border-b border-border px-6 py-4 flex items-center justify-between">
         <div>
-          <p className="text-xs text-muted">Panel de tutoría</p>
-          <h1 className="text-lg font-semibold text-ink">Progreso de mis grupos</h1>
+          <p className="text-xs text-muted">{t("panelLabel")}</p>
+          <h1 className="text-lg font-semibold text-ink">{t("heading")}</h1>
         </div>
         <SignOutButton />
       </header>
 
-      <main className="p-6 max-w-4xl mx-auto">
+      <main className="p-6 max-w-4xl mx-auto w-full flex-1">
         {groups.length === 0 ? (
-          <p className="text-muted text-sm">Todavía no tienes grupos asignados.</p>
+          <p className="text-muted text-sm">{t("noGroups")}</p>
         ) : (
           <>
             {groups.length > 1 && (
-              <nav className="flex gap-2 mb-6" aria-label="Selección de grupo">
+              <nav className="flex gap-2 mb-6" aria-label={t("groupSelectionLabel")}>
                 {groups.map((g) => (
                   <Link
                     key={g.id}
@@ -81,7 +86,7 @@ export default async function TutorPage({
                     aria-current={g.id === activeGroup?.id ? "page" : undefined}
                     className={`px-3 py-1.5 rounded-md text-sm border ${
                       g.id === activeGroup?.id
-                        ? "border-accent text-accent bg-accent-light"
+                        ? "border-accent text-accent-dark bg-accent-light font-medium"
                         : "border-border text-inksoft hover:border-accent-dark"
                     }`}
                   >
@@ -96,19 +101,22 @@ export default async function TutorPage({
                 <div className="flex items-center gap-2 mb-4 text-inksoft">
                   <IconUsersGroup size={20} stroke={1.75} aria-hidden="true" />
                   <h2 className="font-medium">{activeGroup.name}</h2>
-                  <span className="text-muted text-sm">· {activeGroup.students.length} alumnos/as</span>
+                  <span className="text-muted text-sm">
+                    · {t("studentsCount", { count: activeGroup.students.length })}
+                  </span>
                 </div>
 
                 <div className="bg-panel border border-border rounded-lg overflow-hidden">
                   <table className="w-full text-sm">
+                    <caption className="sr-only">{activeGroup.name}</caption>
                     <thead>
                       <tr className="text-left text-muted border-b border-border">
-                        <th className="px-4 py-3 font-medium">Alumno/a</th>
-                        <th className="px-4 py-3 font-medium">Consentimiento</th>
-                        <th className="px-4 py-3 font-medium">Sesiones</th>
-                        <th className="px-4 py-3 font-medium">Minutos</th>
-                        <th className="px-4 py-3 font-medium">Tendencia de ánimo</th>
-                        <th className="px-4 py-3 font-medium">Puentes humanos</th>
+                        <th scope="col" className="px-4 py-3 font-medium">{t("tableStudent")}</th>
+                        <th scope="col" className="px-4 py-3 font-medium">{t("tableConsent")}</th>
+                        <th scope="col" className="px-4 py-3 font-medium">{t("tableSessions")}</th>
+                        <th scope="col" className="px-4 py-3 font-medium">{t("tableMinutes")}</th>
+                        <th scope="col" className="px-4 py-3 font-medium">{t("tableMood")}</th>
+                        <th scope="col" className="px-4 py-3 font-medium">{t("tableBridges")}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -125,7 +133,7 @@ export default async function TutorPage({
                             </td>
                             {!hasConsent ? (
                               <td colSpan={3} className="px-4 py-3 text-muted italic">
-                                Sin datos: falta consentimiento familiar
+                                {t("noConsent")}
                               </td>
                             ) : summary ? (
                               <>
@@ -137,14 +145,14 @@ export default async function TutorPage({
                               </>
                             ) : (
                               <td colSpan={3} className="px-4 py-3 text-muted italic">
-                                Todavía no hay datos de uso
+                                {t("noData")}
                               </td>
                             )}
                             <td className="px-4 py-3">
                               {openBridges > 0 ? (
                                 <span className="inline-flex items-center gap-1 text-warning font-medium">
                                   <IconArrowRight size={14} stroke={2} aria-hidden="true" />
-                                  {openBridges} activo{openBridges > 1 ? "s" : ""}
+                                  {t("bridgesActive", { count: openBridges })}
                                 </span>
                               ) : (
                                 <span className="text-muted">—</span>
@@ -157,10 +165,7 @@ export default async function TutorPage({
                   </table>
                 </div>
 
-                <p className="text-muted text-xs mt-4">
-                  Los datos mostrados son agregados y anónimos: nunca el contenido literal de las conversaciones del
-                  alumnado con Tara.
-                </p>
+                <p className="text-muted text-xs mt-4">{t("footerNote")}</p>
               </>
             )}
           </>

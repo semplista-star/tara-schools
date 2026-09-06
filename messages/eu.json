@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "title": "Tara Ikastetxeak — Hezkuntza-zentroentzako panela",
+    "description": "Tara erabiltzen duten ikasleen aurrerapen metatua eta anonimoa."
+  },
+  "common": {
+    "skipToContent": "Joan eduki nagusira",
+    "languageSelectorLabel": "Hizkuntza aukeratu",
+    "signOut": "Saioa itxi"
+  },
+  "footer": {
+    "accessibilityStatement": "Irisgarritasun adierazpena",
+    "privacyPolicy": "Pribatutasun politika"
+  },
+  "login": {
+    "subtitle": "Hezkuntza-zentroentzako panela. Ikasleen aurrerapen metatua eta anonimoa.",
+    "email": "Helbide elektronikoa",
+    "password": "Pasahitza",
+    "submit": "Sartu",
+    "submitting": "Sartzen…",
+    "error": "Helbide elektronikoa edo pasahitza okerra.",
+    "helpText": "Sarbidea ikastetxeak kudeatzen du. Kontuarik ez baduzu, jarri harremanetan administrazioarekin."
+  },
+  "consentBadge": {
+    "GRANTED": "Baimena emanda",
+    "PENDING": "Baimenaren zain",
+    "DENIED": "Baimena ukatuta"
+  },
+  "consentStatus": {
+    "GRANTED": "Emanda",
+    "PENDING": "Zain",
+    "DENIED": "Ukatuta"
+  },
+  "moodTrend": {
+    "mejora": "Hobetzen",
+    "estable": "Egonkor",
+    "empeora": "Okertzen"
+  },
+  "severity": {
+    "LOW": "Lehentasun baxua",
+    "MEDIUM": "Lehentasun ertaina",
+    "HIGH": "Lehentasun altua",
+    "CRITICAL": "Lehentasun kritikoa"
+  },
+  "alertStatus": {
+    "OPEN": "Irekita",
+    "IN_REVIEW": "Berrikuspenean",
+    "RESOLVED": "Ebatzita"
+  },
+  "auditActions": {
+    "VIEW_GROUP_SUMMARY": "Talde baten laburpena kontsultatu du",
+    "VIEW_SAFETY_ALERT": "Alerta baten xehetasuna kontsultatu du",
+    "ACKNOWLEDGE_SAFETY_ALERT": "Alerta baten ardura hartu du",
+    "RESOLVE_SAFETY_ALERT": "Alerta bat ebatzi du",
+    "ADD_SAFETY_ALERT_NOTE": "Oharra gehitu dio alerta bati",
+    "REQUEST_ADDITIONAL_CONTEXT": "Testuinguru gehigarria eskatu du",
+    "VIEW_SCHOOL_AGGREGATE": "Zentroaren datu metatuak kontsultatu ditu",
+    "VIEW_GROUP_AGGREGATE": "Talde baten datu metatuak kontsultatu ditu",
+    "EXPORT_REPORT": "Txosten bat esportatu du",
+    "ASSIGN_TUTOR": "Tutore bat esleitu dio talde bati",
+    "UNASSIGN_TUTOR": "Tutore bat kendu dio taldeari",
+    "UPDATE_CONSENT_STATUS": "Familia-baimen bat eguneratu du"
+  },
+  "tutor": {
+    "panelLabel": "Tutoretza-panela",
+    "heading": "Nire taldeen aurrerapena",
+    "noGroups": "Oraindik ez duzu talderik esleituta.",
+    "groupSelectionLabel": "Taldearen hautaketa",
+    "studentsCount": "{count, plural, one {ikasle #} other {# ikasle}}",
+    "tableStudent": "Ikaslea",
+    "tableConsent": "Baimena",
+    "tableSessions": "Saioak",
+    "tableMinutes": "Minutuak",
+    "tableMood": "Animo-joera",
+    "tableBridges": "Giza zubiak",
+    "noConsent": "Daturik ez: familia-baimena falta da",
+    "noData": "Oraindik ez dago erabilera-daturik",
+    "bridgesActive": "{count, plural, one {# aktibo} other {# aktibo}}",
+    "footerNote": "Erakusten diren datuak metatuak eta anonimoak dira: inoiz ez ikasleek Tararekin izandako elkarrizketen testu literala."
+  },
+  "referenteDashboard": {
+    "panelLabel": "Ongizate-erreferentearen panela",
+    "heading": "Segurtasun-alertak",
+    "statOpen": "Alerta irekiak",
+    "statInReview": "Berrikuspenean",
+    "statResolved": "Ebatzitakoak (30 egun)",
+    "chartTitle": "Segurtasun-alertak astero",
+    "activeAlertsHeading": "Alerta aktiboak",
+    "noActiveAlerts": "Ez dago alerta irekirik ez berrikuspenean dagoenik.",
+    "resolvedHeading": "Berriki ebatzitakoak",
+    "auditHeading": "Auditoria-erregistroa",
+    "auditNote": "Datu metatuen edo alerten kontsulta oro hemen erregistratzen da, RGPD/LOPD-GDD betetzeko.",
+    "noAudit": "Oraindik ez dago jarduerarik erregistratuta.",
+    "bridgeGaugeLabel": "Artatutako giza zubiak",
+    "bridgeCaptionWithData": "{total}etik {resolved} artatuta",
+    "bridgeCaptionNoData": "Oraindik ez dago giza zubirik erregistratuta"
+  },
+  "alertDetail": {
+    "panelLabel": "Ongizate-erreferentearen panela",
+    "heading": "Alertaren xehetasuna",
+    "back": "Itzuli alertetara",
+    "createdLabel": "Sortze-data",
+    "assignedLabel": "Arduraduna",
+    "resolvedLabel": "Ebazte-data",
+    "acknowledgeButton": "Ardura hartu",
+    "resolveButton": "Ebatzitzat markatu",
+    "contextHeading": "Testuinguru gehigarria eskatu",
+    "contextNote": "Ekintza honek ez du erakusten ikaslearen elkarrizketa-testurik: giza bidez (zuzendaritza, orientazioa, familia) testuinguru gehiago eskatu dela auditagarri uzten du soilik.",
+    "contextReasonLabel": "Eskaeraren arrazoia (aukerakoa)",
+    "contextSubmit": "Eskaera erregistratu",
+    "notesHeading": "Jarraipen-oharrak",
+    "noteFieldLabel": "Oharra gehitu",
+    "noteSubmit": "Oharra gorde",
+    "noNotes": "Oraindik ez dago oharrik."
+  },
+  "adminLayout": {
+    "panelLabel": "Administrazio-panela",
+    "brand": "Tara Ikastetxeak",
+    "navSummary": "Laburpena",
+    "navGroups": "Taldeak eta tutoreak",
+    "navStudents": "Ikasleak eta baimena",
+    "exportButton": "Txostena esportatu (PDF)"
+  },
+  "adminDashboard": {
+    "statConsent": "Baimena duten ikasleak",
+    "statGroupsData": "Daturik duten taldeak",
+    "statOpenAlerts": "Segurtasun-alerta irekiak",
+    "chartTitle": "Tararekin izandako saioak, astero (zentro osoa)",
+    "gaugeLabel": "Familia-baimena",
+    "gaugeCaptionWithData": "{total}etik {granted} emanda",
+    "gaugeCaptionNoData": "Oraindik ez dago ikaslerik erregistratuta",
+    "footnote": "Talde batek gutxienez familia-baimena emanda duten 5 ikasle aktibo behar ditu datu metaturik erakusteko, anonimotasuna babesteko. Segurtasun-alertek hemen kontaketa bat besterik ez dute erakusten: kasu bakoitzaren xehetasuna ongizate-erreferenteak bakarrik ikus dezake."
+  },
+  "adminGroups": {
+    "heading": "Taldeak eta tutoreak",
+    "subheading": "Talde baten datu metatuak gutxienez {min} baimendutako ikasle aktibo daudenean bakarrik daude eskuragarri.",
+    "studentsCount": "{count, plural, one {ikasle #} other {# ikasle}} · {active, plural, one {# baimenarekin} other {# baimenarekin}}",
+    "dataAvailable": "Datuak eskuragarri",
+    "dataInsufficient": "Datu nahikorik ez",
+    "tutorsAssignedLabel": "Esleitutako tutoreak",
+    "noTutors": "Ez dago tutorerik esleituta.",
+    "removeTutorAria": "{name} kendu {group} taldetik",
+    "assignPlaceholder": "Tutorea esleitu…",
+    "assignButton": "Esleitu"
+  },
+  "adminGroupDetail": {
+    "back": "Itzuli taldeetara",
+    "studentsSummary": "{count, plural, one {ikasle #} other {# ikasle}} · {active, plural, one {# baimena emanda} other {# baimena emanda}}",
+    "noDataHeading": "Datu metaturik ez dago eskuragarri",
+    "noDataBody": "Talde honek baimena emanda duten {active} ikasle aktibo ditu. Gutxienez {min} behar dira datu metaturik erakusteko, zenbakietatik abiatuta inolako ikaslerik identifikatu ezin dadin.",
+    "statSessions": "Tararekin izandako saioak (guztira)",
+    "statMinutes": "Erabilera-minutuak (guztira)"
+  },
+  "adminStudents": {
+    "heading": "Ikasleak eta familia-baimena",
+    "subheading": "Baimen-egoerak zehazten du ikasle horren erabilera-datu metaturik biltzen den ala ez. Eguneratu familiak baimena ematen edo kentzen duenean.",
+    "tableStudent": "Ikaslea",
+    "tableStatus": "Egoera",
+    "tableChangeTo": "Aldatu honela:",
+    "changeAria": "{name}(r)en baimen-egoera aldatu",
+    "saveButton": "Gorde"
+  },
+  "accessibilityPage": {
+    "title": "Irisgarritasun adierazpena",
+    "updated": "Azken eguneratzea: {date}",
+    "intro": "Ikastetxe/erakunde honek bere Tara Ikastetxeak aplikazioa irisgarri egiteko konpromisoa hartzen du, irailaren 7ko 1112/2018 Errege Dekretuari jarraikiz, sektore publikoaren webguneen eta gailu mugikorretarako aplikazioen irisgarritasunari buruzkoa.",
+    "conformanceTitle": "Betetze-maila",
+    "conformanceBody": "Aplikazio hau WCAG 2.1 AA mailako gidalerroei jarraituz diseinatu da: egitura semantikoa eta izenbururena, kolore-kontraste nahikoa, etiketa lotuak dituzten formularioak, foku ikusgarria elementu interaktibo guztietan, testu alternatiboak ikono informatiboetan eta teklatu bidezko nabigazio osoa.",
+    "limitationsTitle": "Eduki ez-irisgarria",
+    "limitationsBody": "Egindako ahaleginak gorabehera, baliteke noizbehinkako mugak egotea. Irisgarritasun-arazoren bat antzematen baduzu, jarri harremanetan azpiko bidez, eta berrikusiko dugu.",
+    "preparationTitle": "Adierazpen honen prestaketa",
+    "preparationBody": "Adierazpen hau aplikazioaren arduradun taldeak egindako autoebaluazio batetik abiatuta prestatu da.",
+    "contactTitle": "Kontaktu-informazioa",
+    "contactBody": "Irisgarritasun-gorabeherak zure ikastetxeko administrazioari jakinaraz diezaiokezu, eta hark aplikazioaren arduradun teknikoari helaraziko dio.",
+    "feedbackTitle": "Aplikazio-prozedura",
+    "feedbackBody": "Jasotako erantzunarekin gustura ez bazaude, irisgarritasun-erreklamazioa aurkez dezakezu zure autonomia-erkidegoko organo eskudunaren aurrean."
+  },
+  "privacyPage": {
+    "title": "Pribatutasun politika",
+    "updated": "Azken eguneratzea: {date}",
+    "intro": "Orrialde honek azaltzen du Tara Ikastetxeak aplikazioak nola tratatzen dituen ikasleen eta ikastetxeko langileen datuak. Testu hau eredu orientagarri bat da: ikastetxeak berrikusi eta egokitu behar du bere datu-babeserako ordezkariarekin batera, erabilera errealean jarri aurretik.",
+    "principleTitle": "Oinarrizko printzipioa: inoiz ez elkarrizketen testu literala",
+    "principleBody": "Tara Ikastetxeak aplikazioak ez du erakusten ez gordetzen inongo ikaslek Tararekin izandako elkarrizketen testu literalik. Ikastetxeko langileek datu metatu eta anonimizatuetara bakarrik dute sarbidea (saio-kopurua, erabilera-minutuak, gai-kategoriak, animo-joera). Salbuespen bakarra segurtasun-alerten fluxua da, ongizate-erreferenteak soilik kudeatzen duena, eta horrek ere ez du elkarrizketa-testurik erakusten: sistemak sortutako laburpen profesional bat baino ez.",
+    "dataCollectedTitle": "Zer datu tratatzen diren",
+    "dataCollectedBody": "Ikasleen oinarrizko identifikazio-datuak (ezizen pseudonimoa eta taldea), familia-baimenaren egoera, erabileraren laburpen metatuak, giza-zubi gertaerak (kategoria anonimizatua) eta segurtasun-alertak. Halaber, ikastetxeko langileen kontuen datuak erregistratzen dira (izena, helbide elektronikoa, rola), baita datu metatuetarako eta segurtasunerako sarbideen auditoria-erregistro bat ere.",
+    "legalBasisTitle": "Oinarri juridikoa eta arduraduna",
+    "legalBasisBody": "Tratamendua ikastetxeak ikasleen ongizatea laguntzeko duen interes legitimoan oinarritzen da eta, dagokionean, familia-baimenean. Ikastetxea da tratamenduaren arduraduna; Tara tratamenduaren arduradun gisa jarduten du prozesatzen dituen datu metatuei dagokienez.",
+    "minorsTitle": "Familia-baimena eta adingabeak",
+    "minorsBody": "Ikasle baten erabilera-datu metatuak familiak baimena eman duenean bakarrik biltzen dira. Ikastetxeak egoera hori kontsulta eta eguneratu dezake administrazio-panelean.",
+    "retentionTitle": "Kontserbazioa",
+    "retentionBody": "Datuak ikaslea ikastetxean matrikulatuta dagoen bitartean gordetzen dira, baita datu-babesaren arloko araudi aplikagarriak eskatzen duen epe gehigarrian ere.",
+    "rightsTitle": "Interesdunen eskubideak",
+    "rightsBody": "Familiek eta ikastetxeko langileek sarbide-, zuzenketa-, ezabatze-, aurkaratze- eta mugatze-eskubideak balia ditzakete ikastetxeko administrazioarekin harremanetan jarrita.",
+    "contactTitle": "Kontaktua",
+    "contactBody": "Politika honi buruzko edozein kontsultarako, jarri harremanetan zure ikastetxeko administrazioarekin edo bere datu-babeserako ordezkariarekin."
+  }
+}

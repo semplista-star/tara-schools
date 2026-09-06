@@ -16,7 +16,7 @@ export default function CircularGauge({
   return (
     <div className="bg-panel border border-border rounded-lg p-5 flex flex-col items-center">
       <p className="text-muted text-sm self-start mb-3">{label}</p>
-      <svg width="140" height="140" viewBox="0 0 140 140" role="img" aria-label={`${label}: ${hasData ? `${pct}%` : "sin datos"}`}>
+      <svg width="140" height="140" viewBox="0 0 140 140" role="img" aria-label={`${label}: ${caption}`}>
         <circle cx="70" cy="70" r={radius} fill="none" stroke="#EFF3F8" strokeWidth="12" />
         {hasData && (
           <circle

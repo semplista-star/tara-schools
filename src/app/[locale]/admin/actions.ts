@@ -44,7 +44,7 @@ export async function assignTutor(formData: FormData) {
     metadata: { staffId: staff.id }
   });
 
-  revalidatePath("/admin/grupos");
+  revalidatePath("/[locale]/admin/grupos", "page");
 }
 
 export async function unassignTutor(formData: FormData) {
@@ -68,7 +68,7 @@ export async function unassignTutor(formData: FormData) {
     metadata: { staffId }
   });
 
-  revalidatePath("/admin/grupos");
+  revalidatePath("/[locale]/admin/grupos", "page");
 }
 
 export async function updateConsentStatus(formData: FormData) {
@@ -90,6 +90,6 @@ export async function updateConsentStatus(formData: FormData) {
     metadata: { status }
   });
 
-  revalidatePath("/admin/alumnado");
-  revalidatePath("/admin");
+  revalidatePath("/[locale]/admin/alumnado", "page");
+  revalidatePath("/[locale]/admin", "page");
 }

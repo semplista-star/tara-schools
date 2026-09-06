@@ -14,9 +14,9 @@ export default function StatCard({
 }) {
   const toneClass = {
     ink: "text-ink",
-    danger: "text-danger",
-    warning: "text-warning",
-    success: "text-success"
+    danger: "text-danger-text",
+    warning: "text-warning-text",
+    success: "text-success-text"
   }[tone];
 
   return (
