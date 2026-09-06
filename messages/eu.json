@@ -59,7 +59,8 @@
     "EXPORT_REPORT": "Txosten bat esportatu du",
     "ASSIGN_TUTOR": "Tutore bat esleitu dio talde bati",
     "UNASSIGN_TUTOR": "Tutore bat kendu dio taldeari",
-    "UPDATE_CONSENT_STATUS": "Familia-baimen bat eguneratu du"
+    "UPDATE_CONSENT_STATUS": "Familia-baimen bat eguneratu du",
+    "SEND_CONSENT_REMINDER": "Baimen-gogorarazpen bat bidali du"
   },
   "tutor": {
     "panelLabel": "Tutoretza-panela",
@@ -77,6 +78,34 @@
     "noData": "Oraindik ez dago erabilera-daturik",
     "bridgesActive": "{count, plural, one {# aktibo} other {# aktibo}}",
     "footerNote": "Erakusten diren datuak metatuak eta anonimoak dira: inoiz ez ikasleek Tararekin izandako elkarrizketen testu literala."
+  },
+  "tutorDashboard": {
+    "statConsent": "Baimena duten ikasleak",
+    "statGroupsData": "Daturik duten taldeak",
+    "statOpenAlerts": "Segurtasun-alerta irekiak",
+    "statBridgesCompleted": "Osatutako giza zubiak",
+    "chartTitle": "Tararekin izandako saioak, astero",
+    "chartPrimaryLabel": "Talde hau",
+    "chartComparisonLabel": "Zentroaren batez bestekoa",
+    "emptyChartTitle": "Oraindik ez dago aste honetako saio nahikorik",
+    "emptyChartBodyThreshold": "Talde honetan gutxienez {min} baimendutako ikasle aktibo behar dira datu metaturik erakusteko, inolako ikaslerik identifikatu ezin dadin.",
+    "emptyChartBodyNoData": "Oraindik ez da talde honentzako saiorik erregistratu azken asteetan.",
+    "radarTitle": "Asteko elkarrizketa-gaiak",
+    "topics": {
+      "conflicto_igual": "Berdinen arteko gatazka",
+      "estres_academico": "Estres akademikoa",
+      "familia": "Familia",
+      "emociones_generales": "Oro har, emozioak",
+      "autoestima": "Autoestimua"
+    },
+    "gaugeLabel": "Familia-baimena",
+    "gaugeCaptionWithData": "{total}etik {granted} emanda",
+    "gaugeCaptionNoData": "Oraindik ez dago ikaslerik erregistratuta",
+    "reminderButton": "{count, plural, one {Gogorarazpena bidali zain dagoen familiari} other {Gogorarazpena bidali zain dauden # familiei}}",
+    "reminderSentBanner": "{count, plural, one {Gogorarazpena familia bati bidali zaio.} other {Gogorarazpena # familiari bidali zaie.}}",
+    "reminderSentWithSkippedBanner": "{sent, plural, one {Gogorarazpena familia bati bidali zaio.} other {Gogorarazpena # familiari bidali zaie.}} {skipped, plural, one {Familia batek ez du harremanetarako helbide elektronikorik erregistratuta.} other {# familiak ez dute harremanetarako helbide elektronikorik erregistratuta.}}",
+    "reminderUnconfiguredBanner": "Posta elektronikoaren bidalketa oraindik ez dago konfiguratuta ikastetxe honetan. Jarri harremanetan aplikazioa kudeatzen duenarekin.",
+    "reminderErrorBanner": "Ezin izan da gogorarazpena bidali. Saiatu berriro geroago."
   },
   "referenteDashboard": {
     "panelLabel": "Ongizate-erreferentearen panela",

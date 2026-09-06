@@ -59,7 +59,8 @@
     "EXPORT_REPORT": "Ha exportat un informe",
     "ASSIGN_TUTOR": "Ha assignat un tutor/a a un grup",
     "UNASSIGN_TUTOR": "Ha tret un tutor/a d'un grup",
-    "UPDATE_CONSENT_STATUS": "Ha actualitzat un consentiment familiar"
+    "UPDATE_CONSENT_STATUS": "Ha actualitzat un consentiment familiar",
+    "SEND_CONSENT_REMINDER": "Ha enviat un recordatori de consentiment"
   },
   "tutor": {
     "panelLabel": "Panell de tutoria",
@@ -77,6 +78,34 @@
     "noData": "Encara no hi ha dades d'ús",
     "bridgesActive": "{count, plural, one {# actiu} other {# actius}}",
     "footerNote": "Les dades mostrades són agregades i anònimes: mai el contingut literal de les converses de l'alumnat amb Tara."
+  },
+  "tutorDashboard": {
+    "statConsent": "Alumnat amb consentiment",
+    "statGroupsData": "Grups amb dades disponibles",
+    "statOpenAlerts": "Alertes de seguretat obertes",
+    "statBridgesCompleted": "Ponts humans completats",
+    "chartTitle": "Sessions amb Tara per setmana",
+    "chartPrimaryLabel": "Aquest grup",
+    "chartComparisonLabel": "Mitjana del centre",
+    "emptyChartTitle": "Encara no hi ha prou sessions aquesta setmana",
+    "emptyChartBodyThreshold": "Calen almenys {min} alumnes actius amb consentiment concedit en aquest grup per mostrar dades agregades, de manera que no es pugui identificar cap alumne/a.",
+    "emptyChartBodyNoData": "Encara no s'han registrat sessions per a aquest grup en les últimes setmanes.",
+    "radarTitle": "Temes de conversa de la setmana",
+    "topics": {
+      "conflicto_igual": "Conflicte entre iguals",
+      "estres_academico": "Estrès acadèmic",
+      "familia": "Família",
+      "emociones_generales": "Emocions generals",
+      "autoestima": "Autoestima"
+    },
+    "gaugeLabel": "Consentiment familiar",
+    "gaugeCaptionWithData": "{granted} de {total} concedit",
+    "gaugeCaptionNoData": "Encara no hi ha alumnat registrat",
+    "reminderButton": "{count, plural, one {Enviar recordatori a la família pendent} other {Enviar recordatori a les # famílies pendents}}",
+    "reminderSentBanner": "{count, plural, one {Recordatori enviat a una família.} other {Recordatori enviat a # famílies.}}",
+    "reminderSentWithSkippedBanner": "{sent, plural, one {Recordatori enviat a una família.} other {Recordatori enviat a # famílies.}} {skipped, plural, one {Una família no té correu de contacte registrat.} other {# famílies no tenen correu de contacte registrat.}}",
+    "reminderUnconfiguredBanner": "L'enviament de correu encara no està configurat en aquest centre. Contacta amb qui administra l'aplicació.",
+    "reminderErrorBanner": "No s'ha pogut enviar el recordatori. Torna-ho a provar més tard."
   },
   "referenteDashboard": {
     "panelLabel": "Panell de referent de benestar",

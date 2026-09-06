@@ -88,6 +88,7 @@ model Student {
   schoolId      String
   groupId       String
   consentStatus ConsentStatus @default(PENDING)
+  guardianEmail String? // correo de contacto de la familia, para recordatorios de consentimiento
   createdAt     DateTime      @default(now())
 
   school            School             @relation(fields: [schoolId], references: [id], onDelete: Cascade)
