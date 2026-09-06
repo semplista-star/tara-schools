@@ -6,7 +6,11 @@ const ACTION_LABELS: Record<string, string> = {
   ADD_SAFETY_ALERT_NOTE: "Añadió una nota a una alerta",
   REQUEST_ADDITIONAL_CONTEXT: "Solicitó contexto adicional",
   VIEW_SCHOOL_AGGREGATE: "Consultó agregados del centro",
-  EXPORT_REPORT: "Exportó un informe"
+  VIEW_GROUP_AGGREGATE: "Consultó agregados de un grupo",
+  EXPORT_REPORT: "Exportó un informe",
+  ASSIGN_TUTOR: "Asignó un tutor a un grupo",
+  UNASSIGN_TUTOR: "Quitó un tutor de un grupo",
+  UPDATE_CONSENT_STATUS: "Actualizó un consentimiento familiar"
 };
 
 export default function AuditLogList({

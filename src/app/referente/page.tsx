@@ -4,26 +4,10 @@ import { prisma } from "@/lib/prisma";
 import SignOutButton from "@/components/SignOutButton";
 import StatCard from "@/components/StatCard";
 import HumanBridgeGauge from "@/components/HumanBridgeGauge";
-import AlertTrendChart from "@/components/AlertTrendChart";
+import WeeklyTrendChart from "@/components/WeeklyTrendChart";
 import AlertCard from "@/components/AlertCard";
 import AuditLogList from "@/components/AuditLogList";
-
-const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-
-function weekBuckets(weeks: number) {
-  const now = new Date();
-  const buckets: { start: Date; end: Date; label: string }[] = [];
-  for (let i = weeks - 1; i >= 0; i--) {
-    const end = new Date(now.getTime() - i * WEEK_MS);
-    const start = new Date(end.getTime() - WEEK_MS);
-    buckets.push({
-      start,
-      end,
-      label: start.toLocaleDateString("es-ES", { day: "numeric", month: "short" })
-    });
-  }
-  return buckets;
-}
+import { weekBuckets } from "@/lib/weeks";
 
 export default async function ReferentePage() {
   const user = await requireStaff(["WELLBEING_REFERENT"]);
@@ -87,7 +71,11 @@ export default async function ReferentePage() {
         </section>
 
         <section className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-start">
-          <AlertTrendChart labels={buckets.map((b) => b.label)} values={trendValues} />
+          <WeeklyTrendChart
+            title="Alertas de seguridad por semana"
+            labels={buckets.map((b) => b.label)}
+            values={trendValues}
+          />
           <HumanBridgeGauge resolved={bridgeResolved} total={bridgeTotal} />
         </section>
 

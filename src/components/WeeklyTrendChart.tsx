@@ -5,10 +5,18 @@ import { Line } from "react-chartjs-2";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 
-export default function AlertTrendChart({ labels, values }: { labels: string[]; values: number[] }) {
+export default function WeeklyTrendChart({
+  title,
+  labels,
+  values
+}: {
+  title: string;
+  labels: string[];
+  values: number[];
+}) {
   return (
     <div className="bg-panel border border-border rounded-lg p-5">
-      <p className="text-muted text-sm mb-3">Alertas de seguridad por semana</p>
+      <p className="text-muted text-sm mb-3">{title}</p>
       <div style={{ height: 160 }}>
         <Line
           data={{
