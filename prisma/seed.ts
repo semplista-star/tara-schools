@@ -75,6 +75,13 @@ async function main() {
     }
   }
 
+  // Nota: este seed solo crea la estructura (centro, grupos, alumnado con
+  // alias, cuentas de personal) para poder probar el login y el aislamiento
+  // por rol. NO se generan aquí resúmenes de uso ni eventos de puente
+  // humano de ejemplo: esos datos son reales y llegarán de la integración
+  // con la app Tara original. Hasta entonces, los paneles deben mostrar
+  // correctamente el estado "todavía sin datos".
+
   for (const staff of STAFF) {
     const passwordHash = await bcrypt.hash(staff.password, 10);
     const created = await prisma.staffUser.upsert({
