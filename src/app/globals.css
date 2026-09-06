@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #F7F8FA;
+  color: #16202B;
+}
+
+* {
+  border-color: rgba(20, 30, 45, 0.12);
+}
+
+:focus-visible {
+  outline: 2px solid #2a78d6;
+  outline-offset: 2px;
+}

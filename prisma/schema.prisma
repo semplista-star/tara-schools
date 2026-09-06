@@ -1,0 +1,181 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum StaffRole {
+  ADMIN
+  TUTOR
+  WELLBEING_REFERENT
+}
+
+enum ConsentStatus {
+  PENDING
+  GRANTED
+  DENIED
+}
+
+enum AlertSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum AlertStatus {
+  OPEN
+  IN_REVIEW
+  RESOLVED
+}
+
+// Un centro educativo. Todo el resto de datos queda aislado por schoolId:
+// ningún usuario de un centro puede ver datos de otro centro.
+model School {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+
+  groups       Group[]
+  students     Student[]
+  staff        StaffUser[]
+  safetyAlerts SafetyAlert[]
+  auditLogs    AuditLog[]
+}
+
+// Un grupo/clase dentro de un centro. Un tutor puede tener varios grupos.
+model Group {
+  id        String   @id @default(cuid())
+  name      String
+  schoolId  String
+  createdAt DateTime @default(now())
+
+  school   School      @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  students Student[]
+  tutors   StaffUser[] @relation("TutorGroups")
+
+  @@unique([schoolId, name])
+}
+
+// Personal del centro con acceso al panel. El rol determina qué puede ver:
+// ADMIN: agregados de todo el centro. TUTOR: solo sus grupos asignados.
+// WELLBEING_REFERENT: alertas de seguridad de todo el centro.
+model StaffUser {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         StaffRole
+  schoolId     String
+  createdAt    DateTime  @default(now())
+
+  school               School            @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  tutorGroups          Group[]           @relation("TutorGroups")
+  assignedSafetyAlerts SafetyAlert[]     @relation("AssignedReferent")
+  safetyAlertNotes     SafetyAlertNote[]
+  auditLogs            AuditLog[]
+}
+
+// Alumno/a representado únicamente por un alias pseudónimo. Nunca se
+// almacena aquí (ni en ningún otro modelo) el texto literal de sus
+// conversaciones con Tara: solo datos agregados y anonimizados.
+model Student {
+  id            String        @id @default(cuid())
+  alias         String
+  schoolId      String
+  groupId       String
+  consentStatus ConsentStatus @default(PENDING)
+  createdAt     DateTime      @default(now())
+
+  school            School             @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  group             Group              @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  usageSummaries    UsageSummary[]
+  humanBridgeEvents HumanBridgeEvent[]
+  safetyAlerts      SafetyAlert[]
+}
+
+// Resumen de uso agregado por periodo (p.ej. semanal). Nunca contiene texto
+// de conversación: solo contadores y categorías anonimizadas.
+model UsageSummary {
+  id            String   @id @default(cuid())
+  studentId     String
+  periodStart   DateTime
+  periodEnd     DateTime
+  sessionsCount Int      @default(0)
+  totalMinutes  Int      @default(0)
+  topics        Json? // recuento agregado por categoría, p.ej. {"estudios": 3, "amistad": 2}
+  moodTrend     String? // etiqueta cualitativa agregada: "estable" | "mejora" | "empeora"
+  createdAt     DateTime @default(now())
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId, periodStart])
+}
+
+// Evento en que Tara activó un "puente humano" (recomendó hablar con un
+// adulto). Solo guarda una categoría anonimizada del motivo, nunca el texto.
+model HumanBridgeEvent {
+  id          String   @id @default(cuid())
+  studentId   String
+  triggeredAt DateTime @default(now())
+  category    String
+  resolved    Boolean  @default(false)
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
+
+// Alerta de seguridad. Visible únicamente para el rol WELLBEING_REFERENT
+// (y ADMIN de forma agregada, sin detalle individual). El campo "summary"
+// es una descripción profesional generada por el sistema, no una cita
+// literal de la conversación del/de la menor.
+model SafetyAlert {
+  id                 String         @id @default(cuid())
+  studentId          String
+  schoolId           String
+  severity           AlertSeverity
+  status             AlertStatus    @default(OPEN)
+  summary            String
+  assignedReferentId String?
+  createdAt          DateTime       @default(now())
+  resolvedAt         DateTime?
+
+  student          Student           @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  school           School            @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  assignedReferent StaffUser?        @relation("AssignedReferent", fields: [assignedReferentId], references: [id])
+  notes            SafetyAlertNote[]
+
+  @@index([schoolId, status])
+}
+
+model SafetyAlertNote {
+  id        String   @id @default(cuid())
+  alertId   String
+  authorId  String
+  text      String
+  createdAt DateTime @default(now())
+
+  alert  SafetyAlert @relation(fields: [alertId], references: [id], onDelete: Cascade)
+  author StaffUser   @relation(fields: [authorId], references: [id])
+}
+
+// Registro de auditoría: toda visualización de datos agregados de grupo,
+// toda alerta consultada y toda exportación queda registrada aquí, para
+// cumplir con los requisitos de trazabilidad de RGPD/LOPD-GDD.
+model AuditLog {
+  id         String   @id @default(cuid())
+  schoolId   String
+  actorId    String
+  action     String
+  targetType String?
+  targetId   String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  school School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  actor  StaffUser @relation(fields: [actorId], references: [id])
+
+  @@index([schoolId, createdAt])
+}
