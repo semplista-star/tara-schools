@@ -2,24 +2,24 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-// Script de un solo uso: cambia el email de login de las 3 cuentas
-// SUPERADMIN de @control.tara.app a direcciones reales @soytara.com. Se
-// borra del repo justo después de ejecutarse.
-const RENAMES = [
-  { from: "marcribo@control.tara.app", to: "info@soytara.com" },
-  { from: "mustass@control.tara.app", to: "contacto@soytara.com" },
-  { from: "marky2050@control.tara.app", to: "soporte@soytara.com" }
+// Script de un solo uso: corrige la asignación de emails de login de las
+// 3 cuentas SUPERADMIN. Como el email es único, primero se pasa cada una
+// por un valor temporal para evitar colisiones al rotar entre ellas, y
+// luego se fija el valor final. Se borra del repo justo después de
+// ejecutarse.
+const FINAL = [
+  { id: "cmtu9123y00018hglgiz8ezv9", name: "MarcRibo", email: "contacto@soytara.com" },
+  { id: "cmtu9125700038hgl025yt6vk", name: "MustaSS", email: "soporte@soytara.com" },
+  { id: "cmtu9125l00058hgla1190j1d", name: "Marky2050", email: "info@soytara.com" }
 ];
 
 async function main() {
-  for (const r of RENAMES) {
-    const staff = await prisma.staffUser.findUnique({ where: { email: r.from } });
-    if (!staff) {
-      console.log(`No encontrado: ${r.from}`);
-      continue;
-    }
-    await prisma.staffUser.update({ where: { id: staff.id }, data: { email: r.to } });
-    console.log(`Actualizado: ${r.from} -> ${r.to}`);
+  for (const p of FINAL) {
+    await prisma.staffUser.update({ where: { id: p.id }, data: { email: `tmp-${p.id}@placeholder.local` } });
+  }
+  for (const p of FINAL) {
+    await prisma.staffUser.update({ where: { id: p.id }, data: { email: p.email } });
+    console.log(`${p.name} -> ${p.email}`);
   }
 }
 
