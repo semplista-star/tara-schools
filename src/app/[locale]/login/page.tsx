@@ -10,8 +10,11 @@ export default function LoginPage() {
   const router = useRouter();
   const emailId = useId();
   const passwordId = useId();
+  const totpId = useId();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [totp, setTotp] = useState("");
+  const [needsTotp, setNeedsTotp] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -23,10 +26,23 @@ export default function LoginPage() {
     const res = await signIn("credentials", {
       email: email.trim().toLowerCase(),
       password,
+      totp: needsTotp ? totp.trim() : undefined,
       redirect: false
     });
 
     setLoading(false);
+    if (res?.error === "TOTP_REQUIRED") {
+      setNeedsTotp(true);
+      return;
+    }
+    if (res?.error === "TOTP_INVALID") {
+      setError(t("totpInvalid"));
+      return;
+    }
+    if (res?.error === "TOO_MANY_ATTEMPTS") {
+      setError(t("tooManyAttempts"));
+      return;
+    }
     if (res?.error) {
       setError(t("error"));
     } else {
@@ -65,11 +81,33 @@ export default function LoginPage() {
               type="password"
               autoComplete="current-password"
               required
+              disabled={needsTotp}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-border rounded-md px-3 py-2 bg-canvas focus:outline-none focus:ring-2 focus:ring-accent-light focus:border-accent"
+              className="w-full border border-border rounded-md px-3 py-2 bg-canvas focus:outline-none focus:ring-2 focus:ring-accent-light focus:border-accent disabled:opacity-60"
             />
           </div>
+
+          {needsTotp && (
+            <div>
+              <label htmlFor={totpId} className="block text-sm text-inksoft mb-1">
+                {t("totpLabel")}
+              </label>
+              <input
+                id={totpId}
+                type="text"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                autoFocus
+                required
+                maxLength={6}
+                value={totp}
+                onChange={(e) => setTotp(e.target.value)}
+                className="w-full border border-border rounded-md px-3 py-2 bg-canvas focus:outline-none focus:ring-2 focus:ring-accent-light focus:border-accent tracking-[0.3em] text-center"
+              />
+              <p className="text-muted text-xs mt-1">{t("totpHint")}</p>
+            </div>
+          )}
 
           {error && (
             <p role="alert" className="text-danger text-sm">

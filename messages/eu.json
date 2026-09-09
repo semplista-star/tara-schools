@@ -19,7 +19,11 @@
     "submit": "Sartu",
     "submitting": "Sartzen…",
     "error": "Helbide elektronikoa edo pasahitza okerra.",
-    "helpText": "Sarbidea ikastetxeak kudeatzen du. Kontuarik ez baduzu, jarri harremanetan administrazioarekin."
+    "helpText": "Sarbidea ikastetxeak kudeatzen du. Kontuarik ez baduzu, jarri harremanetan administrazioarekin.",
+    "totpLabel": "Egiaztapen-kodea (autentifikazio-app)",
+    "totpHint": "Sartu zure autentifikazio-appak emandako 6 zenbakiko kodea.",
+    "totpInvalid": "Kode okerra. Saiatu berriro.",
+    "tooManyAttempts": "Saiakera gehiegi. Itxaron minutu batzuk eta saiatu berriro."
   },
   "consentBadge": {
     "GRANTED": "Baimena emanda",
@@ -291,5 +295,15 @@
     "createAccountButton": "Kontua sortu",
     "existingAccountsHeading": "Lehendik dauden kontuak",
     "noAccountsYet": "Oraindik ez dago langile-konturik sortuta."
+  },
+  "twoFactorSetup": {
+    "heading": "Bi urratseko egiaztapena aktibatu",
+    "intro": "Nahitaezkoa da kontrol-zentrorako. Eskaneatu kode hau autentifikazio-app batekin (Google Authenticator, Authy...) eta baieztatu erakutsiko dizun kodearekin.",
+    "qrAlt": "Bi urratseko egiaztapena konfiguratzeko QR kodea",
+    "manualLabel": "Ezin duzu eskaneatu? Sartu gako hau eskuz:",
+    "codeLabel": "6 zenbakiko kodea",
+    "invalidCode": "Kode okerra. Egiaztatu mugikorraren ordua eta saiatu berriro.",
+    "confirmButton": "Baieztatu eta aktibatu",
+    "helpText": "Hemendik aurrera, kode hau eskatuko da saio-hasiera guztietan."
   }
 }

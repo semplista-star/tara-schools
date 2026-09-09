@@ -10,7 +10,8 @@ const pathRole: Record<string, string> = {
   admin: "ADMIN",
   tutor: "TUTOR",
   referente: "WELLBEING_REFERENT",
-  control: "SUPERADMIN"
+  control: "SUPERADMIN",
+  "2fa-setup": "SUPERADMIN"
 };
 
 // Middleware combinado: primero aplica el aislamiento por rol (igual que

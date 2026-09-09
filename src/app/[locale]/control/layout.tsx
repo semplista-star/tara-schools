@@ -1,5 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import { Link, redirect } from "@/i18n/navigation";
+import { requireStaff } from "@/lib/session";
+import { prisma } from "@/lib/prisma";
 import SignOutButton from "@/components/SignOutButton";
 
 export default async function ControlLayout({
@@ -11,6 +13,12 @@ export default async function ControlLayout({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "controlCenter" });
+
+  // El acceso al centro de control requiere 2FA configurada — quien no la
+  // tenga se queda aquí hasta que la active, sin excepción.
+  const user = await requireStaff(["SUPERADMIN"]);
+  const staff = await prisma.staffUser.findUnique({ where: { id: user.id }, select: { totpEnabledAt: true } });
+  if (!staff?.totpEnabledAt) redirect({ href: "/2fa-setup", locale });
 
   return (
     <div className="min-h-screen bg-canvas flex flex-col">

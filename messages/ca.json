@@ -19,7 +19,11 @@
     "submit": "Entrar",
     "submitting": "Entrant…",
     "error": "Correu electrònic o contrasenya incorrectes.",
-    "helpText": "L'accés el gestiona el centre educatiu. Contacta amb l'administració si no tens compte."
+    "helpText": "L'accés el gestiona el centre educatiu. Contacta amb l'administració si no tens compte.",
+    "totpLabel": "Codi de verificació (app autenticadora)",
+    "totpHint": "Introdueix el codi de 6 dígits de la teva app autenticadora.",
+    "totpInvalid": "Codi incorrecte. Torna-ho a provar.",
+    "tooManyAttempts": "Massa intents. Espera uns minuts i torna-ho a provar."
   },
   "consentBadge": {
     "GRANTED": "Consentiment concedit",
@@ -291,5 +295,15 @@
     "createAccountButton": "Crear compte",
     "existingAccountsHeading": "Comptes existents",
     "noAccountsYet": "Encara no hi ha comptes de personal creats."
+  },
+  "twoFactorSetup": {
+    "heading": "Activar la verificació en dos passos",
+    "intro": "Obligatori per al centre de control. Escaneja aquest codi amb una app autenticadora (Google Authenticator, Authy...) i confirma amb el codi que et mostri.",
+    "qrAlt": "Codi QR per configurar la verificació en dos passos",
+    "manualLabel": "No pots escanejar? Introdueix aquesta clau manualment:",
+    "codeLabel": "Codi de 6 dígits",
+    "invalidCode": "Codi incorrecte. Comprova l'hora del mòbil i torna-ho a provar.",
+    "confirmButton": "Confirmar i activar",
+    "helpText": "A partir d'ara, aquest codi es demanarà a cada inici de sessió."
   }
 }

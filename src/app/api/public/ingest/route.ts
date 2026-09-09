@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { clampString, severityForCategory, MAX_CODI_LEN, MAX_LANG_LEN, MAX_STRING_LEN } from "@/lib/publicIngest";
+import { notifyCriticalAlert } from "@/lib/alertNotify";
+import { checkRateLimit, shouldNotify } from "@/lib/rateLimit";
 
 // Endpoint que soytara.com/chat llama directamente desde el navegador para
 // que la actividad del chat público (fuera de cualquier centro educativo)
@@ -65,20 +67,38 @@ export async function POST(req: NextRequest) {
   });
 
   if (body.type === "safety_alert") {
+    // Nunca se limita ni se rechaza: una señal de seguridad real no debe
+    // perderse jamás por un límite de peticiones.
     const category = clampString(body.category, 40) ?? "ALTRE";
     const identityHint = clampString(body.identityHint, MAX_STRING_LEN);
+    const severity = severityForCategory(category);
     const alert = await prisma.publicSafetyAlert.create({
       data: {
         visitorId: visitor.id,
-        severity: severityForCategory(category),
+        severity,
         category,
         identityHint
       }
     });
+
+    // Como mucho un aviso cada 15 minutos por visitante: si alguien manda
+    // varias alertas seguidas, todas quedan guardadas, pero no se satura
+    // el correo de quien las revisa.
+    if (shouldNotify(`alert:${visitor.id}`, 15 * 60 * 1000)) {
+      await notifyCriticalAlert({ id: alert.id, severity, category, source: "public_web" });
+    }
+
     return NextResponse.json({ ok: true, id: alert.id }, { headers });
   }
 
   if (body.type === "session_summary") {
+    // Tráfico rutinario: aquí sí aplicamos un límite básico, por visitante
+    // y por IP (esta última evita que alguien inunde la tabla creando
+    // "codis" nuevos sin parar).
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+    if (!checkRateLimit(`summary:${visitor.id}`, 20, 10 * 60 * 1000) || !checkRateLimit(`ip:${ip}`, 60, 10 * 60 * 1000)) {
+      return NextResponse.json({ error: "rate_limited" }, { status: 429, headers });
+    }
     const mode = clampString(body.mode, 20) ?? "normal";
     const sentiment = clampString(body.sentiment, MAX_STRING_LEN);
     const necessitat = clampString(body.necessitat, MAX_STRING_LEN);

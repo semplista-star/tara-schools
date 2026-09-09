@@ -69,13 +69,15 @@ model Group {
 // ADMIN: agregados de todo el centro. TUTOR: solo sus grupos asignados.
 // WELLBEING_REFERENT: alertas de seguridad de todo el centro.
 model StaffUser {
-  id           String    @id @default(cuid())
-  name         String
-  email        String    @unique
-  passwordHash String
-  role         StaffRole
-  schoolId     String
-  createdAt    DateTime  @default(now())
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  passwordHash  String
+  role          StaffRole
+  schoolId      String
+  createdAt     DateTime  @default(now())
+  totpSecret    String? // pendiente de confirmar hasta que totpEnabledAt se rellena
+  totpEnabledAt DateTime?
 
   school                     School                  @relation(fields: [schoolId], references: [id], onDelete: Cascade)
   tutorGroups                Group[]                 @relation("TutorGroups")
