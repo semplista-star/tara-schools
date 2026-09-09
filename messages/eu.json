@@ -240,7 +240,9 @@
     "noPublicAlerts": "Ez dago alerta irekirik txat publikoan.",
     "schoolAlertsHeading": "Ikastetxeka alerta irekiak",
     "schoolAlertsNote": "Alerta hauek ebaztea ikastetxe bakoitzeko ongizate-erreferentearen zeregina izaten jarraitzen du — hemen ikuspegi globala baino ez dago.",
-    "noSchoolAlerts": "Ez dago alerta irekirik ikastetxe batean ere."
+    "noSchoolAlerts": "Ez dago alerta irekirik ikastetxe batean ere.",
+    "navSummary": "Laburpena",
+    "navAccounts": "Kontuak"
   },
   "controlAlertDetail": {
     "back": "Kontrol-zentrora itzuli",
@@ -254,5 +256,29 @@
     "noteFieldLabel": "Oharra gehitu",
     "noteSubmit": "Oharra gorde",
     "noNotes": "Oraindik ez dago oharrik."
+  },
+  "staffRole": {
+    "ADMIN": "Administrazioa",
+    "TUTOR": "Tutoretza",
+    "WELLBEING_REFERENT": "Ongizate-erreferentea",
+    "SUPERADMIN": "Kontrol-zentroa"
+  },
+  "controlAccounts": {
+    "newSchoolHeading": "Ikastetxe berria",
+    "newSchoolNote": "Eman ikastetxe bati alta, langile-kontuak sortu aurretik.",
+    "schoolNameLabel": "Ikastetxearen izena",
+    "createSchoolButton": "Ikastetxea sortu",
+    "newAccountHeading": "Langile-kontu berria",
+    "newAccountNote": "Sortu ikastetxe baten panelerako sarbidea (administrazioa, tutoretza edo ongizate-erreferentea). Kontrol-zentroko kontuak (SUPERADMIN) ez dira hemendik sortzen.",
+    "noSchoolsYet": "Eman lehenengo ikastetxe bati alta.",
+    "schoolLabel": "Ikastetxea",
+    "roleLabel": "Rola",
+    "nameLabel": "Izena",
+    "emailLabel": "Helbide elektronikoa",
+    "passwordLabel": "Pasahitza",
+    "passwordHint": "Gutxienez 8 karaktere. Partekatu pertsonarekin kanal seguru batetik — ez da berriro erakutsiko hemen.",
+    "createAccountButton": "Kontua sortu",
+    "existingAccountsHeading": "Lehendik dauden kontuak",
+    "noAccountsYet": "Oraindik ez dago langile-konturik sortuta."
   }
 }

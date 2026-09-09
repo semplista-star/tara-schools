@@ -240,7 +240,9 @@
     "noPublicAlerts": "No hi ha alertes obertes al xat públic.",
     "schoolAlertsHeading": "Alertes obertes per centre",
     "schoolAlertsNote": "Resoldre aquestes alertes segueix sent tasca de la referent de benestar de cada centre — aquí només hi ha visibilitat global.",
-    "noSchoolAlerts": "No hi ha alertes obertes en cap centre."
+    "noSchoolAlerts": "No hi ha alertes obertes en cap centre.",
+    "navSummary": "Resum",
+    "navAccounts": "Comptes"
   },
   "controlAlertDetail": {
     "back": "Tornar al centre de control",
@@ -254,5 +256,29 @@
     "noteFieldLabel": "Afegir nota",
     "noteSubmit": "Desar nota",
     "noNotes": "Encara no hi ha notes."
+  },
+  "staffRole": {
+    "ADMIN": "Administració",
+    "TUTOR": "Tutoria",
+    "WELLBEING_REFERENT": "Referent de benestar",
+    "SUPERADMIN": "Centre de control"
+  },
+  "controlAccounts": {
+    "newSchoolHeading": "Nou centre",
+    "newSchoolNote": "Dona d'alta un centre educatiu abans de crear-hi comptes de personal.",
+    "schoolNameLabel": "Nom del centre",
+    "createSchoolButton": "Crear centre",
+    "newAccountHeading": "Nou compte de personal",
+    "newAccountNote": "Crea l'accés al panell d'un centre (administració, tutoria o referent de benestar). Els comptes del centre de control (SUPERADMIN) no es creen des d'aquí.",
+    "noSchoolsYet": "Dona d'alta un centre primer.",
+    "schoolLabel": "Centre",
+    "roleLabel": "Rol",
+    "nameLabel": "Nom",
+    "emailLabel": "Correu electrònic",
+    "passwordLabel": "Contrasenya",
+    "passwordHint": "Mínim 8 caràcters. Comparteix-la amb la persona per un canal segur — no es torna a mostrar aquí.",
+    "createAccountButton": "Crear compte",
+    "existingAccountsHeading": "Comptes existents",
+    "noAccountsYet": "Encara no hi ha comptes de personal creats."
   }
 }
