@@ -105,7 +105,18 @@
     "reminderSentBanner": "{count, plural, one {Gogorarazpena familia bati bidali zaio.} other {Gogorarazpena # familiari bidali zaie.}}",
     "reminderSentWithSkippedBanner": "{sent, plural, one {Gogorarazpena familia bati bidali zaio.} other {Gogorarazpena # familiari bidali zaie.}} {skipped, plural, one {Familia batek ez du harremanetarako helbide elektronikorik erregistratuta.} other {# familiak ez dute harremanetarako helbide elektronikorik erregistratuta.}}",
     "reminderUnconfiguredBanner": "Posta elektronikoaren bidalketa oraindik ez dago konfiguratuta ikastetxe honetan. Jarri harremanetan aplikazioa kudeatzen duenarekin.",
-    "reminderErrorBanner": "Ezin izan da gogorarazpena bidali. Saiatu berriro geroago."
+    "reminderErrorBanner": "Ezin izan da gogorarazpena bidali. Saiatu berriro geroago.",
+    "addStudentsHeading": "Ikasleak gehitu",
+    "addStudentsNote": "Ezizen pseudonimo batekin gehitzen dira — ez da benetako izena behar. Familia-baimena zain geratzen da bereizita kudeatu arte.",
+    "addOneHeading": "Bat bestearen atzetik gehitu",
+    "aliasPlaceholder": "Ezizena (adib. Ikaslea-C1)",
+    "guardianEmailPlaceholder": "Familiaren posta elektronikoa (aukerakoa)",
+    "addOneButton": "Ikaslea gehitu",
+    "importCsvHeading": "CSV bidez inportatu",
+    "csvFormatHint": "Ikasle bakoitzeko lerro bat: ezizena,familia_posta (posta aukerakoa da).",
+    "importCsvButton": "CSV inportatu",
+    "csvEmptyBanner": "Ez da fitxategirik jaso.",
+    "csvOkBanner": "Inportazioa amaituta: {parsed} lerrotik {created} gehitu dira (errepikatutakoak baztertu dira)."
   },
   "referenteDashboard": {
     "panelLabel": "Ongizate-erreferentearen panela",

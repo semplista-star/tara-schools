@@ -19,7 +19,7 @@ import StatCard from "@/components/StatCard";
 import WeeklyTrendChart from "@/components/WeeklyTrendChart";
 import RadarTopicsChart from "@/components/RadarTopicsChart";
 import CircularGauge from "@/components/CircularGauge";
-import { sendConsentReminder } from "@/app/[locale]/tutor/actions";
+import { addStudent, importStudentsCsv, sendConsentReminder } from "@/app/[locale]/tutor/actions";
 
 const TOPIC_KEYS = ["conflicto_igual", "estres_academico", "familia", "emociones_generales", "autoestima"] as const;
 
@@ -28,13 +28,21 @@ export default async function TutorPage({
   searchParams
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ grupo?: string; recordatorio?: string; enviados?: string; sinCorreo?: string }>;
+  searchParams: Promise<{
+    grupo?: string;
+    recordatorio?: string;
+    enviados?: string;
+    sinCorreo?: string;
+    csv?: string;
+    csvCreated?: string;
+    csvParsed?: string;
+  }>;
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "tutor" });
   const td = await getTranslations({ locale, namespace: "tutorDashboard" });
   const user = await requireStaff(["TUTOR"]);
-  const { grupo, recordatorio, enviados, sinCorreo } = await searchParams;
+  const { grupo, recordatorio, enviados, sinCorreo, csv, csvCreated, csvParsed } = await searchParams;
 
   const groups = await prisma.group.findMany({
     where: { schoolId: user.schoolId, tutors: { some: { id: user.id } } },
@@ -195,6 +203,12 @@ export default async function TutorPage({
     else if (recordatorio === "sent" && skippedCount > 0)
       reminderBanner = td("reminderSentWithSkippedBanner", { sent: sentCount, skipped: skippedCount });
     else if (recordatorio === "sent") reminderBanner = td("reminderSentBanner", { count: sentCount });
+  }
+
+  let csvBanner: string | null = null;
+  if (csv && grupo === activeGroup?.id) {
+    if (csv === "empty") csvBanner = td("csvEmptyBanner");
+    else if (csv === "ok") csvBanner = td("csvOkBanner", { created: Number(csvCreated ?? 0), parsed: Number(csvParsed ?? 0) });
   }
 
   return (
@@ -389,6 +403,62 @@ export default async function TutorPage({
                     </tbody>
                   </table>
                 </div>
+
+                <section className="bg-panel border border-border rounded-lg p-6 mt-6">
+                  <h3 className="text-ink font-medium mb-1">{td("addStudentsHeading")}</h3>
+                  <p className="text-muted text-xs mb-4">{td("addStudentsNote")}</p>
+
+                  {csvBanner && (
+                    <p role="status" className="text-inksoft text-xs mb-4 border border-border rounded-md px-3 py-2">
+                      {csvBanner}
+                    </p>
+                  )}
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <form action={addStudent} className="flex flex-col gap-2">
+                      <input type="hidden" name="groupId" value={activeGroup.id} />
+                      <label className="text-sm text-inksoft" htmlFor="new-student-alias">
+                        {td("addOneHeading")}
+                      </label>
+                      <input
+                        id="new-student-alias"
+                        name="alias"
+                        required
+                        placeholder={td("aliasPlaceholder")}
+                        className="border border-border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent-light focus:border-accent"
+                      />
+                      <input
+                        name="guardianEmail"
+                        type="email"
+                        placeholder={td("guardianEmailPlaceholder")}
+                        className="border border-border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent-light focus:border-accent"
+                      />
+                      <button className="self-start bg-accent-dark text-white rounded-md px-4 py-2 text-sm font-medium hover:opacity-90">
+                        {td("addOneButton")}
+                      </button>
+                    </form>
+
+                    <form action={importStudentsCsv} className="flex flex-col gap-2" encType="multipart/form-data">
+                      <input type="hidden" name="groupId" value={activeGroup.id} />
+                      <input type="hidden" name="locale" value={locale} />
+                      <label className="text-sm text-inksoft" htmlFor="csv-file">
+                        {td("importCsvHeading")}
+                      </label>
+                      <input
+                        id="csv-file"
+                        name="csvFile"
+                        type="file"
+                        accept=".csv,text/csv"
+                        required
+                        className="text-sm text-inksoft file:mr-3 file:py-2 file:px-3 file:rounded-md file:border file:border-border file:bg-canvas file:text-sm file:text-inksoft"
+                      />
+                      <p className="text-muted text-xs">{td("csvFormatHint")}</p>
+                      <button className="self-start bg-accent-dark text-white rounded-md px-4 py-2 text-sm font-medium hover:opacity-90">
+                        {td("importCsvButton")}
+                      </button>
+                    </form>
+                  </div>
+                </section>
 
                 <footer className="border border-border rounded-lg px-4 py-3 mt-6 flex flex-wrap items-center gap-3">
                   <span className="inline-flex items-center rounded-full border border-border px-2.5 py-1 text-xs text-inksoft">

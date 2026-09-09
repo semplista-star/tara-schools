@@ -105,7 +105,18 @@
     "reminderSentBanner": "{count, plural, one {Recordatori enviat a una família.} other {Recordatori enviat a # famílies.}}",
     "reminderSentWithSkippedBanner": "{sent, plural, one {Recordatori enviat a una família.} other {Recordatori enviat a # famílies.}} {skipped, plural, one {Una família no té correu de contacte registrat.} other {# famílies no tenen correu de contacte registrat.}}",
     "reminderUnconfiguredBanner": "L'enviament de correu encara no està configurat en aquest centre. Contacta amb qui administra l'aplicació.",
-    "reminderErrorBanner": "No s'ha pogut enviar el recordatori. Torna-ho a provar més tard."
+    "reminderErrorBanner": "No s'ha pogut enviar el recordatori. Torna-ho a provar més tard.",
+    "addStudentsHeading": "Afegir alumnat",
+    "addStudentsNote": "S'afegeixen amb un àlies pseudònim — no cal el nom real. El consentiment familiar queda pendent fins que es gestioni a part.",
+    "addOneHeading": "Afegir un a un",
+    "aliasPlaceholder": "Àlies (ex. Alumne-C1)",
+    "guardianEmailPlaceholder": "Correu de la família (opcional)",
+    "addOneButton": "Afegir alumne/a",
+    "importCsvHeading": "Importar per CSV",
+    "csvFormatHint": "Una fila per alumne/a: alies,correu_familiar (el correu és opcional).",
+    "importCsvButton": "Importar CSV",
+    "csvEmptyBanner": "No s'ha rebut cap arxiu.",
+    "csvOkBanner": "Importació completada: {created} de {parsed} files afegides (les repetides s'han saltat)."
   },
   "referenteDashboard": {
     "panelLabel": "Panell de referent de benestar",

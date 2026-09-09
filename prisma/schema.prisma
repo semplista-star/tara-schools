@@ -103,6 +103,8 @@ model Student {
   usageSummaries    UsageSummary[]
   humanBridgeEvents HumanBridgeEvent[]
   safetyAlerts      SafetyAlert[]
+
+  @@unique([groupId, alias])
 }
 
 // Resumen de uso agregado por periodo (p.ej. semanal). Nunca contiene texto

@@ -105,7 +105,18 @@
     "reminderSentBanner": "{count, plural, one {Recordatorio enviado a unha familia.} other {Recordatorio enviado a # familias.}}",
     "reminderSentWithSkippedBanner": "{sent, plural, one {Recordatorio enviado a unha familia.} other {Recordatorio enviado a # familias.}} {skipped, plural, one {Unha familia non ten correo de contacto rexistrado.} other {# familias non teñen correo de contacto rexistrado.}}",
     "reminderUnconfiguredBanner": "O envío de correo aínda non está configurado neste centro. Contacta con quen administra a aplicación.",
-    "reminderErrorBanner": "Non se puido enviar o recordatorio. Téntao de novo máis tarde."
+    "reminderErrorBanner": "Non se puido enviar o recordatorio. Téntao de novo máis tarde.",
+    "addStudentsHeading": "Engadir alumnado",
+    "addStudentsNote": "Engádense cun alias pseudónimo — non fai falta o nome real. O consentimento familiar queda pendente ata que se xestione á parte.",
+    "addOneHeading": "Engadir un a un",
+    "aliasPlaceholder": "Alias (ex. Alumno-C1)",
+    "guardianEmailPlaceholder": "Correo da familia (opcional)",
+    "addOneButton": "Engadir alumno/a",
+    "importCsvHeading": "Importar por CSV",
+    "csvFormatHint": "Unha fila por alumno/a: alias,correo_familiar (o correo é opcional).",
+    "importCsvButton": "Importar CSV",
+    "csvEmptyBanner": "Non se recibiu ningún arquivo.",
+    "csvOkBanner": "Importación completada: {created} de {parsed} filas engadidas (as repetidas sáltanse)."
   },
   "referenteDashboard": {
     "panelLabel": "Panel de referente de benestar",
