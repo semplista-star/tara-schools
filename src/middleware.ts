@@ -2,15 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import createIntlMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
+import { ROLE_HOME } from "@/lib/roleHome";
 
 const intlMiddleware = createIntlMiddleware(routing);
-
-const roleHome: Record<string, string> = {
-  ADMIN: "admin",
-  TUTOR: "tutor",
-  WELLBEING_REFERENT: "referente",
-  SUPERADMIN: "control"
-};
 
 const pathRole: Record<string, string> = {
   admin: "ADMIN",
@@ -37,9 +31,9 @@ export default async function middleware(req: NextRequest) {
       return NextResponse.redirect(new URL(`/${locale}/login`, req.url));
     }
 
-    const role = token.role as string | undefined;
+    const role = token.role as keyof typeof ROLE_HOME | undefined;
     if (role && pathRole[firstSegment] !== role) {
-      return NextResponse.redirect(new URL(`/${locale}/${roleHome[role] ?? "login"}`, req.url));
+      return NextResponse.redirect(new URL(`/${locale}${ROLE_HOME[role] ?? "/login"}`, req.url));
     }
   }
 
