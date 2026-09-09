@@ -8,13 +8,15 @@ const intlMiddleware = createIntlMiddleware(routing);
 const roleHome: Record<string, string> = {
   ADMIN: "admin",
   TUTOR: "tutor",
-  WELLBEING_REFERENT: "referente"
+  WELLBEING_REFERENT: "referente",
+  SUPERADMIN: "control"
 };
 
 const pathRole: Record<string, string> = {
   admin: "ADMIN",
   tutor: "TUTOR",
-  referente: "WELLBEING_REFERENT"
+  referente: "WELLBEING_REFERENT",
+  control: "SUPERADMIN"
 };
 
 // Middleware combinado: primero aplica el aislamiento por rol (igual que

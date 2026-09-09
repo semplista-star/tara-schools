@@ -222,5 +222,37 @@
     "rightsBody": "Les famílies i el personal del centre poden exercir els seus drets d'accés, rectificació, supressió, oposició i limitació adreçant-se a l'administració del centre educatiu.",
     "contactTitle": "Contacte",
     "contactBody": "Per a qualsevol consulta sobre aquesta política, contacta amb l'administració del teu centre educatiu o amb el/la seu/seva delegat/da de protecció de dades."
+  },
+  "controlCenter": {
+    "panelLabel": "Centre de control",
+    "heading": "Centre de control — Tara",
+    "statSchools": "Centres",
+    "statStudents": "Alumnat total",
+    "statOpenSchoolAlerts": "Alertes obertes (centres)",
+    "statOpenPublicAlerts": "Alertes obertes (xat públic)",
+    "chartTitle": "Alertes de seguretat per setmana (tot Tara)",
+    "schoolsHeading": "Centres educatius",
+    "noSchools": "Encara no hi ha centres donats d'alta.",
+    "schoolStudentsCount": "{count} alumnes",
+    "schoolOpenAlertsCount": "{count} alertes obertes",
+    "publicWebHeading": "Xat públic (soytara.com)",
+    "statPublicVisitors": "Persones ateses",
+    "noPublicAlerts": "No hi ha alertes obertes al xat públic.",
+    "schoolAlertsHeading": "Alertes obertes per centre",
+    "schoolAlertsNote": "Resoldre aquestes alertes segueix sent tasca de la referent de benestar de cada centre — aquí només hi ha visibilitat global.",
+    "noSchoolAlerts": "No hi ha alertes obertes en cap centre."
+  },
+  "controlAlertDetail": {
+    "back": "Tornar al centre de control",
+    "identityHintLabel": "Com va dir que la podríem identificar",
+    "createdLabel": "Creada",
+    "assignedLabel": "Assignada a",
+    "resolvedLabel": "Resolta",
+    "acknowledgeButton": "Marcar en revisió",
+    "resolveButton": "Marcar resolta",
+    "notesHeading": "Notes",
+    "noteFieldLabel": "Afegir nota",
+    "noteSubmit": "Desar nota",
+    "noNotes": "Encara no hi ha notes."
   }
 }

@@ -222,5 +222,37 @@
     "rightsBody": "As familias e o persoal do centro poden exercer os seus dereitos de acceso, rectificación, supresión, oposición e limitación dirixíndose á administración do centro educativo.",
     "contactTitle": "Contacto",
     "contactBody": "Para calquera consulta sobre esta política, contacta coa administración do teu centro educativo ou co seu delegado/a de protección de datos."
+  },
+  "controlCenter": {
+    "panelLabel": "Centro de control",
+    "heading": "Centro de control — Tara",
+    "statSchools": "Centros",
+    "statStudents": "Alumnado total",
+    "statOpenSchoolAlerts": "Alertas abertas (centros)",
+    "statOpenPublicAlerts": "Alertas abertas (chat público)",
+    "chartTitle": "Alertas de seguridade por semana (todo Tara)",
+    "schoolsHeading": "Centros educativos",
+    "noSchools": "Aínda non hai centros dados de alta.",
+    "schoolStudentsCount": "{count} alumnos",
+    "schoolOpenAlertsCount": "{count} alertas abertas",
+    "publicWebHeading": "Chat público (soytara.com)",
+    "statPublicVisitors": "Persoas atendidas",
+    "noPublicAlerts": "Non hai alertas abertas no chat público.",
+    "schoolAlertsHeading": "Alertas abertas por centro",
+    "schoolAlertsNote": "Resolver estas alertas segue sendo tarefa da referente de benestar de cada centro — aquí só hai visibilidade global.",
+    "noSchoolAlerts": "Non hai alertas abertas en ningún centro."
+  },
+  "controlAlertDetail": {
+    "back": "Volver ao centro de control",
+    "identityHintLabel": "Como dixo que a poderiamos identificar",
+    "createdLabel": "Creada",
+    "assignedLabel": "Asignada a",
+    "resolvedLabel": "Resolta",
+    "acknowledgeButton": "Marcar en revisión",
+    "resolveButton": "Marcar resolta",
+    "notesHeading": "Notas",
+    "noteFieldLabel": "Engadir nota",
+    "noteSubmit": "Gardar nota",
+    "noNotes": "Aínda non hai notas."
   }
 }

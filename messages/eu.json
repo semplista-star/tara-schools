@@ -222,5 +222,37 @@
     "rightsBody": "Familiek eta ikastetxeko langileek sarbide-, zuzenketa-, ezabatze-, aurkaratze- eta mugatze-eskubideak balia ditzakete ikastetxeko administrazioarekin harremanetan jarrita.",
     "contactTitle": "Kontaktua",
     "contactBody": "Politika honi buruzko edozein kontsultarako, jarri harremanetan zure ikastetxeko administrazioarekin edo bere datu-babeserako ordezkariarekin."
+  },
+  "controlCenter": {
+    "panelLabel": "Kontrol-zentroa",
+    "heading": "Kontrol-zentroa — Tara",
+    "statSchools": "Ikastetxeak",
+    "statStudents": "Ikasle guztiak",
+    "statOpenSchoolAlerts": "Alerta irekiak (ikastetxeak)",
+    "statOpenPublicAlerts": "Alerta irekiak (txat publikoa)",
+    "chartTitle": "Segurtasun-alertak astero (Tara osoa)",
+    "schoolsHeading": "Ikastetxeak",
+    "noSchools": "Oraindik ez dago ikastetxerik alta emanda.",
+    "schoolStudentsCount": "{count} ikasle",
+    "schoolOpenAlertsCount": "{count} alerta ireki",
+    "publicWebHeading": "Txat publikoa (soytara.com)",
+    "statPublicVisitors": "Artatutako pertsonak",
+    "noPublicAlerts": "Ez dago alerta irekirik txat publikoan.",
+    "schoolAlertsHeading": "Ikastetxeka alerta irekiak",
+    "schoolAlertsNote": "Alerta hauek ebaztea ikastetxe bakoitzeko ongizate-erreferentearen zeregina izaten jarraitzen du — hemen ikuspegi globala baino ez dago.",
+    "noSchoolAlerts": "Ez dago alerta irekirik ikastetxe batean ere."
+  },
+  "controlAlertDetail": {
+    "back": "Kontrol-zentrora itzuli",
+    "identityHintLabel": "Nola esan zuen identifika genezakeela",
+    "createdLabel": "Sortuta",
+    "assignedLabel": "Esleituta",
+    "resolvedLabel": "Ebatzita",
+    "acknowledgeButton": "Berrikuspenean gisa markatu",
+    "resolveButton": "Ebatzita gisa markatu",
+    "notesHeading": "Oharrak",
+    "noteFieldLabel": "Oharra gehitu",
+    "noteSubmit": "Oharra gorde",
+    "noNotes": "Oraindik ez dago oharrik."
   }
 }

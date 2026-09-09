@@ -11,6 +11,7 @@ enum StaffRole {
   ADMIN
   TUTOR
   WELLBEING_REFERENT
+  SUPERADMIN
 }
 
 enum ConsentStatus {
@@ -34,6 +35,10 @@ enum AlertStatus {
 
 // Un centro educativo. Todo el resto de datos queda aislado por schoolId:
 // ningún usuario de un centro puede ver datos de otro centro.
+// Excepción: existe una fila ancla (nombre "Tara — Panel central") que no
+// es un centro real, solo el FK obligatorio de los StaffUser con rol
+// SUPERADMIN — su acceso ignora el aislamiento por schoolId a nivel de
+// aplicación (ver /control), no a nivel de base de datos.
 model School {
   id        String   @id @default(cuid())
   name      String
@@ -72,11 +77,13 @@ model StaffUser {
   schoolId     String
   createdAt    DateTime  @default(now())
 
-  school               School            @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  tutorGroups          Group[]           @relation("TutorGroups")
-  assignedSafetyAlerts SafetyAlert[]     @relation("AssignedReferent")
-  safetyAlertNotes     SafetyAlertNote[]
-  auditLogs            AuditLog[]
+  school                     School                  @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  tutorGroups                Group[]                 @relation("TutorGroups")
+  assignedSafetyAlerts       SafetyAlert[]           @relation("AssignedReferent")
+  safetyAlertNotes           SafetyAlertNote[]
+  auditLogs                  AuditLog[]
+  assignedPublicSafetyAlerts PublicSafetyAlert[]     @relation("AssignedPublicAlert")
+  publicSafetyAlertNotes     PublicSafetyAlertNote[] @relation("PublicAlertNoteAuthor")
 }
 
 // Alumno/a representado únicamente por un alias pseudónimo. Nunca se
@@ -179,4 +186,69 @@ model AuditLog {
   actor  StaffUser @relation(fields: [actorId], references: [id])
 
   @@index([schoolId, createdAt])
+}
+
+// ── CHAT PÚBLICO (soytara.com/chat) ──────────────────────────────────────
+// Usuarios anónimos del chat público, fuera de cualquier centro educativo.
+// Se identifican solo por el código pseudónimo que ellos mismos eligen
+// (equivalente al "alias" de Student, pero sin centro/grupo/consentimiento
+// familiar porque no hay ninguno). Igual que en el resto del esquema, nunca
+// se guarda aquí texto literal de conversación.
+model PublicVisitor {
+  id        String   @id @default(cuid())
+  codi      String   @unique
+  lang      String
+  createdAt DateTime @default(now())
+
+  usageSummaries PublicUsageSummary[]
+  safetyAlerts   PublicSafetyAlert[]
+}
+
+model PublicUsageSummary {
+  id         String   @id @default(cuid())
+  visitorId  String
+  mode       String // normal | empatia | mediacio
+  sentiment  String?
+  necessitat String?
+  tornCount  Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  visitor PublicVisitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+
+  @@index([visitorId, createdAt])
+}
+
+// Alerta de seguridad activada por Tara en el chat público. "category" es
+// la categoría anonimizada del protocolo de seguridad (ver SEGURETAT en el
+// system prompt), nunca una cita literal. "identityHint" solo existe si
+// la propia persona ofreció voluntariamente cómo identificarse ante un
+// adulto de confianza — es el único campo potencialmente identificable de
+// todo este bloque, y por eso se trata como el dato más sensible del panel.
+model PublicSafetyAlert {
+  id                 String        @id @default(cuid())
+  visitorId          String
+  severity           AlertSeverity
+  status             AlertStatus   @default(OPEN)
+  category           String
+  identityHint       String?
+  assignedReferentId String?
+  createdAt          DateTime      @default(now())
+  resolvedAt         DateTime?
+
+  visitor          PublicVisitor           @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  assignedReferent StaffUser?              @relation("AssignedPublicAlert", fields: [assignedReferentId], references: [id])
+  notes            PublicSafetyAlertNote[]
+
+  @@index([status])
+}
+
+model PublicSafetyAlertNote {
+  id        String   @id @default(cuid())
+  alertId   String
+  authorId  String
+  text      String
+  createdAt DateTime @default(now())
+
+  alert  PublicSafetyAlert @relation(fields: [alertId], references: [id], onDelete: Cascade)
+  author StaffUser         @relation("PublicAlertNoteAuthor", fields: [authorId], references: [id])
 }

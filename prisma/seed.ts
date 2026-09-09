@@ -1,5 +1,6 @@
 import { PrismaClient, ConsentStatus } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { CENTRAL_SCHOOL_ID } from "../src/lib/central";
 
 const prisma = new PrismaClient();
 
@@ -43,6 +44,15 @@ const GROUPS = [
 ];
 
 async function main() {
+  // Fila-ancla para el centro de control (/control, rol SUPERADMIN): no es
+  // un centro real, solo el FK obligatorio de School que necesitan esas
+  // cuentas. Se excluye explícitamente de las agregaciones de /control.
+  await prisma.school.upsert({
+    where: { id: CENTRAL_SCHOOL_ID },
+    update: {},
+    create: { id: CENTRAL_SCHOOL_ID, name: "Tara — Panel central" }
+  });
+
   const school = await prisma.school.upsert({
     where: { id: "seed-school-1" },
     update: {},
