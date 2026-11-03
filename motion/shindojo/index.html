@@ -4,27 +4,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Shippori+Mincho+B1:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap">
 <style>
-/* Layout: a single "screening room" column — the 16:9 stage, a transport bar that reads like an NLE, then the shot list. */
+/* Layout: a single "screening room" column: the 16:9 stage, a transport bar like an editing suite, then the shot list and the voice-over script. */
 :root {
-  --aizome: #0f1a2e;      /* indigo-dyed keikogi */
-  --aizome-2: #1b2d4f;
-  --sumi: #080d18;        /* ink */
-  --kinari: #ebe3d0;      /* undyed cotton / paper */
-  --kinari-dim: #a9a594;
-  --kuchiba: #c99a3e;     /* ochre accent */
-  --line: rgba(235, 227, 208, .14);
+  --bosc: #0f1d17;        /* deep forest */
+  --bosc-2: #1c3328;
+  --nit: #08110d;
+  --paper: #ece6d6;
+  --paper-dim: #a3a898;
+  --ambre: #d6a54a;       /* light between the trees */
+  --line: rgba(236, 230, 214, .14);
   --display: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
   --body: "Zen Kaku Gothic New", "Hiragino Sans", "Segoe UI", system-ui, sans-serif;
   --mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   color-scheme: dark;
 }
-html { background: var(--sumi); }
+html { background: var(--nit); }
 body {
-  background: var(--sumi);
-  color: var(--kinari);
-  font-family: var(--body);
-  font-size: 15px;
-  line-height: 1.55;
+  background: var(--nit); color: var(--paper); font-family: var(--body); font-size: 15px; line-height: 1.55;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 28px 56px;
@@ -32,57 +28,60 @@ body {
 .wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 22px; }
 header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
 h1 { font-family: var(--display); font-weight: 800; font-size: clamp(26px, 4vw, 40px); letter-spacing: .04em; margin: 0; text-wrap: balance; }
-h1 span { color: var(--kuchiba); font-weight: 500; margin-left: .35em; }
-.meta { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--kinari-dim); }
+h1 span { color: var(--ambre); font-weight: 500; margin-left: .35em; }
+.meta { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--paper-dim); }
 
-.stage { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: var(--aizome); border: 1px solid var(--line); overflow: hidden; }
-.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: var(--bosc); border: 1px solid var(--line); overflow: hidden; }
+.stage canvas, .stage video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .bigplay {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
   width: 92px; height: 92px; border-radius: 50%;
-  background: rgba(8, 13, 24, .55); border: 1px solid rgba(235, 227, 208, .5);
-  color: var(--kinari); cursor: pointer; display: grid; place-items: center;
-  transition: transform .35s cubic-bezier(.2, .8, .2, 1), background .3s;
-  backdrop-filter: blur(4px);
+  background: rgba(8, 17, 13, .55); border: 1px solid rgba(236, 230, 214, .5);
+  color: var(--paper); cursor: pointer; display: grid; place-items: center;
+  transition: transform .35s cubic-bezier(.2, .8, .2, 1), background .3s; backdrop-filter: blur(4px);
 }
-.bigplay:hover { transform: translate(-50%, -50%) scale(1.06); background: rgba(8, 13, 24, .75); }
+.bigplay:hover { transform: translate(-50%, -50%) scale(1.06); background: rgba(8, 17, 13, .75); }
 .bigplay svg { width: 30px; height: 30px; margin-left: 5px; fill: currentColor; }
 
 .transport { display: grid; gap: 10px; }
 .acts { display: grid; grid-template-columns: 15fr 25fr 15fr 5fr; gap: 3px; }
 .acts button {
   font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--kinari-dim); background: transparent; border: 0; border-top: 2px solid var(--line);
+  color: var(--paper-dim); background: transparent; border: 0; border-top: 2px solid var(--line);
   padding: 6px 0 0; text-align: left; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
 }
-.acts button.on { color: var(--kinari); border-top-color: var(--kuchiba); }
-.acts button:focus-visible, .ctrl:focus-visible, .shot:focus-visible, .bigplay:focus-visible { outline: 2px solid var(--kuchiba); outline-offset: 2px; }
-input[type=range] { width: 100%; accent-color: var(--kuchiba); margin: 0; }
+.acts button.on { color: var(--paper); border-top-color: var(--ambre); }
+.acts button:focus-visible, .ctrl:focus-visible, .shot:focus-visible, .bigplay:focus-visible, .vo button:focus-visible { outline: 2px solid var(--ambre); outline-offset: 2px; }
+input[type=range] { width: 100%; accent-color: var(--ambre); margin: 0; }
 .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
 .ctrl {
   font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
-  background: transparent; color: var(--kinari); border: 1px solid var(--line); padding: 8px 12px; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--paper); border: 1px solid var(--line); padding: 8px 12px; cursor: pointer;
 }
-.ctrl:hover { border-color: rgba(235, 227, 208, .4); }
-.ctrl[aria-pressed="true"] { border-color: var(--kuchiba); color: var(--kuchiba); }
-.tc { font-family: var(--mono); font-size: 14px; font-variant-numeric: tabular-nums; color: var(--kinari); min-width: 9ch; }
+.ctrl:hover { border-color: rgba(236, 230, 214, .4); }
+.tc { font-family: var(--mono); font-size: 14px; font-variant-numeric: tabular-nums; min-width: 9ch; }
 .spacer { flex: 1; }
-.status { font-family: var(--mono); font-size: 12px; color: var(--kinari-dim); min-height: 1.5em; }
-.status a { color: var(--kuchiba); }
+.status { font-family: var(--mono); font-size: 12px; color: var(--paper-dim); min-height: 1.5em; }
 
-.shots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+.shots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); }
 .shot { background: transparent; color: inherit; font: inherit; text-align: left; border: 0; border-right: 1px solid var(--line); padding: 16px 18px 6px 0; margin-right: 18px; cursor: pointer; min-width: 0; display: grid; gap: 6px; align-content: start; }
 .shot:last-child { border-right: 0; margin-right: 0; }
-.shot .t { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; color: var(--kuchiba); font-variant-numeric: tabular-nums; }
+.shot .t, .vo .t { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; color: var(--ambre); font-variant-numeric: tabular-nums; }
 .shot h2 { font-family: var(--display); font-size: 20px; font-weight: 800; margin: 0; letter-spacing: .02em; text-wrap: balance; }
-.shot p { margin: 0; color: var(--kinari-dim); font-size: 14px; }
-.note { font-size: 13px; color: var(--kinari-dim); max-width: 72ch; margin: 0; }
-.note code { font-family: var(--mono); font-size: 12px; color: var(--kinari); }
+.shot p { margin: 0; color: var(--paper-dim); font-size: 14px; }
+
+.vo { border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 10px; }
+.vo h3 { margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--paper-dim); font-weight: 400; }
+.vo ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 28px; }
+.vo button { display: grid; grid-template-columns: 7ch minmax(0, 1fr); gap: 12px; width: 100%; text-align: left; background: transparent; border: 0; color: var(--paper); font: inherit; padding: 5px 0; cursor: pointer; }
+.vo button.on { color: var(--ambre); }
+.note { font-size: 13px; color: var(--paper-dim); max-width: 72ch; margin: 0; }
+.note code { font-family: var(--mono); font-size: 12px; color: var(--paper); }
 
 @media (max-width: 820px) {
   .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .shot:nth-child(2) { border-right: 0; margin-right: 0; }
+  .vo ol { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 480px) {
   .shots { grid-template-columns: minmax(0, 1fr); }
@@ -95,7 +94,7 @@ input[type=range] { width: 100%; accent-color: var(--kuchiba); margin: 0; }
 <div class="wrap">
   <header>
     <h1>SHIN DOJO<span>道場</span></h1>
-    <div class="meta">Motion · 60 s · 1920×1080 · Canvas + GSAP</div>
+    <div class="meta">Motion · 60 s · 1920×1080 · Canvas + GSAP · VO en català</div>
   </header>
 
   <div class="stage" id="stageBox">
@@ -105,31 +104,34 @@ input[type=range] { width: 100%; accent-color: var(--kuchiba); margin: 0; }
 
   <div class="transport">
     <div class="acts" id="acts">
-      <button data-t="0">I · Ensō</button>
-      <button data-t="15">II · El camí</button>
-      <button data-t="40">III · La forja</button>
+      <button data-t="0">I · Veure</button>
+      <button data-t="15">II · El dojo</button>
+      <button data-t="40">III · El mapa</button>
       <button data-t="55">Outro</button>
     </div>
     <input type="range" id="scrub" min="0" max="60" step="0.01" value="0" aria-label="Posició del vídeo">
     <div class="row">
-      <button class="ctrl" id="play" aria-label="Reprodueix o pausa">▶ Play</button>
+      <button class="ctrl" id="play">▶ Play</button>
       <span class="tc" id="tc">00:00:00</span>
       <span class="spacer"></span>
-      <button class="ctrl" id="sound" aria-pressed="false">Taiko · off</button>
       <button class="ctrl" id="full">Pantalla completa</button>
-      <button class="ctrl" id="rec">Exporta WebM</button>
     </div>
     <div class="status" id="status" role="status"></div>
   </div>
 
-  <div class="shots" id="shots">
-    <button class="shot" data-t="0"><span class="t">00:00 — 00:15</span><h2>I · Ensō</h2><p>Una pinzellada traça l'horitzó i després el cercle zen. Hi apareix 心 i el títol puja des d'una màscara, lletra a lletra.</p></button>
-    <button class="shot" data-t="15"><span class="t">00:15 — 00:40</span><h2>II · El camí</h2><p>道 + 場: què vol dir dojo. Els cinturons es dibuixen en línia, es corben en cercle, es tanquen en triangle i s'aixequen en una piràmide 3D.</p></button>
-    <button class="shot" data-t="40"><span class="t">00:40 — 00:55</span><h2>III · La forja</h2><p>Línies de velocitat que acceleren, el comptador de Musashi (1.000 → 10.000 dies) i talls cada cop més ràpids: 礼 忍 技 気 心.</p></button>
-    <button class="shot" data-t="55"><span class="t">00:55 — 01:00</span><h2>Outro</h2><p>Flaix a paper, logotip amb ensō en tinta índigo, crida a l'acció i fosa a negre.</p></button>
+  <div class="shots">
+    <button class="shot" data-t="0"><span class="t">00:00 — 00:15</span><h2>I · Veure</h2><p>«No has vingut a canviar. Has vingut a veure.» Un ensō es dibuixa com un ull que s'obre i hi apareix el nom.</p></button>
+    <button class="shot" data-t="15"><span class="t">00:15 — 00:40</span><h2>II · El dojo</h2><p>Els nou centres del mapa es construeixen, es fonen en corbes de nivell (el mapa no és el territori), giren en un carrusel 3D amb les tres formes de trobar-se i creixen en bosc.</p></button>
+    <button class="shot" data-t="40"><span class="t">00:40 — 00:55</span><h2>III · El mapa</h2><p>El bosc s'accelera mentre passen les preguntes amb què arriba la gent. Comptadors 9 · 36 · 64 i un sol punt de llum: la teva experiència.</p></button>
+    <button class="shot" data-t="55"><span class="t">00:55 — 01:00</span><h2>Outro</h2><p>Flaix a paper, ensō en tinta de bosc, «Obrim una conversa» i fosa.</p></button>
   </div>
 
-  <p class="note">Tecles: <code>espai</code> reprodueix o pausa, <code>←</code>/<code>→</code> salten 5 s. Per exportar fotograma a fotograma amb un navegador headless, crida <code>window.seekTo(segons)</code> i captura el canvas. L'exportació WebM grava els 60 s en temps real i després et demana confirmació per desar el fitxer.</p>
+  <section class="vo" aria-labelledby="voh">
+    <h3 id="voh">Guió de veu · ElevenLabs · català</h3>
+    <ol id="voList"></ol>
+  </section>
+
+  <p class="note">Aquesta previsualització és muda: la veu es genera amb ElevenLabs i es munta a l'MP4 amb <code>node motion/shindojo/scripts/build.mjs</code>. Tecles: <code>espai</code> reprodueix o pausa, <code>←</code>/<code>→</code> salten 5 s.</p>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -137,607 +139,533 @@ input[type=range] { width: 100%; accent-color: var(--kuchiba); margin: 0; }
 (() => {
 'use strict';
 
-/* ───────────────────────── CONFIG (edita amb les dades reals del dojo) ───────────────────────── */
+/* ───────────── Text of the piece (from shindojo.cat) ───────────── */
 const CONFIG = {
   name: 'SHIN DOJO',
-  sub: 'ARTS MARCIALS',
-  tagline: 'Cos  ·  Ment  ·  Esperit',
-  cta: 'Vine a provar una classe',
+  sub: 'DISSENY HUMÀ  ·  TROBADA  ·  PRÀCTICA',
+  tagline: 'Comprendre com funcionem. Descobrir noves maneres de mirar.',
+  cta: 'Obrim una conversa.',
   url: 'shindojo.cat',
 };
+/* Voice-over cue sheet. `at` is the planned start in seconds; the build script
+   places each ElevenLabs clip there (or right after the previous one if it runs long). */
+const VO = [
+  { at: 0.9,  text: 'No has vingut a canviar.' },
+  { at: 3.4,  text: 'Has vingut a veure.' },
+  { at: 6.2,  text: 'Shin Dojo. Un espai de trobada i pràctica per explorar el Disseny Humà.' },
+  { at: 11.4, text: 'Per comprendre com funcionem, i descobrir noves maneres de mirar.' },
+  { at: 15.6, text: 'Un dojo és el lloc on s\'aprèn a través de la pràctica.' },
+  { at: 19.4, text: 'Amb el Disseny Humà com a mapa, i la pròpia experiència com a referència.' },
+  { at: 24.6, text: 'Perquè el mapa no és el territori.' },
+  { at: 28.6, text: 'Sessions i programes. Famílies. Projectors.' },
+  { at: 32.6, text: 'Una mateixa pràctica. Diferents maneres de viure-la.' },
+  { at: 36.9, text: 'I el bosc: el dojo sense parets.' },
+  { at: 40.4, text: 'Una decisió que demana claredat.' },
+  { at: 42.7, text: 'Una relació que voldries comprendre millor.' },
+  { at: 45.2, text: 'Gastar més energia de la necessària.' },
+  { at: 47.3, text: 'El desig de viure amb menys fricció.' },
+  { at: 49.6, text: 'Nou centres. Trenta-sis canals. Seixanta-quatre portes.' },
+  { at: 52.6, text: 'I una sola referència: la teva experiència.' },
+  { at: 56.2, text: 'Obrim una conversa. Shin Dojo.' },
+];
+window.VO = VO;
 
-/* ───────────────────────── Setup ───────────────────────── */
+/* ───────────── Setup ───────────── */
 const W = 1920, H = 1080, CX = W / 2, CY = H / 2, DUR = 60;
 const cv = document.getElementById('stage');
 const ctx = cv.getContext('2d');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-const C = {
-  aizome: '#0f1a2e', aizome2: '#1b2d4f', sumi: '#080d18',
-  kinari: '#ebe3d0', kuchiba: '#c99a3e',
-};
-const BELTS = [
-  { c: '#f2eee4', n: 'Blanc' }, { c: '#e8c33a', n: 'Groc' }, { c: '#e07a2c', n: 'Taronja' },
-  { c: '#3f8f4f', n: 'Verd' }, { c: '#2f63b8', n: 'Blau' }, { c: '#7a4b2a', n: 'Marró' },
-  { c: '#101010', n: 'Negre' },
-];
+const C = { bosc: '#0f1d17', bosc2: '#1c3328', nit: '#08110d', paper: '#ece6d6', ambre: '#d6a54a', tinta: '#16291f' };
 const FONT = {
   display: '"Shippori Mincho B1", "Yu Mincho", Georgia, serif',
   body: '"Zen Kaku Gothic New", "Segoe UI", system-ui, sans-serif',
   mono: '"DM Mono", ui-monospace, Menlo, monospace',
 };
 
-/* ───────────────────────── Math helpers ───────────────────────── */
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const lerp = (a, b, t) => a + (b - a) * t;
-const seg = (v, a, b) => clamp((v - a) / (b - a)); // local 0..1 within [a,b]
+const seg = (v, a, b) => clamp((v - a) / (b - a));
 const E = {
-  p4o: gsap.parseEase('power4.out'), p3io: gsap.parseEase('power3.inOut'),
-  p2o: gsap.parseEase('power2.out'), p2i: gsap.parseEase('power2.in'),
-  eo: gsap.parseEase('expo.out'), sio: gsap.parseEase('sine.inOut'),
-  bo: gsap.parseEase('back.out(1.6)'),
+  p4o: gsap.parseEase('power4.out'), p3io: gsap.parseEase('power3.inOut'), p3o: gsap.parseEase('power3.out'),
+  p2o: gsap.parseEase('power2.out'), p2i: gsap.parseEase('power2.in'), eo: gsap.parseEase('expo.out'),
+  sio: gsap.parseEase('sine.inOut'), bo: gsap.parseEase('back.out(1.7)'),
 };
-const hex = h => h[0] === '#' ? [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)) : h.match(/\d+/g).slice(0, 3).map(Number);
-const mix = (a, b, t) => { const A = hex(a), B = hex(b); return `rgb(${A.map((v, i) => Math.round(lerp(v, B[i], t))).join(',')})`; };
-const mixA = (a, b, t, al) => { const A = hex(a), B = hex(b); return `rgba(${A.map((v, i) => Math.round(lerp(v, B[i], t))).join(',')},${al})`; };
+const rgb = h => h[0] === '#' ? [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)) : h.match(/\d+/g).slice(0, 3).map(Number);
+const mix = (a, b, t) => { const A = rgb(a), B = rgb(b); return `rgb(${A.map((v, i) => Math.round(lerp(v, B[i], t))).join(',')})`; };
+const rgba = (h, a) => `rgba(${rgb(h).join(',')},${a})`;
 function rng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
 
-/* ───────────────────────── State + GSAP master timeline ───────────────────────── */
+/* ───────────── GSAP master timeline ───────────── */
 const S = {};
 const tl = gsap.timeline({ paused: true });
-// T(prop, from, to, at, duration, ease) — every tween is fromTo so scrubbing in both directions is exact.
 function T(p, from, to, at, dur, ease = 'power2.inOut') {
   if (!(p in S)) S[p] = from;
   tl.fromTo(S, { [p]: from }, { [p]: to, duration: dur, ease, immediateRender: false }, at);
 }
 
-// ACT I — 0–15 s
-T('line', 0, 1, 0.3, 1.6, 'power3.inOut');
-T('lineOut', 0, 1, 2.0, 1.4, 'power2.inOut');
-T('enso', 0, 1, 1.1, 3.2, 'power2.inOut');
-T('kanji', 0, 1, 3.7, 1.8, 'expo.out');
-T('lift', 0, 1, 5.4, 1.9, 'power3.inOut');
-T('title', 0, 1, 6.0, 2.2, 'none');
-T('sub', 0, 1, 7.7, 1.4, 'power2.out');
-T('tag', 0, 1, 8.6, 1.5, 'power2.out');
-T('zoom', 1, 1.045, 0, 14, 'sine.inOut');
-T('titleOut', 0, 1, 13.4, 1.3, 'power2.in');
-T('ensoBlow', 0, 1, 13.8, 2.0, 'power3.in');
+// ACT I · 0–15
+T('l1', 0, 1, 0.7, 1.4, 'power3.out');   T('l1o', 0, 1, 2.8, 0.7, 'power2.in');
+T('l2', 0, 1, 3.3, 1.3, 'power3.out');   T('l2o', 0, 1, 5.2, 0.7, 'power2.in');
+T('enso', 0, 1, 5.3, 2.9, 'power2.inOut');
+T('kanji', 0, 1, 7.2, 1.6, 'expo.out');
+T('title', 0, 1, 7.0, 2.2, 'none');
+T('sub', 0, 1, 8.6, 1.4, 'power2.out');
+T('tag', 0, 1, 11.2, 1.4, 'power2.out');
+T('zoom', 1, 1.04, 0, 14.5, 'sine.inOut');
+T('i1Out', 0, 1, 13.7, 1.4, 'power2.in');
 
-// ACT II — 15–40 s
-T('ety', 0, 1, 15.3, 1.8, 'expo.out');
-T('etyLine', 0, 1, 17.2, 1.5, 'power3.inOut');
-T('etyCap', 0, 1, 18.1, 1.3, 'power2.out');
-T('etyOut', 0, 1, 21.0, 1.2, 'power2.in');
-T('beltHead', 0, 1, 22.0, 0.8, 'power2.out');
-T('belt', 0, 1, 22.2, 4.8, 'power1.inOut');
-T('beltOut', 0, 1, 27.0, 0.9, 'power2.inOut');
-T('morph', 0, 1, 27.8, 2.3, 'power3.inOut');
-T('morph2', 0, 1, 30.4, 1.8, 'power3.inOut');
-T('tone', 0, 1, 27.8, 1.9, 'power2.inOut');
-T('mCap', 0, 1, 28.5, 1.0, 'power2.out');
-T('mCapOut', 0, 1, 30.1, 0.8, 'power2.in');
-T('triLab', 0, 1, 31.4, 1.0, 'power2.out');
-T('d3', 0, 1, 32.2, 0.25, 'none');
-T('h', 0, 1, 32.4, 2.8, 'power2.inOut');
-T('ry', 0, 1, 32.4, 7.2, 'sine.inOut');
-T('rx', 0, 1, 32.4, 3.2, 'power2.inOut');
-T('pCap', 0, 1, 33.8, 1.3, 'power2.out');
-T('pOut', 0, 1, 38.4, 1.7, 'power3.in');
+// ACT II · 15–40
+T('dojo', 0, 1, 15.1, 1.4, 'power3.out');
+T('bg', 0, 1, 15.8, 3.0, 'none');            // nine centres pop in
+T('ch', 0, 1, 17.6, 3.6, 'power1.inOut');    // channels draw
+T('def', 0, 1, 21.0, 1.2, 'power2.out');     // some centres become defined
+T('copy', 0, 1, 19.3, 1.2, 'power2.out');
+T('dojoOut', 0, 1, 23.4, 1.2, 'power2.in');
+T('topo', 0, 1, 23.7, 3.2, 'power2.out');
+T('mapa', 0, 1, 24.5, 1.4, 'power3.out');
+T('mapaOut', 0, 1, 27.5, 0.8, 'power2.in');
+T('topoOut', 0, 1, 27.6, 1.4, 'power2.inOut');
+T('ringA', 0, 1, 28.1, 1.0, 'power2.out');
+T('ring', -0.6, 0, 28.1, 1.7, 'power3.out');
+T('ring2', 0, 1, 30.7, 1.1, 'power3.inOut');
+T('ring3', 0, 1, 33.2, 1.1, 'power3.inOut');
+T('practica', 0, 1, 32.5, 1.0, 'power2.out');
+T('ringOut', 0, 1, 35.9, 0.9, 'power2.in');
+T('trees', 0, 1, 36.2, 3.0, 'power3.out');
+T('bosc', 0, 1, 36.9, 1.2, 'power3.out');
+T('boscOut', 0, 1, 39.4, 0.7, 'power2.in');
 
-// ACT III — 40–55 s
-T('dark', 0, 1, 39.3, 1.8, 'power2.inOut');
-T('speedA', 0, 1, 39.2, 1.6, 'power2.out');
-T('travel', 0, 1, 39.3, 14.9, 'power2.in');
-T('speedOut', 0, 1, 53.4, 0.7, 'power2.in');
-T('cnt', 0, 1, 40.3, 1.1, 'expo.out');
-T('count', 0, 1000, 40.5, 2.8, 'power3.out');
-T('count2', 0, 1, 44.0, 2.6, 'power3.out');
-T('swap', 0, 1, 43.8, 0.7, 'power2.inOut');
-T('cntOut', 0, 1, 47.1, 0.7, 'power2.in');
-T('flash', 0, 1, 53.6, 0.5, 'power2.in');
-T('paper', 0, 1, 54.08, 0.04, 'none');
-T('flashOut', 0, 1, 54.15, 1.25, 'power2.out');
+// ACT III · 40–55
+T('dark', 0, 1, 39.6, 1.6, 'power2.inOut');
+T('travel', 0, 1, 39.5, 15.0, 'power2.in');
+T('cnt', 0, 1, 49.3, 0.7, 'power2.out');
+T('cntOut', 0, 1, 52.1, 0.5, 'power2.in');
+T('ref', 0, 1, 52.5, 1.0, 'power3.out');
+T('bloom', 0, 1, 52.8, 1.8, 'power2.in');
+T('treesOut', 0, 1, 53.2, 1.2, 'power2.in');
+T('flash', 0, 1, 54.1, 0.45, 'power2.in');
+T('paper', 0, 1, 54.55, 0.04, 'none');
+T('flashOut', 0, 1, 54.6, 1.2, 'power2.out');
 
-// OUTRO — 55–60 s
-T('oEnso', 0, 1, 54.9, 1.9, 'power2.inOut');
-T('oKanji', 0, 1, 56.0, 1.1, 'expo.out');
-T('oTitle', 0, 1, 56.1, 1.6, 'none');
-T('oCta', 0, 1, 57.1, 1.0, 'power2.out');
-T('oUrl', 0, 1, 57.5, 1.1, 'power3.inOut');
+// OUTRO · 55–60
+T('oEnso', 0, 1, 55.0, 1.8, 'power2.inOut');
+T('oKanji', 0, 1, 55.9, 1.1, 'expo.out');
+T('oTitle', 0, 1, 56.0, 1.6, 'none');
+T('oCta', 0, 1, 56.9, 1.0, 'power2.out');
+T('oUrl', 0, 1, 57.4, 1.1, 'power3.inOut');
 T('fade', 0, 1, 58.7, 1.3, 'sine.inOut');
 tl.set({}, {}, DUR);
 
-const CUTS = [
-  { k: '礼', w: 'RESPECTE', r: 'rei', t: 47.9, d: 1.5 },
-  { k: '忍', w: 'CONSTÀNCIA', r: 'nin', t: 49.4, d: 1.2 },
-  { k: '技', w: 'TÈCNICA', r: 'gi', t: 50.6, d: 1.0 },
-  { k: '気', w: 'ENERGIA', r: 'ki', t: 51.6, d: 0.85 },
-  { k: '心', w: 'ESPERIT', r: 'shin', t: 52.45, d: 1.6 },
-];
-const BEATS = [
-  [0.3, .35], [1.1, .6], [3.7, .9, 'bell'], [6.0, .5], [13.8, .5], [15.3, .8], [22.0, .55], [27.8, .55],
-  [32.2, .7], [39.3, .8], [40.5, .9], [44.0, .9], [47.9, 1], [49.4, 1], [50.6, 1], [51.6, 1], [52.45, 1],
-  [54.08, 1.2], [56.0, .8, 'bell'],
+const ASKS = [
+  { t: 40.3, d: 2.4, s: 'Una decisió que demana claredat.' },
+  { t: 42.6, d: 2.5, s: 'Una relació que voldries comprendre millor.' },
+  { t: 45.1, d: 2.1, s: 'Més energia de la necessària.' },
+  { t: 47.2, d: 2.0, s: 'Viure amb menys fricció.' },
 ];
 
-/* ───────────────────────── Precomputed assets ───────────────────────── */
-// Film grain tile
+/* ───────────── Precomputed assets ───────────── */
 const grain = document.createElement('canvas'); grain.width = grain.height = 256;
 { const g = grain.getContext('2d'), id = g.createImageData(256, 256), r = rng(7);
   for (let i = 0; i < id.data.length; i += 4) { const v = r() * 255; id.data[i] = id.data[i + 1] = id.data[i + 2] = v; id.data[i + 3] = 255; }
   g.putImageData(id, 0, 0); }
-// Dust motes
-const DUST = (() => { const r = rng(42); return Array.from({ length: 110 }, () => ({ x: r() * W, y: r() * H, s: .6 + r() * 2.4, vx: (r() - .5) * 14, vy: -4 - r() * 10, p: r() * 6.28 })); })();
-// Speed lines
-const RAYS = (() => { const r = rng(99); return Array.from({ length: 220 }, () => ({ a: r() * Math.PI * 2, r0: r(), v: .5 + r() * 1.5, l: .3 + r() * .9, w: .6 + r() * 2.2, g: r() < .12 })); })();
-// Ensō brush profile (fixed noise so every frame/scrub is identical)
+const POLLEN = (() => { const r = rng(42); return Array.from({ length: 120 }, () => ({ x: r() * W, y: r() * H, s: .6 + r() * 2.4, vx: (r() - .5) * 12, vy: -3 - r() * 9, p: r() * 6.28, a: r() < .25 })); })();
 const ENSO = (() => { const r = rng(3), N = 520, pts = [];
   const a0 = -Math.PI * 0.58, span = Math.PI * 2 * 0.93;
   for (let i = 0; i < N; i++) {
     const u = i / (N - 1), a = a0 + span * u;
     const rad = 1 + 0.014 * Math.sin(a * 5 + 1) + 0.008 * Math.sin(a * 13);
-    // thick at the press, thinning to a dry tail
     const w = (0.25 + 0.75 * Math.pow(Math.sin(Math.PI * Math.min(1, u * 1.25 + .06)), .5)) * (1 - 0.55 * u) * (0.9 + r() * 0.2);
-    pts.push({ u, a, rad, w });
+    pts.push({ a, rad, w });
   }
   return pts; })();
 const BRISTLES = [[0, 0, 1], [-.32, .02, .55], [.3, -.03, .5], [-.12, .05, .35], [.18, .04, .35]];
 
-/* ───────────────────────── Drawing primitives ───────────────────────── */
+// Nine-centre map (stylised)
+const CENTRES = [
+  { x: 0, y: -340, t: 'up', s: 60 }, { x: 0, y: -222, t: 'down', s: 60 }, { x: 0, y: -100, t: 'sq', s: 54 },
+  { x: 0, y: 25, t: 'dia', s: 58 }, { x: 104, y: 86, t: 'up', s: 34 }, { x: -195, y: 205, t: 'left', s: 56 },
+  { x: 0, y: 210, t: 'sq', s: 54 }, { x: 195, y: 205, t: 'right', s: 56 }, { x: 0, y: 335, t: 'sq', s: 54 },
+];
+const DEFINED = new Set([2, 3, 6, 7]);
+const CHANNELS = [[0, 1, 3], [1, 2, 3], [2, 3, 3], [2, 4, 1], [2, 5, 2], [2, 7, 2], [3, 6, 3], [3, 4, 1], [3, 5, 1], [4, 7, 1], [4, 5, 1], [6, 5, 1], [6, 7, 1], [6, 8, 3], [5, 8, 3], [7, 8, 3]];
+// Contour peaks (topographic "territory")
+const PEAKS = [{ x: CX - 330, y: CY + 70, p: 0.3 }, { x: CX + 380, y: CY - 90, p: 2.1 }, { x: CX + 40, y: CY + 300, p: 4.4 }, { x: CX - 620, y: CY - 300, p: 1.2 }];
+// Forest
+const TREES = (() => { const r = rng(17), out = [];
+  for (let i = 0; i < 95; i++) {
+    const d = .25 + r() * .75;
+    out.push({ x: r() * W * 1.6 - W * .3, d, h: H * (.45 + r() * .7) * (0.7 + d * .4), w: 2 + d * 11, del: r() * .45,
+      br: Array.from({ length: 2 + Math.floor(r() * 4) }, () => ({ y: .35 + r() * .55, l: 20 + r() * 70, s: r() < .5 ? -1 : 1 })) });
+  }
+  return out.sort((a, b) => a.d - b.d); })();
+
+/* ───────────── Primitives ───────────── */
 const hasLS = 'letterSpacing' in ctx;
 function text(str, x, y, o = {}) {
-  const { size = 40, font = FONT.body, weight = 400, color = C.kinari, alpha = 1, align = 'center', ls = 0, base = 'alphabetic' } = o;
+  const { size = 40, font = FONT.body, weight = 400, color = C.paper, alpha = 1, align = 'center', ls = 0, base = 'alphabetic' } = o;
   if (alpha <= 0.001) return;
-  ctx.save();
-  ctx.globalAlpha *= alpha;
-  ctx.font = `${weight} ${size}px ${font}`;
-  ctx.fillStyle = color; ctx.textAlign = align; ctx.textBaseline = base;
+  ctx.save(); ctx.globalAlpha *= alpha;
+  ctx.font = `${weight} ${size}px ${font}`; ctx.fillStyle = color; ctx.textAlign = align; ctx.textBaseline = base;
   if (hasLS) ctx.letterSpacing = `${ls}px`;
-  // letterSpacing adds trailing space on the last glyph; compensate when centered
   ctx.fillText(str, align === 'center' && hasLS ? x + ls / 2 : x, y);
   ctx.restore();
 }
-
+// Line of text that rises word by word out of a mask; `hl` words are painted ambre.
+function riseLine(str, x, y, size, prog, o = {}) {
+  if (prog <= 0) return;
+  const { font = FONT.display, weight = 500, color = C.paper, hl = [], align = 'center', alpha = 1 } = o;
+  if (alpha <= 0.001) return;
+  ctx.save(); ctx.globalAlpha *= alpha;
+  ctx.font = `${weight} ${size}px ${font}`; if (hasLS) ctx.letterSpacing = '0px';
+  ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+  const words = str.split(' '), sp = ctx.measureText(' ').width, ws = words.map(w => ctx.measureText(w).width);
+  const total = ws.reduce((a, b) => a + b, 0) + sp * (words.length - 1);
+  let cx = align === 'center' ? x - total / 2 : x;
+  words.forEach((w, i) => {
+    const st = (i / words.length) * .5, lp = E.p4o(seg(prog, st, st + .5));
+    if (lp > 0) {
+      ctx.save(); ctx.beginPath(); ctx.rect(cx - 6, y - size * 1.1, ws[i] + 12, size * 1.42); ctx.clip();
+      ctx.globalAlpha *= lp; ctx.fillStyle = hl.includes(i) ? C.ambre : color;
+      ctx.fillText(w, cx, y + (1 - lp) * size * .9); ctx.restore();
+    }
+    cx += ws[i] + sp;
+  });
+  ctx.restore();
+}
 function enso(cx, cy, R, prog, color, alpha = 1, width = 46) {
   if (prog <= 0 || alpha <= 0) return;
-  ctx.save(); ctx.globalAlpha *= alpha; ctx.fillStyle = color;
+  ctx.save(); ctx.fillStyle = color;
   const n = Math.floor(ENSO.length * prog);
   for (const [off, jit, al] of BRISTLES) {
-    ctx.globalAlpha = alpha * al * 0.9;
-    ctx.beginPath();
+    ctx.globalAlpha = alpha * al * .9; ctx.beginPath();
     for (let i = 0; i < n; i++) {
-      const p = ENSO[i];
-      const rr = R * p.rad + off * width * p.w + jit * width * Math.sin(p.a * 9);
-      const x = cx + Math.cos(p.a) * rr, y = cy + Math.sin(p.a) * rr;
-      const w = width * p.w * (off === 0 ? .5 : .22);
+      const p = ENSO[i], rr = R * p.rad + off * width * p.w + jit * width * Math.sin(p.a * 9);
+      const x = cx + Math.cos(p.a) * rr, y = cy + Math.sin(p.a) * rr, w = width * p.w * (off === 0 ? .5 : .22);
       ctx.moveTo(x + w, y); ctx.arc(x, y, w, 0, Math.PI * 2);
     }
     ctx.fill();
   }
-  // wet ink head while drawing
-  if (prog < 1 && n > 0) {
-    const p = ENSO[n - 1]; const x = cx + Math.cos(p.a) * R * p.rad, y = cy + Math.sin(p.a) * R * p.rad;
-    ctx.globalAlpha = alpha * .9; ctx.beginPath(); ctx.arc(x, y, width * p.w * .62, 0, Math.PI * 2); ctx.fill();
-  }
+  if (prog < 1 && n > 0) { const p = ENSO[n - 1]; ctx.globalAlpha = alpha * .9; ctx.beginPath(); ctx.arc(cx + Math.cos(p.a) * R * p.rad, cy + Math.sin(p.a) * R * p.rad, width * p.w * .62, 0, Math.PI * 2); ctx.fill(); }
   ctx.restore();
 }
-
-function brushLine(x0, x1, y, prog, color, alpha, width = 10) {
-  if (prog <= 0 || alpha <= 0) return;
-  ctx.save(); ctx.fillStyle = color;
-  const N = 260, n = Math.floor(N * prog);
-  for (const [off, , al] of BRISTLES) {
-    ctx.globalAlpha = alpha * al; ctx.beginPath();
-    for (let i = 0; i < n; i++) {
-      const u = i / N, x = lerp(x0, x1, u);
-      const w = width * (0.3 + 0.7 * Math.sin(Math.PI * u)) * (off === 0 ? .5 : .25);
-      const yy = y + off * width * 1.2 + Math.sin(u * 17) * 1.2;
-      ctx.moveTo(x + w, yy); ctx.arc(x, yy, w, 0, Math.PI * 2);
-    }
-    ctx.fill();
-  }
-  ctx.restore();
-}
-
 function maskedTitle(str, cx, baseline, size, prog, color, ls) {
-  ctx.save();
-  ctx.font = `800 ${size}px ${FONT.display}`;
-  if (hasLS) ctx.letterSpacing = '0px';
+  ctx.save(); ctx.font = `800 ${size}px ${FONT.display}`; if (hasLS) ctx.letterSpacing = '0px';
   const chars = [...str], widths = chars.map(c => ctx.measureText(c).width);
-  const total = widths.reduce((a, b) => a + b, 0) + ls * (chars.length - 1);
-  let x = cx - total / 2;
+  let x = cx - (widths.reduce((a, b) => a + b, 0) + ls * (chars.length - 1)) / 2;
   ctx.fillStyle = color; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
   chars.forEach((ch, i) => {
-    const st = (i / chars.length) * 0.55, lp = E.p4o(seg(prog, st, st + 0.45));
-    if (lp > 0) {
-      ctx.save();
-      ctx.beginPath(); ctx.rect(x - 10, baseline - size * 1.1, widths[i] + 20, size * 1.32); ctx.clip();
-      ctx.globalAlpha *= lp;
-      ctx.fillText(ch, x, baseline + (1 - lp) * size * 1.05);
-      ctx.restore();
-    }
+    const st = (i / chars.length) * .55, lp = E.p4o(seg(prog, st, st + .45));
+    if (lp > 0) { ctx.save(); ctx.beginPath(); ctx.rect(x - 10, baseline - size * 1.1, widths[i] + 20, size * 1.32); ctx.clip(); ctx.globalAlpha *= lp; ctx.fillText(ch, x, baseline + (1 - lp) * size * 1.05); ctx.restore(); }
     x += widths[i] + ls;
   });
   ctx.restore();
 }
-
-function kanjiGlyph(ch, x, y, size, color, alpha, o = {}) {
+function glyph(ch, x, y, size, color, alpha) {
   if (alpha <= 0.001) return;
-  ctx.save(); ctx.globalAlpha *= alpha;
-  ctx.font = `800 ${size}px ${FONT.display}`;
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = color;
-  if (hasLS) ctx.letterSpacing = '0px';
-  if (o.glow) { ctx.shadowColor = o.glow; ctx.shadowBlur = o.blur || 40; }
-  ctx.fillText(ch, x, y);
-  ctx.restore();
+  ctx.save(); ctx.globalAlpha *= alpha; ctx.font = `800 ${size}px ${FONT.display}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = color;
+  if (hasLS) ctx.letterSpacing = '0px'; ctx.fillText(ch, x, y); ctx.restore();
+}
+function shapePath(t, x, y, s) {
+  ctx.beginPath();
+  if (t === 'sq') ctx.rect(x - s / 2, y - s / 2, s, s);
+  else if (t === 'dia') { ctx.moveTo(x, y - s * .72); ctx.lineTo(x + s * .72, y); ctx.lineTo(x, y + s * .72); ctx.lineTo(x - s * .72, y); }
+  else { const r = s * .62, rot = { up: -Math.PI / 2, down: Math.PI / 2, left: Math.PI, right: 0 }[t];
+    for (let k = 0; k < 3; k++) { const a = rot + k * Math.PI * 2 / 3; k ? ctx.lineTo(x + Math.cos(a) * r, y + Math.sin(a) * r) : ctx.moveTo(x + Math.cos(a) * r, y + Math.sin(a) * r); } }
+  ctx.closePath();
 }
 
-/* ───────────────────────── Morph geometry (belt → circle → triangle) ───────────────────────── */
-const MN = 7 * 36;
-const TRI = [[0, -300], [260, 150], [-260, 150]];
-function ptLine(u) { return [lerp(-720, 720, u), 0]; }
-function ptCircle(u) { const a = -Math.PI / 2 + u * Math.PI * 2; return [Math.cos(a) * 300, Math.sin(a) * 300]; }
-function ptTri(u) { const s = u * 3, i = Math.min(2, Math.floor(s)), f = s - i, A = TRI[i], B = TRI[(i + 1) % 3]; return [lerp(A[0], B[0], f), lerp(A[1], B[1], f)]; }
-function morphPt(u) {
-  const a = ptLine(u), b = ptCircle(u), c = ptTri(u);
-  const m1 = S.morph, m2 = S.morph2;
-  const x = lerp(lerp(a[0], b[0], m1), c[0], m2), y = lerp(lerp(a[1], b[1], m1), c[1], m2);
-  return [CX + x, CY - 20 + y];
-}
-
-/* ───────────────────────── 3D pyramid ───────────────────────── */
-function project(x, y, z, ry, rx, sc) {
-  const cY = Math.cos(ry), sY = Math.sin(ry);
-  let x1 = x * cY + z * sY, z1 = -x * sY + z * cY;
-  const cX = Math.cos(rx), sX = Math.sin(rx);
-  const y1 = y * cX - z1 * sX, z2 = y * sX + z1 * cX;
-  const D = 1400, s = D / (D + z2) * sc;
-  return { x: CX + x1 * s, y: CY - 20 + y1 * s, z: z2, s };
-}
-
-/* ───────────────────────── Scenes ───────────────────────── */
-function drawBackground(t) {
-  const dark = S.dark, paper = S.paper;
-  const inner = mix(mix(C.aizome2, C.aizome, dark * .85), '#f1ead9', paper);
-  const outer = mix(mix(C.aizome, C.sumi, dark), '#d9cfb8', paper);
+/* ───────────── Scenes ───────────── */
+function background(t) {
+  const inner = mix(mix(C.bosc2, C.bosc, S.dark * .8), '#f3eee1', S.paper);
+  const outer = mix(mix(C.bosc, C.nit, S.dark), '#dcd3bd', S.paper);
   const g = ctx.createRadialGradient(CX, CY * .9, 80, CX, CY, W * .7);
-  g.addColorStop(0, inner); g.addColorStop(1, outer);
-  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-
-  // faint tatami grid (2:1 mats) — only in Act II, drifts slowly
-  const tat = seg(t, 15, 17) * (1 - seg(t, 38.5, 40)) * .07;
-  if (tat > 0) {
-    ctx.save(); ctx.strokeStyle = C.kinari; ctx.globalAlpha = tat; ctx.lineWidth = 1.5;
-    const mw = 360, mh = 180, off = (t * 6) % mh;
-    for (let row = -1; row < H / mh + 1; row++) {
-      const y = row * mh + off, shift = (row % 2) * mw / 2;
-      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
-      for (let x = -mw + shift; x < W + mw; x += mw) { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + mh); ctx.stroke(); }
-    }
-    ctx.restore();
-  }
+  g.addColorStop(0, inner); g.addColorStop(1, outer); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 }
-
-function drawDust(t) {
-  const a = (1 - S.dark) * (1 - S.paper) * seg(t, 0, 1.5);
+function pollen(t) {
+  const a = (1 - S.paper) * seg(t, 0, 1.5) * (1 - S.dark * .5);
   if (a <= 0) return;
-  ctx.save(); ctx.fillStyle = C.kinari;
-  for (const d of DUST) {
+  ctx.save();
+  for (const d of POLLEN) {
     const x = ((d.x + d.vx * t) % W + W) % W, y = ((d.y + d.vy * t) % H + H) % H;
-    ctx.globalAlpha = a * (.18 + .22 * Math.sin(t * .8 + d.p) ** 2);
+    ctx.fillStyle = d.a ? C.ambre : C.paper; ctx.globalAlpha = a * (.15 + .25 * Math.sin(t * .8 + d.p) ** 2);
     ctx.beginPath(); ctx.arc(x, y, d.s, 0, Math.PI * 2); ctx.fill();
   }
   ctx.restore();
 }
 
 function actI(t) {
-  if (t > 16.5) return;
-  // horizon brush line
-  brushLine(CX - 620, CX + 620, CY + 4, S.line, C.kinari, (1 - S.lineOut) * .85, 9);
+  if (t > 15.5) return;
+  riseLine('No has vingut a canviar.', CX, CY + 20, 104, S.l1, { alpha: 1 - S.l1o });
+  riseLine('Has vingut a veure.', CX, CY + 20, 104, S.l2, { alpha: 1 - S.l2o, hl: [3] });
 
-  const lift = S.lift, blow = S.ensoBlow;
-  const ey = lerp(CY - 20, 360, lift), es = lerp(1, .6, lift) * lerp(1, 5.5, blow);
-  const ea = 1 - E.p2i(blow);
-  enso(CX, ey, 330 * es, S.enso, C.kinari, ea, 54 * es);
-
+  const out = S.i1Out, up = -E.p2i(out) * 60;
+  ctx.save(); ctx.globalAlpha = 1 - out; ctx.translate(0, up);
+  enso(CX, 360, 205, S.enso, C.paper, 1 - out, 34);
   const k = S.kanji;
-  kanjiGlyph('心', CX, ey + 8 * es, 300 * es * (1.18 - .18 * k), C.kinari, k * ea, { glow: 'rgba(201,154,62,.35)', blur: 60 * (1 - k * .6) });
-
-  const out = S.titleOut, oy = -E.p2i(out) * 60, oa = 1 - out;
-  ctx.save(); ctx.translate(0, oy); ctx.globalAlpha = oa;
-  maskedTitle(CONFIG.name, CX, 790, 168, S.title, C.kinari, 30);
-  text(CONFIG.sub, CX, 862, { size: 30, font: FONT.mono, ls: 14, color: C.kuchiba, alpha: S.sub });
-  // tagline with a ruled line each side that grows in
-  const tg = S.tag;
-  text(CONFIG.tagline, CX, 935, { size: 34, font: FONT.body, ls: 3, alpha: tg });
-  ctx.strokeStyle = C.kinari; ctx.globalAlpha = oa * tg * .5; ctx.lineWidth = 1.5;
-  const lw = 140 * E.p3io(tg);
-  ctx.beginPath(); ctx.moveTo(CX - 270, 923); ctx.lineTo(CX - 270 - lw, 923); ctx.moveTo(CX + 270, 923); ctx.lineTo(CX + 270 + lw, 923); ctx.stroke();
+  glyph('道場', CX, 368, 104 * (1.12 - .12 * k), C.paper, k);
+  maskedTitle(CONFIG.name, CX, 750, 150, S.title, C.paper, 26);
+  text(CONFIG.sub, CX, 830, { size: 28, font: FONT.mono, ls: 10, color: C.ambre, alpha: S.sub });
+  text(CONFIG.tagline, CX, 920, { size: 38, font: FONT.body, alpha: S.tag });
   ctx.restore();
 }
 
-function actIIety(t) {
-  if (t < 15 || t > 22.5) return;
-  const e = S.ety, o = S.etyOut, oa = 1 - o, spread = E.p2i(o) * 220;
-  const ky = CY - 110;
-  const lx = CX - 330 - (1 - e) * 140 - spread, rx = CX + 330 + (1 - e) * 140 + spread;
-  kanjiGlyph('道', lx, ky, 330, C.kinari, e * oa);
-  kanjiGlyph('場', rx, ky, 330, C.kinari, e * oa);
-  text('+', CX, ky + 22, { size: 90, font: FONT.display, color: C.kuchiba, alpha: e * oa, base: 'middle' });
+function actIIdojo(t) {
+  if (t < 15 || t > 25) return;
+  const a = S.dojo * (1 - S.dojoOut);
+  text('01 / EL DOJO', 200, 300, { size: 26, font: FONT.mono, ls: 8, color: C.ambre, align: 'left', alpha: a });
+  riseLine('El lloc de', 200, 420, 96, S.dojo, { align: 'left', weight: 800, alpha: 1 - S.dojoOut });
+  riseLine('la pràctica.', 200, 530, 96, S.dojo, { align: 'left', weight: 800, alpha: 1 - S.dojoOut });
+  const ca = S.copy * (1 - S.dojoOut);
+  [['MAPA', 'El Disseny Humà'], ['REFERÈNCIA', 'La pròpia experiència']].forEach(([k, v], i) => {
+    const y = 660 + i * 110, e = E.p3o(seg(S.copy, i * .25, .75 + i * .25));
+    text(k, 200, y, { size: 22, font: FONT.mono, ls: 6, color: C.ambre, align: 'left', alpha: ca * e });
+    text(v, 200 + (1 - e) * 30, y + 48, { size: 40, font: FONT.body, align: 'left', alpha: ca * e });
+  });
 
-  text('DŌ', lx, ky + 250, { size: 30, font: FONT.mono, ls: 10, color: C.kuchiba, alpha: e * oa });
-  text('el camí', lx, ky + 305, { size: 44, font: FONT.body, alpha: e * oa });
-  text('JŌ', rx, ky + 250, { size: 30, font: FONT.mono, ls: 10, color: C.kuchiba, alpha: e * oa });
-  text('el lloc', rx, ky + 305, { size: 44, font: FONT.body, alpha: e * oa });
-
-  // connector bracket
-  const L = S.etyLine;
-  if (L > 0) {
-    ctx.save(); ctx.strokeStyle = C.kinari; ctx.globalAlpha = .55 * oa; ctx.lineWidth = 2;
-    const y = ky + 360, x0 = lx, x1 = rx, xm = lerp(x0, x1, .5);
-    ctx.beginPath();
-    ctx.moveTo(x0, y - 18); ctx.lineTo(x0, y);
-    ctx.lineTo(lerp(x0, xm, Math.min(1, L * 2)), y);
-    ctx.moveTo(x1, y - 18); ctx.lineTo(x1, y);
-    ctx.lineTo(lerp(x1, xm, Math.min(1, L * 2)), y);
-    if (L > .5) { ctx.moveTo(xm, y); ctx.lineTo(xm, y + 30 * seg(L, .5, 1)); }
-    ctx.stroke(); ctx.restore();
-  }
-  text('DOJO', CX, ky + 450, { size: 52, font: FONT.display, weight: 800, ls: 18, alpha: S.etyCap * oa });
-  text('el lloc on es recorre el camí', CX, ky + 505, { size: 34, font: FONT.body, color: C.kinari, alpha: S.etyCap * oa * .8 });
-}
-
-function actIImorph(t) {
-  if (t < 21.8 || t > 32.8) return;
-  const vis = (1 - S.d3) * S.beltHead;
-  if (vis <= 0) return;
-  const drawn = S.morph > 0 ? 1 : S.belt;
-  const lw = lerp(lerp(34, 7, S.morph), 4, S.morph2);
-  const groups = 7, per = MN / groups;
-
-  ctx.save(); ctx.globalAlpha = vis; ctx.lineCap = 'butt'; ctx.lineJoin = 'round';
-  // underlay so the black belt reads on indigo
-  ctx.strokeStyle = mixA(C.kinari, C.kinari, 0, .22 * (1 - S.tone)); ctx.lineWidth = lw + 4;
-  ctx.beginPath();
-  for (let i = 0; i <= MN * drawn; i++) { const [x, y] = morphPt(i / MN); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
-  ctx.stroke();
-  for (let g = 0; g < groups; g++) {
-    const u0 = g / groups, u1 = (g + 1) / groups;
-    if (drawn <= u0) break;
-    const end = Math.min(u1, drawn);
-    ctx.strokeStyle = mix(BELTS[g].c, C.kinari, S.tone); ctx.lineWidth = lw;
-    ctx.beginPath();
-    for (let i = Math.round(u0 * MN); i <= Math.round(end * MN); i++) { const [x, y] = morphPt(i / MN); i === Math.round(u0 * MN) ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
-    ctx.stroke();
-  }
-  ctx.restore();
-
-  // belt labels
-  const bo = 1 - S.beltOut;
-  if (S.morph < .05) {
-    text('CADA CINTURÓ, UN PAS DEL CAMÍ', CX, CY - 190, { size: 30, font: FONT.mono, ls: 10, color: C.kuchiba, alpha: S.beltHead * bo });
-    BELTS.forEach((b, g) => {
-      const la = E.p2o(seg(S.belt, g / 7 + .02, g / 7 + .12)) * bo;
-      const [x] = ptLine((g + .5) / 7);
-      text(b.n, CX + x, CY + 70 + (1 - la) * 20, { size: 34, font: FONT.body, weight: 700, alpha: la });
-    });
-    text('Exemple orientatiu: l\'ordre i els colors varien segons l\'estil i l\'escola', CX, CY + 250, { size: 24, font: FONT.body, color: C.kinari, alpha: .55 * E.p2o(seg(S.belt, .85, 1)) * bo });
-  }
-  // morph captions
-  text('Cada grau tanca un cercle', CX, CY + 400, { size: 44, font: FONT.display, weight: 500, alpha: S.mCap * (1 - S.mCapOut) });
-}
-
-function actII3d(t) {
-  if (t < 30.8 || t > 40.4) return;
-  const tri = S.triLab, d3 = S.d3, out = S.pOut;
-  const sc = lerp(1, 2.6, E.p2i(out)), oa = 1 - out;
-  const ry = S.ry * Math.PI * 1.55, rx = -0.42 * S.rx, apexZ = -360 * S.h;
-  const V = [
-    project(TRI[0][0], TRI[0][1], 0, ry, rx, sc),
-    project(TRI[1][0], TRI[1][1], 0, ry, rx, sc),
-    project(TRI[2][0], TRI[2][1], 0, ry, rx, sc),
-    project(0, 0, apexZ, ry, rx, sc),
-  ];
-  const labels = ['MENT', 'COS', 'ESPERIT'];
-
-  if (d3 > 0) {
-    ctx.save(); ctx.globalAlpha = d3 * oa;
-    // orbit of points around the pyramid
-    for (let i = 0; i < 72; i++) {
-      const a = i / 72 * Math.PI * 2 + t * .25;
-      const p = project(Math.cos(a) * 470, 40 * Math.sin(a * 3), Math.sin(a) * 470, ry * .4, rx - .25, sc);
-      ctx.fillStyle = C.kuchiba; ctx.globalAlpha = d3 * oa * S.h * clamp(.25 + (500 - p.z) / 1300, 0, .8);
-      ctx.beginPath(); ctx.arc(p.x, p.y, 2.2 * p.s, 0, Math.PI * 2); ctx.fill();
+  const ox = 1370, oy = 560, sc = 1.12 * lerp(1, .85, E.p2i(S.dojoOut)), ma = 1 - S.dojoOut;
+  const P = i => [ox + CENTRES[i].x * sc, oy + CENTRES[i].y * sc];
+  ctx.save(); ctx.globalAlpha = ma; ctx.lineCap = 'round';
+  CHANNELS.forEach(([a, b, n], ci) => {
+    const st = ci / CHANNELS.length * .65, lp = E.p3io(seg(S.ch, st, st + .35));
+    if (lp <= 0) return;
+    const [x1, y1] = P(a), [x2, y2] = P(b), dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy), nx = -dy / L, ny = dx / L;
+    ctx.strokeStyle = rgba(C.paper, .55); ctx.lineWidth = 2.2;
+    for (let k = 0; k < n; k++) {
+      const off = (k - (n - 1) / 2) * 9;
+      ctx.beginPath(); ctx.moveTo(x1 + nx * off, y1 + ny * off); ctx.lineTo(x1 + nx * off + dx * lp, y1 + ny * off + dy * lp); ctx.stroke();
     }
-    // faces
-    ctx.globalAlpha = d3 * oa;
-    [[0, 1, 3], [1, 2, 3], [2, 0, 3]].forEach(([a, b, c]) => {
-      ctx.fillStyle = mixA(C.kuchiba, C.kuchiba, 0, .05 + .05 * S.h);
-      ctx.beginPath(); ctx.moveTo(V[a].x, V[a].y); ctx.lineTo(V[b].x, V[b].y); ctx.lineTo(V[c].x, V[c].y); ctx.closePath(); ctx.fill();
-    });
-    // edges with depth cue
-    const E6 = [[0, 1], [1, 2], [2, 0], [0, 3], [1, 3], [2, 3]];
-    E6.forEach(([a, b], i) => {
-      const z = (V[a].z + V[b].z) / 2;
-      ctx.strokeStyle = C.kinari; ctx.lineWidth = (i < 3 ? 4 : 2.5) * (V[a].s + V[b].s) / 2;
-      ctx.globalAlpha = d3 * oa * (i < 3 ? 1 : S.h) * clamp(.45 + (300 - z) / 900, .25, 1);
-      ctx.beginPath(); ctx.moveTo(V[a].x, V[a].y); ctx.lineTo(V[b].x, V[b].y); ctx.stroke();
-    });
-    ctx.restore();
-    // apex 道
-    kanjiGlyph('道', V[3].x, V[3].y - 70 * V[3].s, 64 * V[3].s, C.kuchiba, d3 * oa * S.h);
-  }
-  // vertex dots + labels (shared by 2D triangle and 3D)
-  for (let i = 0; i < 3; i++) {
-    const v = V[i], dx = v.x - CX, dy = v.y - (CY - 20), len = Math.hypot(dx, dy) || 1;
-    ctx.save(); ctx.globalAlpha = tri * oa; ctx.fillStyle = C.kuchiba;
-    ctx.beginPath(); ctx.arc(v.x, v.y, 10 * E.bo(tri) * v.s, 0, Math.PI * 2); ctx.fill(); ctx.restore();
-    text(labels[i], v.x + dx / len * 80, v.y + dy / len * 60 + 12, { size: 34, font: FONT.mono, ls: 8, alpha: tri * oa });
-  }
-  text('Tres pilars. Un sol camí.', CX, 975, { size: 46, font: FONT.display, weight: 500, alpha: S.pCap * oa });
+  });
+  CENTRES.forEach((c, i) => {
+    const st = i / CENTRES.length * .7, lp = seg(S.bg, st, st + .3);
+    if (lp <= 0) return;
+    const [x, y] = P(i), s = c.s * sc * E.bo(lp);
+    shapePath(c.t, x, y, s);
+    const d = DEFINED.has(i) ? E.p2o(S.def) : 0;
+    ctx.globalAlpha = ma * clamp(lp * 2);
+    ctx.fillStyle = mix(C.bosc, C.ambre, d * .9); ctx.fill();
+    ctx.strokeStyle = C.paper; ctx.lineWidth = 2.5; ctx.stroke();
+  });
+  ctx.restore();
+  text('9 CENTRES', ox, oy + 470, { size: 22, font: FONT.mono, ls: 6, alpha: S.copy * ma * .7 });
 }
 
-function actIIIspeed(t) {
-  const a = S.speedA * (1 - S.speedOut);
-  if (a <= 0) return;
-  const travel = S.travel * 38, Rmax = 1250;
+function actIItopo(t) {
+  if (t < 23.5 || t > 29.2) return;
+  const g = S.topo, a = 1 - S.topoOut;
+  ctx.save(); ctx.lineWidth = 1.6;
+  PEAKS.forEach((pk, pi) => {
+    const rings = 17;
+    for (let k = 1; k <= rings; k++) {
+      const lp = E.p2o(seg(g * rings * 1.15 - (k - 1) * .9, 0, 1));
+      if (lp <= 0) continue;
+      const r0 = 38 * k * (.92 + .08 * pi), rot = t * .02 * (pi % 2 ? 1 : -1);
+      ctx.strokeStyle = k % 5 === 0 ? rgba(C.ambre, .55 * a) : rgba(C.paper, (.30 - k * .009) * a);
+      ctx.beginPath();
+      for (let s = 0; s <= 120; s++) {
+        const th = s / 120 * Math.PI * 2;
+        const rr = r0 * lp * (1 + .16 * Math.sin(3 * th + pk.p + k * .25 + rot) + .09 * Math.sin(5 * th - pk.p * 1.7 - k * .18) + .05 * Math.sin(9 * th + k));
+        const x = pk.x + Math.cos(th) * rr, y = pk.y + Math.sin(th) * rr * .78;
+        s ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+      }
+      ctx.stroke();
+    }
+  });
+  ctx.restore();
+  const m = S.mapa * (1 - S.mapaOut);
+  if (m > 0) { const gr = ctx.createRadialGradient(CX, CY, 40, CX, CY, 620); gr.addColorStop(0, rgba(C.bosc, .85 * m)); gr.addColorStop(1, rgba(C.bosc, 0)); ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H); }
+  riseLine('El mapa no és el territori.', CX, CY + 30, 96, S.mapa, { weight: 800, alpha: 1 - S.mapaOut, hl: [4] });
+}
+
+const FORMS = [
+  { n: '02', h: 'Sessions i Programes', s: 'Del mapa a l\'experiència.', l: 'Sessió Mirall  ·  Lectura Viva  ·  Programa SHIN' },
+  { n: '03', h: 'Famílies', s: 'Cada persona, un món.', l: 'Infants  ·  Parella  ·  Família' },
+  { n: '04', h: 'Projectors', s: 'Una mirada compartida.', l: 'Un espai per reconèixer-te en altres Projectors' },
+];
+function actIIforms(t) {
+  if (t < 28 || t > 37) return;
+  const A = S.ringA * (1 - S.ringOut), rot = S.ring + S.ring2 + S.ring3;
+  if (A <= 0) return;
+  text('FORMES DE TROBAR-NOS', CX, 190, { size: 26, font: FONT.mono, ls: 10, color: C.ambre, alpha: A });
+  ctx.save(); ctx.strokeStyle = rgba(C.paper, .18 * A); ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.ellipse(CX, CY + 110, 640, 110, 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+  const items = FORMS.map((f, i) => {
+    const a = (i - rot) * Math.PI * 2 / 3;
+    const x = Math.sin(a) * 900, z = (1 - Math.cos(a)) * 520, s = 1400 / (1400 + z);
+    return { f, x, z, s, y: CY - 30 - (z / 1040) * 70, dot: [CX + Math.sin(a) * 640, CY + 110 + Math.cos(a) * 110] };
+  }).sort((a, b) => b.z - a.z);
+  items.forEach(({ f, x, s, z, y, dot }) => {
+    const al = A * clamp(1.1 - z / 480, 0, 1), px = CX + x * s;
+    ctx.save(); ctx.fillStyle = C.ambre; ctx.globalAlpha = A * clamp(1.2 - z / 1040, .3, 1); ctx.beginPath(); ctx.arc(dot[0], dot[1], 8 * s, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    text(f.n, px, y - 150 * s, { size: 30 * s, font: FONT.mono, ls: 6, color: C.ambre, alpha: al });
+    text(f.h, px, y - 60 * s, { size: 80 * s, font: FONT.display, weight: 800, alpha: al });
+    text(f.s, px, y + 10 * s, { size: 38 * s, font: FONT.body, alpha: al * .9 });
+    text(f.l, px, y + 290, { size: 26, font: FONT.mono, ls: 2, alpha: A * .8 * clamp(1 - z / 160) });
+  });
+  riseLine('Una mateixa pràctica. Diferents maneres de viure-la.', CX, 960, 48, S.practica, { alpha: 1 - S.ringOut });
+}
+
+function forest(t) {
+  const g = S.trees, a = 1 - S.treesOut;
+  if (g <= 0 || a <= 0) return;
+  const travel = S.travel;
+  ctx.save(); ctx.globalCompositeOperation = 'lighter';
+  for (let i = 0; i < 6; i++) {
+    const x = 300 + i * 290 - travel * 900 * (.3 + i * .05);
+    const xx = ((x % (W + 600)) + W + 600) % (W + 600) - 300;
+    const gr = ctx.createLinearGradient(xx, 0, xx - 380, H);
+    gr.addColorStop(0, rgba(C.ambre, .10 * g * a * (1 - S.dark * .6))); gr.addColorStop(1, rgba(C.ambre, 0));
+    ctx.fillStyle = gr; ctx.beginPath(); ctx.moveTo(xx, 0); ctx.lineTo(xx + 90, 0); ctx.lineTo(xx - 300, H); ctx.lineTo(xx - 420, H); ctx.closePath(); ctx.fill();
+  }
+  ctx.restore();
   ctx.save(); ctx.lineCap = 'round';
-  for (const r of RAYS) {
-    const pos = (r.r0 + travel * r.v * .1) % 1;
-    const rad = 60 + pos * pos * Rmax;
-    const len = (20 + 420 * r.l * pos) * (0.4 + S.travel * 1.6);
-    const ca = Math.cos(r.a), sa = Math.sin(r.a);
-    ctx.strokeStyle = r.g ? C.kuchiba : C.kinari;
-    ctx.globalAlpha = a * pos * (r.g ? .9 : .55);
-    ctx.lineWidth = r.w * (0.6 + pos * 1.4);
-    ctx.beginPath(); ctx.moveTo(CX + ca * rad, CY + sa * rad); ctx.lineTo(CX + ca * (rad + len), CY + sa * (rad + len)); ctx.stroke();
+  const span = W * 1.6;
+  for (const tr of TREES) {
+    const gp = E.p3o(seg(g, tr.del, tr.del + .55));
+    if (gp <= 0) continue;
+    const x = ((tr.x - travel * 5200 * tr.d) % span + span) % span - W * .3;
+    if (x < -120 || x > W + 120) continue;
+    const top = H - tr.h * gp, base = a * (.25 + tr.d * .6);
+    ctx.strokeStyle = mix(C.bosc2, C.paper, .12 + tr.d * .5); ctx.globalAlpha = base;
+    const blur = Math.min(60, travel * travel * 140 * tr.d);
+    ctx.lineWidth = tr.w;
+    ctx.beginPath(); ctx.moveTo(x, H + 10); ctx.lineTo(x, top); ctx.stroke();
+    if (blur > 2) { ctx.globalAlpha = base * .25; ctx.lineWidth = tr.w + blur; ctx.beginPath(); ctx.moveTo(x + blur * .5, H + 10); ctx.lineTo(x + blur * .5, top); ctx.stroke(); ctx.globalAlpha = base; }
+    ctx.lineWidth = Math.max(1, tr.w * .35);
+    for (const b of tr.br) {
+      const by = H - tr.h * b.y * gp;
+      if (by < top) continue;
+      ctx.beginPath(); ctx.moveTo(x, by); ctx.lineTo(x + b.s * b.l * tr.d * gp, by - b.l * .6 * gp); ctx.stroke();
+    }
   }
   ctx.restore();
+  const gr = ctx.createLinearGradient(0, H * .55, 0, H); gr.addColorStop(0, rgba(C.nit, 0)); gr.addColorStop(1, rgba(C.nit, .65 * g * a));
+  ctx.fillStyle = gr; ctx.fillRect(0, H * .55, W, H * .45);
+}
+function actIIbosc(t) {
+  if (t < 36 || t > 40.5) return;
+  const a = 1 - S.boscOut;
+  const gr = ctx.createRadialGradient(CX, CY - 40, 30, CX, CY - 40, 700); gr.addColorStop(0, rgba(C.nit, .6 * S.bosc * a)); gr.addColorStop(1, rgba(C.nit, 0));
+  ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H);
+  text('06 / ANEM AL BOSC', CX, CY - 150, { size: 26, font: FONT.mono, ls: 10, color: C.ambre, alpha: S.bosc * a });
+  riseLine('Shinrin Dojo.', CX, CY - 20, 120, S.bosc, { weight: 800, alpha: a });
+  riseLine('El dojo sense parets.', CX, CY + 80, 54, S.bosc, { alpha: a });
 }
 
-function fmt(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
-
+function actIIIasks(t) {
+  for (const q of ASKS) {
+    const end = q.t + q.d;
+    if (t < q.t || t > end + .1) continue;
+    const pin = seg(t, q.t, q.t + .9), out = E.p2i(seg(t, end - .4, end));
+    const drift = (t - q.t) * 16;
+    ctx.save();
+    const gr = ctx.createRadialGradient(CX, CY, 30, CX, CY, 760); gr.addColorStop(0, rgba(C.nit, .75 * (1 - out))); gr.addColorStop(1, rgba(C.nit, 0));
+    ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H);
+    ctx.translate(-drift, 0);
+    riseLine(q.s, CX, CY + 30, 84, pin, { weight: 500, alpha: 1 - out });
+    ctx.restore();
+  }
+}
 function actIIIcount(t) {
-  if (t < 40 || t > 48) return;
-  const a = S.cnt * (1 - S.cntOut), sc = 1 + E.p2i(S.cntOut) * .35 + (1 - S.cnt) * .2;
+  if (t < 49 || t > 53) return;
+  const a = S.cnt * (1 - S.cntOut), sc = 1 + E.p2i(S.cntOut) * .25;
   if (a <= 0) return;
-  const n = lerp(S.count, 10000, S.count2);
   ctx.save(); ctx.translate(CX, CY); ctx.scale(sc, sc); ctx.translate(-CX, -CY);
-  text(fmt(n), CX, CY + 40, { size: 280, font: FONT.display, weight: 800, ls: 6, alpha: a });
-  const sw = S.swap;
-  text('DIES PER FORJAR', CX, CY + 150 - sw * 20, { size: 38, font: FONT.mono, ls: 14, color: C.kuchiba, alpha: a * (1 - sw) });
-  text('DIES PER POLIR', CX, CY + 170 - sw * 20, { size: 38, font: FONT.mono, ls: 14, color: C.kuchiba, alpha: a * sw });
-  text('Miyamoto Musashi · El llibre dels cinc anells', CX, CY + 250, { size: 28, font: FONT.body, alpha: a * .7 * E.p2o(seg(t, 41.4, 42.6)) });
-  // progress ring around the number, fills with the count
-  ctx.strokeStyle = C.kinari; ctx.globalAlpha = a * .25; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.arc(CX, CY - 40, 420, 0, Math.PI * 2); ctx.stroke();
-  ctx.strokeStyle = C.kuchiba; ctx.globalAlpha = a; ctx.lineWidth = 5;
-  ctx.beginPath(); ctx.arc(CX, CY - 40, 420, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (n / 10000)); ctx.stroke();
+  const gr = ctx.createRadialGradient(CX, CY, 30, CX, CY, 900); gr.addColorStop(0, rgba(C.nit, .8 * a)); gr.addColorStop(1, rgba(C.nit, .2 * a));
+  ctx.fillStyle = gr; ctx.fillRect(-200, -200, W + 400, H + 400);
+  text('EL MAPA DEL DISSENY HUMÀ', CX, CY - 250, { size: 26, font: FONT.mono, ls: 10, color: C.ambre, alpha: a });
+  [[9, 'CENTRES'], [36, 'CANALS'], [64, 'PORTES']].forEach(([n, l], i) => {
+    const st = 49.4 + i * .5, p = E.eo(seg(t, st, st + 1.0));
+    const x = CX + (i - 1) * 520;
+    text(String(Math.round(n * p)), x, CY + 70, { size: 250, font: FONT.display, weight: 800, alpha: a * clamp(p * 3) });
+    text(l, x, CY + 150, { size: 30, font: FONT.mono, ls: 12, alpha: a * clamp(p * 2) });
+    if (i) { ctx.strokeStyle = rgba(C.paper, .2 * a); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(x - 260, CY - 120); ctx.lineTo(x - 260, CY + 160); ctx.stroke(); }
+  });
   ctx.restore();
 }
-
-function actIIIcuts(t) {
-  for (const c of CUTS) {
-    const end = c.t + c.d + .14;
-    if (t < c.t || t > end) continue;
-    const ain = E.eo(seg(t, c.t, c.t + .18)), aout = 1 - E.p2i(seg(t, end - .2, end));
-    const a = ain * aout, local = seg(t, c.t, end);
-    const sc = lerp(1.28, 1, ain) * (1 + local * .06);
-    // speed echo trails
-    for (let k = 3; k >= 1; k--) kanjiGlyph(c.k, CX, CY - 40, 460 * sc * (1 + k * .07), C.kuchiba, a * .08 * (4 - k) * (1 - ain * .6));
-    kanjiGlyph(c.k, CX, CY - 40, 460 * sc, C.kinari, a, { glow: 'rgba(201,154,62,.45)', blur: 50 });
-    text(c.w, CX, CY + 300, { size: 46, font: FONT.mono, weight: 500, ls: 20, alpha: a });
-    text(c.r, CX, CY + 355, { size: 30, font: FONT.body, color: C.kuchiba, alpha: a * .9 });
-  }
+function actIIIref(t) {
+  if (t < 52.4 || t > 55) return;
+  const b = S.bloom;
+  const r = lerp(10, 1400, E.p2i(b));
+  const gr = ctx.createRadialGradient(CX, CY, 0, CX, CY, r);
+  gr.addColorStop(0, rgba('#fff6e0', .9 * b)); gr.addColorStop(.4, rgba(C.ambre, .35 * b)); gr.addColorStop(1, rgba(C.ambre, 0));
+  ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H);
+  riseLine('I una sola referència:', CX, CY - 50, 60, S.ref, { alpha: 1 - b * .4 });
+  riseLine('la teva experiència.', CX, CY + 70, 110, S.ref, { weight: 800, hl: [2], alpha: 1 - b * .4 });
 }
 
 function outro(t) {
-  if (t < 54) return;
-  const ink = C.aizome;
-  const ey = 380;
-  enso(CX, ey, 190, S.oEnso, ink, 1, 34);
+  if (t < 54.5) return;
+  const ink = C.tinta;
+  enso(CX, 380, 190, S.oEnso, ink, 1, 34);
   const k = S.oKanji;
-  kanjiGlyph('心', CX, ey + 6, 175 * (1.15 - .15 * k), ink, k);
+  glyph('道場', CX, 388, 96 * (1.12 - .12 * k), ink, k);
   maskedTitle(CONFIG.name, CX, 712, 120, S.oTitle, ink, 22);
-  text(CONFIG.cta, CX, 812, { size: 44, font: FONT.body, weight: 700, color: ink, alpha: S.oCta, ls: 1 });
+  text(CONFIG.cta, CX, 812, { size: 46, font: FONT.display, weight: 500, color: ink, alpha: S.oCta });
   const u = S.oUrl;
-  text(CONFIG.url, CX, 892, { size: 40, font: FONT.mono, weight: 500, ls: 6, color: '#8a6420', alpha: E.p2o(u) });
-  ctx.save(); ctx.strokeStyle = '#8a6420'; ctx.lineWidth = 2.5; ctx.globalAlpha = u;
-  const half = 190 * u; ctx.beginPath(); ctx.moveTo(CX - half, 912); ctx.lineTo(CX + half, 912); ctx.stroke(); ctx.restore();
+  text(CONFIG.url, CX, 892, { size: 38, font: FONT.mono, weight: 500, ls: 6, color: '#7a5a1c', alpha: E.p2o(u) });
+  ctx.save(); ctx.strokeStyle = '#7a5a1c'; ctx.lineWidth = 2.5; ctx.globalAlpha = u;
+  const half = 185 * u; ctx.beginPath(); ctx.moveTo(CX - half, 912); ctx.lineTo(CX + half, 912); ctx.stroke(); ctx.restore();
 }
-
 function chrome(t) {
-  // corner marks + slate, in the ink of whichever ground we're on
-  const ink = S.paper > .5 ? C.aizome : C.kinari;
-  const a = seg(t, .8, 2.2) * (1 - S.fade) * (S.flash > 0 && S.flashOut < .5 ? 1 - S.flash : 1);
+  const ink = S.paper > .5 ? C.tinta : C.paper;
+  const a = seg(t, .8, 2.2) * (1 - S.fade) * (1 - S.flash * (1 - S.flashOut));
   if (a <= 0) return;
-  ctx.save(); ctx.strokeStyle = ink; ctx.globalAlpha = a * .45; ctx.lineWidth = 2;
+  ctx.save(); ctx.strokeStyle = ink; ctx.globalAlpha = a * .4; ctx.lineWidth = 2;
   const m = 56, L = 34;
-  [[m, m, 1, 1], [W - m, m, -1, 1], [m, H - m, 1, -1], [W - m, H - m, -1, -1]].forEach(([x, y, sx, sy]) => {
-    ctx.beginPath(); ctx.moveTo(x, y + sy * L); ctx.lineTo(x, y); ctx.lineTo(x + sx * L, y); ctx.stroke();
-  });
+  [[m, m, 1, 1], [W - m, m, -1, 1], [m, H - m, 1, -1], [W - m, H - m, -1, -1]].forEach(([x, y, sx, sy]) => { ctx.beginPath(); ctx.moveTo(x, y + sy * L); ctx.lineTo(x, y); ctx.lineTo(x + sx * L, y); ctx.stroke(); });
   ctx.restore();
-  const act = t < 15 ? 'I · ENSŌ' : t < 40 ? 'II · EL CAMÍ' : t < 55 ? 'III · LA FORJA' : 'OUTRO';
-  text('SHIN DOJO  道場', m + 4, m + 64, { size: 22, font: FONT.mono, ls: 6, align: 'left', color: ink, alpha: a * .6 });
+  const act = t < 15 ? 'I · VEURE' : t < 40 ? 'II · EL DOJO' : t < 55 ? 'III · EL MAPA' : 'OUTRO';
+  text('SHIN DOJO', m + 4, m + 64, { size: 22, font: FONT.mono, ls: 6, align: 'left', color: ink, alpha: a * .6 });
   text(act, W - m - 4, m + 64, { size: 22, font: FONT.mono, ls: 6, align: 'right', color: ink, alpha: a * .6 });
 }
-
 let vignette;
 function post(t) {
-  if (!vignette) { vignette = ctx.createRadialGradient(CX, CY, H * .35, CX, CY, W * .72); vignette.addColorStop(0, 'rgba(0,0,0,0)'); vignette.addColorStop(1, 'rgba(3,6,12,.55)'); }
-  ctx.save();
-  ctx.globalAlpha = 1 - S.paper * .7; ctx.fillStyle = vignette; ctx.fillRect(0, 0, W, H);
-  // grain, re-seeded 24×/s so it flickers like film but stays deterministic per frame
-  const f = Math.floor(t * 24), r = rng(f + 11);
-  ctx.globalAlpha = .055; ctx.globalCompositeOperation = 'overlay';
-  ctx.translate(-r() * 256, -r() * 256);
+  if (!vignette) { vignette = ctx.createRadialGradient(CX, CY, H * .35, CX, CY, W * .72); vignette.addColorStop(0, 'rgba(0,0,0,0)'); vignette.addColorStop(1, 'rgba(2,6,4,.55)'); }
+  ctx.save(); ctx.globalAlpha = 1 - S.paper * .7; ctx.fillStyle = vignette; ctx.fillRect(0, 0, W, H);
+  const r = rng(Math.floor(t * 24) + 11);
+  ctx.globalAlpha = .05; ctx.globalCompositeOperation = 'overlay'; ctx.translate(-r() * 256, -r() * 256);
   for (let y = 0; y < H + 256; y += 256) for (let x = 0; x < W + 256; x += 256) ctx.drawImage(grain, x, y);
   ctx.restore();
-  // flash to paper
   const fl = S.flash * (1 - S.flashOut);
-  if (fl > 0) { ctx.fillStyle = `rgba(247,242,230,${fl})`; ctx.fillRect(0, 0, W, H); }
-  // fade-in from black and final fade
-  const fin = 1 - E.sio(seg(t, 0, 1.2));
-  const fo = Math.max(fin, S.fade);
-  if (fo > 0) { ctx.fillStyle = `rgba(8,13,24,${fo})`; ctx.fillRect(0, 0, W, H); }
+  if (fl > 0) { ctx.fillStyle = `rgba(250,246,234,${fl})`; ctx.fillRect(0, 0, W, H); }
+  const fo = Math.max(1 - E.sio(seg(t, 0, 1.2)), S.fade);
+  if (fo > 0) { ctx.fillStyle = `rgba(8,17,13,${fo})`; ctx.fillRect(0, 0, W, H); }
 }
-
 function render(t) {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
-  drawBackground(t);
+  background(t);
   ctx.save();
   const z = t < 15 ? S.zoom : 1;
   ctx.translate(CX, CY); ctx.scale(z, z); ctx.translate(-CX, -CY);
-  drawDust(t);
+  pollen(t);
   actI(t);
-  actIIety(t);
-  actIImorph(t);
-  actII3d(t);
-  actIIIspeed(t);
+  actIIdojo(t);
+  actIItopo(t);
+  actIIforms(t);
+  forest(t);
+  actIIbosc(t);
+  actIIIasks(t);
   actIIIcount(t);
-  actIIIcuts(t);
+  actIIIref(t);
   outro(t);
   ctx.restore();
   chrome(t);
   post(t);
 }
 
-/* ───────────────────────── Audio: synthesized taiko + bell ───────────────────────── */
-let ac = null, master = null, recDest = null, soundOn = false;
-function initAudio() {
-  if (ac) return;
-  ac = new (window.AudioContext || window.webkitAudioContext)();
-  master = ac.createGain(); master.gain.value = .8; master.connect(ac.destination);
-  recDest = ac.createMediaStreamDestination(); master.connect(recDest);
-}
-function taiko(vel) {
-  const now = ac.currentTime;
-  const o = ac.createOscillator(), g = ac.createGain();
-  o.type = 'sine'; o.frequency.setValueAtTime(140, now); o.frequency.exponentialRampToValueAtTime(48, now + .35);
-  g.gain.setValueAtTime(.0001, now); g.gain.exponentialRampToValueAtTime(.9 * vel, now + .008); g.gain.exponentialRampToValueAtTime(.0001, now + 1.1);
-  o.connect(g).connect(master); o.start(now); o.stop(now + 1.2);
-  const len = ac.sampleRate * .08, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
-  for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len) ** 3;
-  const n = ac.createBufferSource(), f = ac.createBiquadFilter(), ng = ac.createGain();
-  n.buffer = buf; f.type = 'lowpass'; f.frequency.value = 900; ng.gain.value = .35 * vel;
-  n.connect(f).connect(ng).connect(master); n.start(now);
-}
-function bell(vel) {
-  const now = ac.currentTime;
-  [1, 2.76, 5.4].forEach((m, i) => {
-    const o = ac.createOscillator(), g = ac.createGain();
-    o.type = 'sine'; o.frequency.value = 523 * m;
-    g.gain.setValueAtTime(.0001, now); g.gain.exponentialRampToValueAtTime(.12 * vel / (i + 1), now + .01); g.gain.exponentialRampToValueAtTime(.0001, now + 3.5 / (i + 1));
-    o.connect(g).connect(master); o.start(now); o.stop(now + 4);
-  });
-}
-
-/* ───────────────────────── Transport / UI ───────────────────────── */
+/* ───────────── Transport / UI ───────────── */
 const $ = id => document.getElementById(id);
 const scrub = $('scrub'), tc = $('tc'), playBtn = $('play'), big = $('bigplay'), status = $('status');
 const actBtns = [...document.querySelectorAll('#acts button')];
-let lastT = 0, scrubbing = false, started = false;
+let scrubbing = false, started = false;
+const voList = $('voList');
+VO.forEach(v => {
+  const li = document.createElement('li'), b = document.createElement('button');
+  const ts = document.createElement('span'); ts.className = 't'; ts.textContent = '00:' + v.at.toFixed(1).padStart(4, '0');
+  const tx = document.createElement('span'); tx.textContent = v.text;
+  b.append(ts, tx); b.dataset.t = v.at; li.append(b); voList.append(li);
+});
+const voBtns = [...voList.querySelectorAll('button')];
 
 function timecode(t) { const s = Math.floor(t), f = Math.floor((t - s) * 30); return `00:${String(s).padStart(2, '0')}:${String(f).padStart(2, '0')}`; }
 function syncUI(t) {
@@ -745,38 +673,27 @@ function syncUI(t) {
   tc.textContent = timecode(t);
   const idx = t < 15 ? 0 : t < 40 ? 1 : t < 55 ? 2 : 3;
   actBtns.forEach((b, i) => b.classList.toggle('on', i === idx));
+  let cur = -1; VO.forEach((v, i) => { if (t >= v.at) cur = i; });
+  voBtns.forEach((b, i) => b.classList.toggle('on', i === cur && started));
 }
-function setPlaying(p) {
-  playBtn.textContent = p ? '❚❚ Pausa' : '▶ Play';
-  big.hidden = p;
-}
-function play() {
-  if (!started || tl.time() >= DUR - .01) { tl.seek(0); started = true; }
-  lastT = tl.time(); tl.play(); setPlaying(true);
-  if (ac && ac.state === 'suspended') ac.resume();
-}
+function setPlaying(p) { playBtn.textContent = p ? '❚❚ Pausa' : '▶ Play'; big.hidden = p; }
+function play() { if (!started || tl.time() >= DUR - .01) { tl.seek(0); started = true; } tl.play(); setPlaying(true); }
 function pause() { tl.pause(); setPlaying(false); }
 function toggle() { tl.paused() ? play() : pause(); }
-function seek(t) { tl.seek(clamp(t, 0, DUR)); lastT = tl.time(); }
-
+function seek(t) { tl.seek(clamp(t, 0, DUR)); }
 tl.eventCallback('onComplete', () => setPlaying(false));
 playBtn.addEventListener('click', toggle);
 big.addEventListener('click', play);
 scrub.addEventListener('pointerdown', () => { scrubbing = true; });
-scrub.addEventListener('input', () => { if (!tl.paused()) pause(); seek(parseFloat(scrub.value)); started = true; });
+scrub.addEventListener('input', () => { if (!tl.paused()) pause(); started = true; seek(parseFloat(scrub.value)); });
 scrub.addEventListener('change', () => { scrubbing = false; });
-const jump = t => { seek(t); started = true; play(); };
-actBtns.forEach(b => b.addEventListener('click', () => jump(+b.dataset.t)));
+const jump = t => { started = true; seek(t); play(); };
+[...actBtns, ...voBtns].forEach(b => b.addEventListener('click', () => jump(+b.dataset.t)));
 document.querySelectorAll('.shot').forEach(b => b.addEventListener('click', () => { jump(+b.dataset.t); $('stageBox').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' }); }));
 document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'INPUT' && e.target.type !== 'range') return;
   if (e.code === 'Space') { e.preventDefault(); toggle(); }
-  else if (e.code === 'ArrowRight') { e.preventDefault(); seek(tl.time() + 5); }
-  else if (e.code === 'ArrowLeft') { e.preventDefault(); seek(tl.time() - 5); }
-});
-$('sound').addEventListener('click', e => {
-  initAudio(); if (ac.state === 'suspended') ac.resume();
-  soundOn = !soundOn; e.currentTarget.setAttribute('aria-pressed', soundOn); e.currentTarget.textContent = `Taiko · ${soundOn ? 'on' : 'off'}`;
+  else if (e.code === 'ArrowRight') { e.preventDefault(); started = true; seek(tl.time() + 5); }
+  else if (e.code === 'ArrowLeft') { e.preventDefault(); started = true; seek(tl.time() - 5); }
 });
 $('full').addEventListener('click', () => {
   const el = $('stageBox');
@@ -784,69 +701,14 @@ $('full').addEventListener('click', () => {
   if (p && p.catch) p.catch(() => { status.textContent = 'Aquest visor no permet pantalla completa.'; });
 });
 
-// WebM export (real-time capture of the canvas + taiko track)
-let recorder = null, downloads = null;
-if (window.claude && typeof window.claude.use === 'function') window.claude.use('downloads').then(d => { downloads = d; }).catch(() => {});
-$('rec').addEventListener('click', () => {
-  if (recorder) { recorder.stop(); return; }
-  if (!cv.captureStream || !window.MediaRecorder) { status.textContent = 'Aquest navegador no pot gravar el canvas.'; return; }
-  const stream = cv.captureStream(30);
-  if (soundOn && recDest) recDest.stream.getAudioTracks().forEach(tr => stream.addTrack(tr));
-  const type = ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'].find(m => MediaRecorder.isTypeSupported(m)) || '';
-  const chunks = [];
-  try { recorder = new MediaRecorder(stream, type ? { mimeType: type, videoBitsPerSecond: 12e6 } : undefined); }
-  catch (err) { status.textContent = 'No s\'ha pogut iniciar la gravació.'; recorder = null; return; }
-  recorder.ondataavailable = e => e.data.size && chunks.push(e.data);
-  recorder.onstop = async () => {
-    const blob = new Blob(chunks, { type: 'video/webm' }), name = 'shindojo-60s.webm';
-    $('rec').textContent = 'Exporta WebM'; recorder = null;
-    const mb = (blob.size / 1e6).toFixed(1) + ' MB';
-    if (downloads) {
-      status.textContent = `Gravació llesta (${mb}). Confirma la descàrrega…`;
-      try { await downloads.save({ filename: name, data: blob }); status.textContent = `Desat: ${name} (${mb}).`; }
-      catch (err) { status.textContent = err && err.code === 'declined' ? 'Descàrrega cancel·lada.' : 'Aquest visor no pot desar el fitxer.'; }
-      return;
-    }
-    // Opened as a local file: a plain link works there.
-    status.innerHTML = '';
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.textContent = 'Descarrega ' + name;
-    status.append(`Gravació llesta (${mb}) · `, a);
-    try { a.click(); } catch (_) {}
-  };
-  seek(0); started = true; recorder.start(250); play();
-  $('rec').textContent = '■ Atura la gravació';
-  status.textContent = 'Gravant en temps real: 60 s…';
-  tl.eventCallback('onComplete', () => { setPlaying(false); if (recorder) setTimeout(() => recorder && recorder.stop(), 300); });
-});
+// Frame-accurate hook used by scripts/render.mjs
+window.seekTo = t => { tl.pause(); seek(t); render(tl.time()); return tl.time(); };
 
-// Headless hook for frame-accurate export
-window.seekTo = t => { pause(); seek(t); render(tl.time()); syncUI(tl.time()); return tl.time(); };
-
-function loop() {
-  const t = tl.time();
-  if (soundOn && ac && !tl.paused()) {
-    for (const [bt, v, kind] of BEATS) if (lastT < bt && t >= bt && t - bt < .25) (kind === 'bell' ? bell : taiko)(v);
-  }
-  lastT = t;
-  render(t); syncUI(t);
-  requestAnimationFrame(loop);
-}
-
-// Wait for the faces (including the CJK subsets) so the canvas never paints a fallback.
-const glyphs = '心道場礼忍技気 ŌōÀÈÒÍÚàèòíú·SHINDOJ';
-Promise.race([
-  Promise.all([
-    document.fonts.load(`800 100px "Shippori Mincho B1"`, glyphs),
-    document.fonts.load(`500 100px "Shippori Mincho B1"`, glyphs),
-    document.fonts.load(`400 40px "Zen Kaku Gothic New"`, glyphs),
-    document.fonts.load(`700 40px "Zen Kaku Gothic New"`, glyphs),
-    document.fonts.load(`400 40px "DM Mono"`, glyphs),
-    document.fonts.load(`500 40px "DM Mono"`, glyphs),
-  ]),
-  new Promise(r => setTimeout(r, 3500)),
-]).catch(() => {}).then(() => {
-  seek(9.6); // poster frame: the title card
-  requestAnimationFrame(loop);
-});
+function loop() { const t = tl.time(); render(t); syncUI(t); requestAnimationFrame(loop); }
+const glyphs = '道場 àèéíòóúÀÈÉÍÒÓÚïüç·\'SHINDOJ0123456789';
+window.fontsReady = Promise.race([
+  Promise.all(['800 100px "Shippori Mincho B1"', '500 100px "Shippori Mincho B1"', '400 40px "Zen Kaku Gothic New"', '700 40px "Zen Kaku Gothic New"', '400 40px "DM Mono"', '500 40px "DM Mono"'].map(f => document.fonts.load(f, glyphs))),
+  new Promise(r => setTimeout(r, 4000)),
+]).catch(() => {}).then(() => { seek(9.8); requestAnimationFrame(loop); return true; });
 })();
 </script>
