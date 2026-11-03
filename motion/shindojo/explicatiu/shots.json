@@ -1,0 +1,113 @@
+{
+  "title": "Shin Dojo · Vídeo explicatiu",
+  "fps": 30,
+  "transition": 0.7,
+  "wordsPerSecond": 2.4,
+  "shots": [
+    {
+      "id": "pla01", "dur": 5.0, "act": "I · Ganxo",
+      "pla": "Pla general, fix o travelling molt lent",
+      "imatge": "Bosc a primera hora del matí. Llum que entra entre els arbres, una mica de boira. Encara no hi ha ningú.",
+      "vo": "No has vingut a canviar. Has vingut a veure.",
+      "overlay": [{ "style": "Hero", "text": "No has vingut a canviar.\\NHas vingut a {\\c&H4AA5D6&}veure.", "in": 0.4, "out": 4.6 }]
+    },
+    {
+      "id": "pla02", "dur": 6.0, "act": "I · Ganxo",
+      "pla": "Pla mitjà d'esquena, càmera seguint a distància",
+      "imatge": "Una persona camina sola per un sender del bosc, amb pas tranquil. Roba còmoda, colors naturals.",
+      "vo": "Shin Dojo: un espai de trobada i pràctica per explorar el Disseny Humà.",
+      "overlay": [
+        { "style": "Logo", "text": "SHIN DOJO", "in": 0.6, "out": 5.6 },
+        { "style": "Kicker", "text": "DISSENY HUMÀ  ·  TROBADA  ·  PRÀCTICA", "in": 1.2, "out": 5.6, "pos": [960, 640] }
+      ]
+    },
+    {
+      "id": "pla03", "dur": 5.0, "act": "I · Ganxo",
+      "pla": "Primers plans de detall (2 o 3 talls curts)",
+      "imatge": "Mans que toquen l'escorça d'un arbre. Peus que trepitgen fulles i terra. Una respiració profunda.",
+      "vo": "Per comprendre com funcionem, com decidim i com ens relacionem.",
+      "overlay": []
+    },
+    {
+      "id": "pla04", "dur": 5.5, "act": "II · Desenvolupament",
+      "pla": "Pla mitjà, càmera a l'altura dels ulls",
+      "imatge": "Dues persones assegudes entre els arbres, conversant. L'Albert escolta amb atenció; l'altra persona parla.",
+      "vo": "Un dojo és el lloc on s'aprèn a través de la pràctica.",
+      "overlay": [
+        { "style": "Kicker", "text": "01 / EL DOJO", "in": 0.4, "out": 5.0, "pos": [150, 820], "an": 1 },
+        { "style": "Lower", "text": "El lloc de la pràctica.", "in": 0.7, "out": 5.0, "pos": [150, 900], "an": 1 }
+      ]
+    },
+    {
+      "id": "pla05", "dur": 6.0, "act": "II · Desenvolupament",
+      "pla": "Pla zenital o de detall sobre la carta",
+      "imatge": "Sobre una manta o una pedra, un full imprès amb el gràfic de Disseny Humà. Una mà en va assenyalant les parts.",
+      "vo": "El Disseny Humà ens fa de mapa. La pròpia experiència, de referència.",
+      "overlay": [
+        { "style": "Kicker", "text": "MAPA", "in": 0.5, "out": 5.4, "pos": [150, 790], "an": 1 },
+        { "style": "Lower", "text": "El Disseny Humà", "in": 0.6, "out": 5.4, "pos": [150, 860], "an": 1 },
+        { "style": "Kicker", "text": "REFERÈNCIA", "in": 2.6, "out": 5.4, "pos": [1770, 790], "an": 3 },
+        { "style": "Lower", "text": "La pròpia experiència", "in": 2.7, "out": 5.4, "pos": [1770, 860], "an": 3 }
+      ]
+    },
+    {
+      "id": "pla06", "dur": 6.5, "act": "II · Desenvolupament",
+      "pla": "Pla mitjà que s'obre a pla general",
+      "imatge": "La persona s'atura, mira lluny cap al paisatge i respira. Moment de calma i observació.",
+      "vo": "El mapa no és el territori: cadascú ho valida amb la seva experiència.",
+      "overlay": [{ "style": "Hero", "text": "El mapa no és {\\c&H4AA5D6&}el territori.", "in": 0.5, "out": 6.0 }]
+    },
+    {
+      "id": "pla07", "dur": 5.0, "act": "II · Desenvolupament",
+      "pla": "Pla mitjà caminant de cara, càmera retrocedint",
+      "imatge": "L'Albert i una persona caminen pel bosc mentre conversen: una sessió individual.",
+      "vo": "Sessions i programes, per portar les descobertes a la vida.",
+      "overlay": [
+        { "style": "Kicker", "text": "02 / SESSIONS I PROGRAMES", "in": 0.3, "out": 4.6, "pos": [150, 820], "an": 1 },
+        { "style": "Lower", "text": "Sessió Mirall · Lectura Viva · Programa SHIN", "in": 0.6, "out": 4.6, "pos": [150, 900], "an": 1 }
+      ]
+    },
+    {
+      "id": "pla08", "dur": 5.0, "act": "III · Clímax",
+      "pla": "Pla general amb moviment, ritme més viu",
+      "imatge": "Una família (pares i infants) al bosc: caminen, juguen, s'agafen de la mà.",
+      "vo": "Propostes per a parelles i famílies: cada persona, un món.",
+      "overlay": [
+        { "style": "Kicker", "text": "03 / FAMÍLIES", "in": 0.3, "out": 4.6, "pos": [150, 820], "an": 1 },
+        { "style": "Lower", "text": "Cada persona, un món.", "in": 0.6, "out": 4.6, "pos": [150, 900], "an": 1 }
+      ]
+    },
+    {
+      "id": "pla09", "dur": 5.0, "act": "III · Clímax",
+      "pla": "Pla mitjà, càmera circulant lentament al voltant del grup",
+      "imatge": "Un grup petit assegut en cercle entre els arbres. Conversa viva; algú riu.",
+      "vo": "I un espai per a Projectors, per compartir la mirada.",
+      "overlay": [
+        { "style": "Kicker", "text": "04 / PROJECTORS", "in": 0.3, "out": 4.6, "pos": [150, 820], "an": 1 },
+        { "style": "Lower", "text": "Una mirada compartida.", "in": 0.6, "out": 4.6, "pos": [150, 900], "an": 1 }
+      ]
+    },
+    {
+      "id": "pla10", "dur": 5.5, "act": "III · Clímax",
+      "pla": "Pla general a contrallum, llum de tarda",
+      "imatge": "El grup camina pel bosc i s'allunya entre els arbres. Raigs de sol entre les branques.",
+      "vo": "Sempre que és possible, ens trobem al bosc: el dojo sense parets.",
+      "overlay": [
+        { "style": "Kicker", "text": "06 / ANEM AL BOSC", "in": 0.4, "out": 5.0, "pos": [960, 430] },
+        { "style": "Hero", "text": "Shinrin Dojo.", "in": 0.6, "out": 5.0 },
+        { "style": "Lower", "text": "El dojo sense parets.", "in": 1.2, "out": 5.0, "pos": [960, 640] }
+      ]
+    },
+    {
+      "id": "pla11", "dur": 5.5, "act": "Outro",
+      "pla": "Pla fix desenfocat (fons per al logotip)",
+      "imatge": "Copes dels arbres vistes des de baix, desenfocades, o la mateixa llum del pla 01. Serveix de fons del logotip.",
+      "vo": "Si alguna cosa t'ha despertat interès, obrim una conversa.",
+      "overlay": [
+        { "style": "Logo", "text": "SHIN DOJO", "in": 0.4, "out": 5.5 },
+        { "style": "Lower", "text": "Obrim una conversa.", "in": 1.0, "out": 5.5, "pos": [960, 640] },
+        { "style": "Kicker", "text": "SHINDOJO.CAT   ·   INSTAGRAM: SHIN DOJO", "in": 1.6, "out": 5.5, "pos": [960, 730] }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+[Script Info]
+Title: Shin Dojo · Vídeo explicatiu
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Hero,Shippori Mincho B1 ExtraBold,112,&H00D6E6EC,&H00D6E6EC,&H00101810,&H90000000,0,0,0,0,100,100,0,0,1,0,4,5,80,80,0,1
+Style: Logo,Shippori Mincho B1 ExtraBold,150,&H00D6E6EC,&H00D6E6EC,&H00101810,&H90000000,0,0,0,0,100,100,22,0,1,0,4,5,80,80,0,1
+Style: Kicker,DM Mono Medium,30,&H004AA5D6,&H004AA5D6,&H00101810,&HA0000000,0,0,0,0,100,100,8,0,1,0,2,5,80,80,0,1
+Style: Lower,Zen Kaku Gothic New,54,&H00D6E6EC,&H00D6E6EC,&H00101810,&H90000000,-1,0,0,0,100,100,0,0,1,0,3,5,80,80,0,1
+Style: Sub,Zen Kaku Gothic New,46,&H00FFFFFF,&H00FFFFFF,&H00101810,&H96000000,-1,0,0,0,100,100,0,0,1,2.6,1.2,2,160,160,62,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 2,0:00:00.60,0:00:04.85,Sub,,0,0,0,,{\fad(180,180)}No has vingut a canviar.\NHas vingut a veure.
+Dialogue: 2,0:00:05.35,0:00:10.88,Sub,,0,0,0,,{\fad(180,180)}Shin Dojo: un espai de trobada i\Npràctica per explorar el Disseny Humà.
+Dialogue: 2,0:00:11.35,0:00:15.88,Sub,,0,0,0,,{\fad(180,180)}Per comprendre com funcionem,\Ncom decidim i com ens relacionem.
+Dialogue: 2,0:00:16.35,0:00:21.38,Sub,,0,0,0,,{\fad(180,180)}Un dojo és el lloc on s'aprèn\Na través de la pràctica.
+Dialogue: 2,0:00:21.85,0:00:27.35,Sub,,0,0,0,,{\fad(180,180)}El Disseny Humà ens fa de mapa.\NLa pròpia experiència, de referència.
+Dialogue: 2,0:00:27.85,0:00:33.77,Sub,,0,0,0,,{\fad(180,180)}El mapa no és el territori: cadascú\Nho valida amb la seva experiència.
+Dialogue: 2,0:00:34.35,0:00:38.88,Sub,,0,0,0,,{\fad(180,180)}Sessions i programes,\Nper portar les descobertes a la vida.
+Dialogue: 2,0:00:39.35,0:00:43.88,Sub,,0,0,0,,{\fad(180,180)}Propostes per a parelles i famílies:\Ncada persona, un món.
+Dialogue: 2,0:00:44.35,0:00:48.88,Sub,,0,0,0,,{\fad(180,180)}I un espai per a Projectors,\Nper compartir la mirada.
+Dialogue: 2,0:00:49.35,0:00:54.38,Sub,,0,0,0,,{\fad(180,180)}Sempre que és possible, ens trobem\Nal bosc: el dojo sense parets.
+Dialogue: 2,0:00:54.85,0:00:59.10,Sub,,0,0,0,,{\fad(180,180)}Si alguna cosa t'ha despertat\Ninterès, obrim una conversa.

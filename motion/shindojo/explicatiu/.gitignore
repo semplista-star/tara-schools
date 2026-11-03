@@ -1,0 +1,3 @@
+build/
+footage/*
+!footage/README.md
