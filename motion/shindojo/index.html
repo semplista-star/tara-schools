@@ -129,7 +129,7 @@ input[type=range] { width: 100%; accent-color: var(--kuchiba); margin: 0; }
     <button class="shot" data-t="55"><span class="t">00:55 — 01:00</span><h2>Outro</h2><p>Flaix a paper, logotip amb ensō en tinta índigo, crida a l'acció i fosa a negre.</p></button>
   </div>
 
-  <p class="note">Tecles: <code>espai</code> reprodueix o pausa, <code>←</code>/<code>→</code> salten 5 s. Per exportar fotograma a fotograma amb un navegador headless, crida <code>window.seekTo(segons)</code> i captura el canvas. L'exportació WebM descarrega el fitxer quan obres la pàgina en local.</p>
+  <p class="note">Tecles: <code>espai</code> reprodueix o pausa, <code>←</code>/<code>→</code> salten 5 s. Per exportar fotograma a fotograma amb un navegador headless, crida <code>window.seekTo(segons)</code> i captura el canvas. L'exportació WebM grava els 60 s en temps real i després et demana confirmació per desar el fitxer.</p>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -785,7 +785,8 @@ $('full').addEventListener('click', () => {
 });
 
 // WebM export (real-time capture of the canvas + taiko track)
-let recorder = null;
+let recorder = null, downloads = null;
+if (window.claude && typeof window.claude.use === 'function') window.claude.use('downloads').then(d => { downloads = d; }).catch(() => {});
 $('rec').addEventListener('click', () => {
   if (recorder) { recorder.stop(); return; }
   if (!cv.captureStream || !window.MediaRecorder) { status.textContent = 'Aquest navegador no pot gravar el canvas.'; return; }
@@ -796,13 +797,21 @@ $('rec').addEventListener('click', () => {
   try { recorder = new MediaRecorder(stream, type ? { mimeType: type, videoBitsPerSecond: 12e6 } : undefined); }
   catch (err) { status.textContent = 'No s\'ha pogut iniciar la gravació.'; recorder = null; return; }
   recorder.ondataavailable = e => e.data.size && chunks.push(e.data);
-  recorder.onstop = () => {
-    const blob = new Blob(chunks, { type: 'video/webm' }), url = URL.createObjectURL(blob);
-    status.innerHTML = '';
-    const a = document.createElement('a'); a.href = url; a.download = 'shindojo-60s.webm'; a.textContent = 'Descarrega shindojo-60s.webm';
-    status.append('Gravació llesta (' + (blob.size / 1e6).toFixed(1) + ' MB) · ', a);
-    try { a.click(); } catch (_) {}
+  recorder.onstop = async () => {
+    const blob = new Blob(chunks, { type: 'video/webm' }), name = 'shindojo-60s.webm';
     $('rec').textContent = 'Exporta WebM'; recorder = null;
+    const mb = (blob.size / 1e6).toFixed(1) + ' MB';
+    if (downloads) {
+      status.textContent = `Gravació llesta (${mb}). Confirma la descàrrega…`;
+      try { await downloads.save({ filename: name, data: blob }); status.textContent = `Desat: ${name} (${mb}).`; }
+      catch (err) { status.textContent = err && err.code === 'declined' ? 'Descàrrega cancel·lada.' : 'Aquest visor no pot desar el fitxer.'; }
+      return;
+    }
+    // Opened as a local file: a plain link works there.
+    status.innerHTML = '';
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.textContent = 'Descarrega ' + name;
+    status.append(`Gravació llesta (${mb}) · `, a);
+    try { a.click(); } catch (_) {}
   };
   seek(0); started = true; recorder.start(250); play();
   $('rec').textContent = '■ Atura la gravació';
